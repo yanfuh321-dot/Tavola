@@ -1,0 +1,1627 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tavola: Mediterranean dinners for two</title>
+<meta name="description" content="Healthy Mediterranean dinners for two, with a new idea every day.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Tavola">
+<meta name="theme-color" content="#F2F4EF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1B27" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#F2F4EF; --surface:#FBFCF9; --surface-2:#E7EBE3; --ink:#15273A; --ink-soft:#4D5E6D; --line:#D3DAD0;
+  --sea:#1F5C8C; --sea-ink:#FFFFFF; --olive:#56682A; --lemon:#EDC94F; --lemon-ink:#2A2306; --tile:#2A6596;
+  --tomato:#B8432F; --saffron:#D39A12; --focus:#1F5C8C; --scrim:rgba(14,27,39,.42);
+  --c-fish:#2A6596; --c-poultry:#B97E12; --c-legumes:#A0452F; --c-vegetarian:#56682A; --c-eggs:#9C7F0E;
+  --font-display:"Marcellus","Songti SC","Noto Serif SC","STSong",Georgia,serif;
+  --font-body:"Figtree",system-ui,-apple-system,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1B27; --surface:#162536; --surface-2:#1F3146; --ink:#E5EBEF; --ink-soft:#A2B1BE; --line:#2B3F55;
+    --sea:#7DB3DE; --sea-ink:#0F1B27; --olive:#AEC16E; --lemon:#F0D06A; --lemon-ink:#231C02; --tile:#3F7BAB;
+    --tomato:#EE8B76; --saffron:#F0C04A; --focus:#F0D06A; --scrim:rgba(0,0,0,.6);
+    --c-fish:#6FA6D6; --c-poultry:#E2B04A; --c-legumes:#E08A70; --c-vegetarian:#A9BE6B; --c-eggs:#E5C95A;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1B27; --surface:#162536; --surface-2:#1F3146; --ink:#E5EBEF; --ink-soft:#A2B1BE; --line:#2B3F55;
+  --sea:#7DB3DE; --sea-ink:#0F1B27; --olive:#AEC16E; --lemon:#F0D06A; --lemon-ink:#231C02; --tile:#3F7BAB;
+  --tomato:#EE8B76; --saffron:#F0C04A; --focus:#F0D06A; --scrim:rgba(0,0,0,.6);
+  --c-fish:#6FA6D6; --c-poultry:#E2B04A; --c-legumes:#E08A70; --c-vegetarian:#A9BE6B; --c-eggs:#E5C95A;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body.locked{overflow:hidden}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+svg{flex:none}
+
+.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(16px,4vw,32px) 48px}
+
+/* header */
+.top{position:relative;display:flex;align-items:center;gap:14px;padding:18px 0 22px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto;color:inherit;text-decoration:none;border-radius:8px}
+.brand .tile{width:32px;height:32px}
+.wordmark{font-family:var(--font-display);font-size:1.7rem;line-height:1;letter-spacing:.01em}
+.nav{display:flex;gap:2px;background:var(--surface-2);padding:4px;border-radius:12px}
+.nav button{border:0;background:transparent;color:var(--ink-soft);font-weight:600;font-size:.95rem;padding:8px 18px;border-radius:9px;cursor:pointer}
+.nav button:hover{color:var(--ink)}
+.nav button[aria-current="page"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+@media (max-width:640px){
+  .nav{order:3;width:100%}
+  .nav button{flex:1;padding:9px 6px}
+}
+.icon-btn{width:42px;height:42px;display:inline-grid;place-items:center;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;padding:0}
+.icon-btn:hover{background:var(--surface-2)}
+.icon-btn svg{width:20px;height:20px}
+.icon-btn.sm{width:34px;height:34px;border-color:transparent;background:transparent;color:inherit}
+.icon-btn.sm:hover{background:rgba(127,127,127,.18)}
+.icon-btn.fav.on{color:var(--tomato)}
+
+/* settings popover */
+.pop{position:absolute;top:68px;right:0;z-index:40;width:min(360px,calc(100vw - 32px));max-height:calc(100vh - 100px);overflow-y:auto;overscroll-behavior:contain;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 24px 60px -24px rgba(0,0,0,.4);padding:18px;display:grid;gap:16px}
+@media (max-width:640px){.pop{top:62px}}
+.pop-row{display:grid;gap:8px}
+.pop-lbl{font-weight:600;font-size:.92rem}
+.pop-desc{margin:2px 0 0;color:var(--ink-soft);font-size:.86rem;line-height:1.45}
+.pop-switch{display:flex;gap:14px;align-items:flex-start;justify-content:space-between;padding-top:14px;border-top:1px solid var(--line)}
+.pop-note{margin:0;color:var(--ink-soft);font-size:.82rem}
+.pop-field{display:grid;gap:8px;padding-top:14px;border-top:1px solid var(--line)}
+.pop-field .pop-desc{margin:0}
+.pop-field .input{font-size:.9rem;padding:9px 12px}
+.pop-actions{display:flex;gap:8px;flex-wrap:wrap}
+.switch{flex:none;width:46px;height:28px;border-radius:999px;border:0;background:var(--line);position:relative;cursor:pointer;padding:0;margin-top:2px}
+.switch span{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+.switch[aria-checked="true"]{background:var(--sea)}
+.switch[aria-checked="true"] span{transform:translateX(18px)}
+
+/* segmented + chips */
+.seg{display:inline-flex;flex-wrap:wrap;background:var(--surface-2);padding:3px;border-radius:10px;gap:2px}
+.seg button{border:0;background:transparent;color:var(--ink-soft);font-size:.88rem;font-weight:600;padding:6px 13px;border-radius:8px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.14)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:.9rem;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;line-height:1.3}
+.chip:hover{border-color:var(--ink-soft)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:.98rem;padding:11px 18px;border-radius:10px;border:1px solid transparent;cursor:pointer;line-height:1.2;text-decoration:none}
+.btn svg{width:18px;height:18px}
+.btn-primary{background:var(--sea);color:var(--sea-ink)}
+.btn-primary:hover{filter:brightness(1.08)}
+.btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{background:var(--surface-2)}
+.btn-done{background:var(--olive);color:var(--surface)}
+.btn.sm{padding:7px 12px;font-size:.88rem}
+.btn.danger{color:var(--tomato)}
+.btn[disabled]{opacity:.5;cursor:not-allowed;filter:none}
+.input{font:inherit;font-size:1rem;width:100%;padding:11px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.input::placeholder{color:var(--ink-soft);opacity:.8}
+textarea.input{min-height:104px;resize:vertical;line-height:1.5}
+
+/* tiles */
+.tile{display:block;color:var(--c,var(--tile));border-radius:5px;overflow:hidden;flex:none}
+.tile svg{display:block;width:100%;height:100%}
+.cat-fish{--c:var(--c-fish)} .cat-poultry{--c:var(--c-poultry)} .cat-legumes{--c:var(--c-legumes)}
+.cat-vegetarian{--c:var(--c-vegetarian)} .cat-eggs{--c:var(--c-eggs)}
+
+/* hero: the tiled frame */
+.hero{--fr:24px;position:relative;padding:var(--fr);border-radius:6px}
+@media (max-width:640px){.hero{--fr:16px}}
+.hero::before{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--tile);
+  -webkit-mask:var(--tile-mask) 0 0/var(--fr) var(--fr) repeat;mask:var(--tile-mask) 0 0/var(--fr) var(--fr) repeat}
+.hero-in{position:relative;background:var(--surface);border-radius:3px;padding:clamp(24px,5vw,60px);display:grid;gap:16px;justify-items:start}
+.date{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:0;font-family:var(--font-display);font-size:1.2rem;color:var(--ink-soft)}
+.badge{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-body);background:var(--lemon);color:var(--lemon-ink);font-weight:600;font-size:.8rem;padding:3px 10px 3px 8px;border-radius:999px}
+.badge svg{width:14px;height:14px}
+.hero h1{font-family:var(--font-display);font-weight:400;font-size:clamp(2.2rem,5.6vw,4.1rem);line-height:1.04;margin:0;max-width:17ch;text-wrap:balance;letter-spacing:-.005em}
+.desc{font-size:1.1rem;color:var(--ink-soft);max-width:56ch;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;list-style:none;padding:0;margin:0;color:var(--ink-soft);font-size:.92rem}
+.meta li{display:inline-flex;align-items:center;gap:6px}
+.meta svg{width:17px;height:17px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.status{display:flex;align-items:center;gap:10px;margin:4px 0 0;color:var(--ink-soft);font-size:.92rem}
+.spin{width:20px;height:20px;display:inline-block}
+.spin .tile{width:20px;height:20px;animation:spin 5s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* sections */
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,5vw,56px);margin-top:clamp(32px,5vw,52px)}
+.sec h2{font-family:var(--font-display);font-weight:400;font-size:1.6rem;margin:0 0 10px;line-height:1.2}
+.empty{color:var(--ink-soft);margin:6px 0 0;max-width:46ch}
+.page-head{margin:6px 0 22px}
+.page-head h1{font-family:var(--font-display);font-weight:400;font-size:clamp(2rem,4.6vw,3rem);line-height:1.08;margin:0}
+.page-head p{margin:8px 0 0;color:var(--ink-soft);max-width:60ch}
+
+/* recipe rows */
+.rlist{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.rlist > li{border-bottom:1px solid var(--line)}
+.rlist.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));column-gap:36px;border-top:0}
+.rlist.grid2 > li{border-top:1px solid var(--line);border-bottom:0}
+.row{display:grid;grid-template-columns:50px 1fr auto;gap:14px;align-items:center;width:100%;padding:12px 6px;background:none;border:0;text-align:left;cursor:pointer;border-radius:6px}
+.row:hover{background:var(--surface-2)}
+.row .tile{width:50px;height:50px}
+.rbody{display:grid;gap:3px;min-width:0}
+.rt{font-weight:600;line-height:1.3}
+.rm{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.85rem;color:var(--ink-soft)}
+.rm span{display:inline-flex;align-items:center;gap:5px}
+.rm svg{width:14px;height:14px}
+.rm .new{color:var(--lemon-ink);background:var(--lemon);border-radius:999px;padding:0 8px;font-weight:600}
+.side{display:flex;align-items:center;gap:8px;color:var(--ink-soft);font-size:.85rem;font-weight:600}
+.side svg{width:16px;height:16px}
+.side .hfav{color:var(--tomato);display:inline-flex}
+.side .rstar{display:inline-flex;align-items:center;gap:3px;color:var(--ink)}
+.side .rstar svg{color:var(--saffron)}
+
+/* discover */
+.disc{display:grid;grid-template-columns:minmax(280px,400px) 1fr;gap:clamp(28px,5vw,64px);align-items:start}
+@media (max-width:860px){.disc{grid-template-columns:1fr}}
+.fgroup{border:0;padding:0;margin:0 0 22px;min-width:0}
+.fgroup legend,.flabel{display:block;font-weight:600;font-size:.95rem;margin-bottom:9px;padding:0}
+.disc-actions{display:flex;flex-wrap:wrap;gap:10px}
+.disc-out{min-height:200px}
+.placeholder{display:grid;justify-items:start;gap:14px;padding:28px 0;color:var(--ink-soft)}
+.placeholder .row3{display:flex;gap:8px}
+.placeholder .tile{width:44px;height:44px;opacity:.55}
+.working{display:grid;gap:14px;justify-items:start;padding:24px 0}
+.working .w-title{font-family:var(--font-display);font-size:1.5rem;margin:0;line-height:1.2}
+.working .w-hint{margin:0;color:var(--ink-soft);font-size:.92rem}
+.progress{width:min(100%,420px);height:6px;background:var(--surface-2);border-radius:3px;overflow:hidden}
+.progress span{display:block;height:100%;width:var(--p,10%);background:var(--sea);border-radius:3px;transition:width .5s ease}
+.progress.indet span{width:28%;animation:slide 1.5s ease-in-out infinite}
+@keyframes slide{0%{transform:translateX(-110%)}100%{transform:translateX(380%)}}
+.result{display:grid;gap:14px;justify-items:start;padding:clamp(20px,3vw,32px);background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.result .tile{width:60px;height:60px}
+.result h2{font-family:var(--font-display);font-weight:400;font-size:clamp(1.7rem,3.4vw,2.3rem);line-height:1.1;margin:0;text-wrap:balance}
+.health{display:flex;gap:10px;align-items:flex-start;color:var(--olive);font-size:.95rem;margin:0;max-width:62ch}
+.health svg{width:18px;height:18px;margin-top:3px}
+.err{margin:0 0 16px;padding:12px 14px;border-radius:10px;background:color-mix(in srgb,var(--tomato) 14%,transparent);color:var(--ink);border-left:3px solid var(--tomato)}
+.note{margin:0 0 16px;color:var(--ink-soft)}
+
+/* library */
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:0 0 14px}
+.search{flex:1 1 260px;position:relative;display:block}
+.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--ink-soft);pointer-events:none}
+.search .input{padding-left:40px}
+.sortl select{width:auto;padding-right:34px}
+.lib-chips{margin-bottom:22px}
+
+/* detail overlay */
+.overlay{position:fixed;inset:0;z-index:50;background:var(--scrim);overflow-y:auto;overscroll-behavior:contain;
+  padding:calc(env(safe-area-inset-top,0px) + 28px) 16px calc(env(safe-area-inset-bottom,0px) + 28px)}
+.overlay[hidden]{display:none}
+.sheet{background:var(--surface);color:var(--ink);width:100%;max-width:900px;margin:0 auto;border-radius:16px;box-shadow:0 30px 90px -20px rgba(0,0,0,.5)}
+.sheet-bar{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--surface);border-bottom:1px solid var(--line);border-radius:16px 16px 0 0}
+@media (min-width:641px){.sheet-bar{top:calc(-28px - env(safe-area-inset-top,0px))}}
+.bar-title{flex:1;min-width:0;font-weight:600;font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink-soft)}
+.sheet-body{padding:clamp(22px,4.5vw,44px)}
+@media (max-width:640px){
+  .overlay{padding:0}
+  .sheet{border-radius:0;min-height:100%;box-shadow:none}
+  .sheet-bar{border-radius:0;padding-top:calc(10px + env(safe-area-inset-top,0px))}
+  .sheet-body{padding-bottom:calc(32px + env(safe-area-inset-bottom,0px))}
+}
+.d-head{display:grid;gap:12px;justify-items:start;margin-bottom:26px}
+.d-head .tile{width:62px;height:62px}
+.d-head h2{font-family:var(--font-display);font-weight:400;font-size:clamp(2rem,4.6vw,3rem);line-height:1.06;margin:0;text-wrap:balance}
+.d-controls{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:30px}
+.stepper{display:inline-flex;align-items:center;gap:10px}
+.stepper .lbl{font-weight:600;font-size:.95rem;margin-right:2px}
+.stepper button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--surface);cursor:pointer;display:grid;place-items:center;padding:0}
+.stepper button svg{width:16px;height:16px}
+.stepper button[disabled]{opacity:.4;cursor:not-allowed}
+.stepper output{min-width:2ch;text-align:center;font-weight:700;font-size:1.15rem;font-variant-numeric:tabular-nums}
+.d-cols{display:grid;grid-template-columns:minmax(240px,330px) 1fr;gap:clamp(28px,4.5vw,56px)}
+@media (max-width:740px){.d-cols{grid-template-columns:1fr}}
+.d-cols h3,.mine h3,.h3like{display:block;font-family:var(--font-display);font-weight:400;font-size:1.45rem;margin:0 0 12px;line-height:1.2}
+.ings{list-style:none;margin:0;padding:0}
+.ing{display:grid;grid-template-columns:20px minmax(70px,max-content) 1fr;gap:12px;align-items:baseline;width:100%;text-align:left;background:none;border:0;border-bottom:1px dashed var(--line);padding:10px 2px;cursor:pointer;line-height:1.4}
+.ing .box{width:19px;height:19px;border:1.5px solid var(--ink-soft);border-radius:5px;align-self:center;display:grid;place-items:center}
+.ing .box svg{width:13px;height:13px;opacity:0}
+.ing[aria-pressed="true"] .box{background:var(--olive);border-color:var(--olive);color:var(--surface)}
+.ing[aria-pressed="true"] .box svg{opacity:1}
+.ing[aria-pressed="true"] .amt,.ing[aria-pressed="true"] .nm{text-decoration:line-through;color:var(--ink-soft)}
+.ing .amt{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.steps{list-style:none;margin:0;padding:0}
+.step{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:2px 0 22px}
+.step .num{font-family:var(--font-display);font-size:1.6rem;line-height:1.05;color:var(--sea)}
+.step p{margin:0 0 10px;max-width:62ch}
+.step p strong{font-weight:700;white-space:nowrap}
+.tbtn{display:inline-flex;align-items:center;gap:8px;font-size:.9rem;font-weight:600;padding:7px 14px 7px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface-2);cursor:pointer}
+.tbtn svg{width:17px;height:17px}
+.tbtn.run{background:var(--lemon);color:var(--lemon-ink);border-color:transparent;font-variant-numeric:tabular-nums}
+.tbtn.paused{background:transparent;border-color:var(--lemon)}
+.tbtn.done{background:var(--tomato);color:#fff;border-color:transparent}
+.tips{margin-top:6px;padding:20px 22px 14px;border-radius:12px;background:var(--surface-2)}
+.tips h3{margin-bottom:8px}
+.tips ul{margin:0;padding-left:20px}
+.tips li{margin:0 0 8px;max-width:66ch;line-height:1.5}
+.tips li::marker{color:var(--olive)}
+.mine{margin-top:16px;padding-top:28px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:28px}
+@media (max-width:740px){.mine{grid-template-columns:1fr}}
+.stars{display:flex;gap:2px;margin:-4px 0 18px -4px}
+.star{background:none;border:0;padding:4px;cursor:pointer;color:var(--line);border-radius:6px}
+.star svg{width:30px;height:30px;display:block}
+.star.on{color:var(--saffron)}
+.cooked{display:grid;gap:8px;justify-items:start}
+.cooked-info{margin:0;color:var(--ink-soft);font-size:.9rem}
+
+/* timers */
+.timers{position:fixed;z-index:60;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px;width:min(360px,calc(100% - 32px))}
+@media (max-width:640px){.timers{left:12px;right:12px;width:auto;bottom:calc(12px + env(safe-area-inset-bottom,0px))}}
+.timer{display:flex;align-items:center;gap:8px;background:var(--ink);color:var(--bg);padding:8px 8px 8px 14px;border-radius:14px;box-shadow:0 14px 34px -12px rgba(0,0,0,.55)}
+.timer .t-ic svg{width:20px;height:20px;display:block;opacity:.8}
+.t-main{flex:1;min-width:0;display:grid;background:none;border:0;padding:2px 4px;text-align:left;cursor:pointer;border-radius:8px}
+.t-time{font-weight:700;font-size:1.25rem;font-variant-numeric:tabular-nums;line-height:1.15}
+.t-label{font-size:.82rem;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.timer.paused .t-time{opacity:.6}
+.timer.done{background:var(--lemon);color:var(--lemon-ink);animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.025)}}
+body.has-timers .wrap{padding-bottom:140px}
+
+/* toast + footer */
+.toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0px));transform:translate(-50%,-16px);opacity:0;background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:10px;font-weight:600;font-size:.92rem;z-index:80;transition:opacity .25s,transform .25s;pointer-events:none;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.foot{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:.85rem}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top" id="top"></header>
+  <main id="main"></main>
+  <footer class="foot" id="foot"></footer>
+</div>
+<div id="overlay" class="overlay" hidden></div>
+<div id="timers" class="timers"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script>
+'use strict';
+/* ---------- icons ---------- */
+const ic = p => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const HEART = 'M12 20s-7.5-4.6-9.2-9.3C1.6 7.4 3.8 4.5 7 4.5c2 0 3.6 1.2 5 3 1.4-1.8 3-3 5-3 3.2 0 5.4 2.9 4.2 6.2C19.5 15.4 12 20 12 20z';
+const ICON = {
+  clock: ic('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
+  pin: ic('<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'),
+  leaf: ic('<path d="M5 19c0-8 6-14 15-14 0 9-6 15-14 15"/><path d="M5 19c3-4 6-6.5 9-8"/>'),
+  flame: ic('<path d="M12 3c1 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5 0 2 1 3 2 3 0-3-1-5 1-8.5z"/>'),
+  heart: ic(`<path d="${HEART}"/>`),
+  heartFill: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="${HEART}"/></svg>`,
+  star: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>',
+  x: ic('<path d="M6 6l12 12M18 6L6 18"/>'),
+  plus: ic('<path d="M12 5v14M5 12h14"/>'),
+  minus: ic('<path d="M5 12h14"/>'),
+  gear: ic('<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>'),
+  sparkle: ic('<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/>'),
+  shuffle: ic('<path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>'),
+  timer: ic('<circle cx="12" cy="13.5" r="7.5"/><path d="M12 10v3.5l2.5 2M9.5 2.5h5"/>'),
+  play: ic('<path d="M8 5.5l11 6.5-11 6.5z"/>'),
+  pause: ic('<path d="M9 5.5v13M15 5.5v13"/>'),
+  bell: ic('<path d="M6 9a6 6 0 0 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9zM10 20a2 2 0 0 0 4 0"/>'),
+  trash: ic('<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>'),
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  search: ic('<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>'),
+  pot: ic('<path d="M4 10h16v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-6zM2 10h20M9.5 6.5c0-1.5 1-2 1-3.5M14 6.5c0-1.5 1-2 1-3.5"/>'),
+};
+
+/* ---------- ceramic tile motifs (40x40) ---------- */
+const CORNERS = '<path d="M0 0H7A7 7 0 0 1 0 7Z M40 0V7A7 7 0 0 1 33 0Z M40 40H33A7 7 0 0 1 40 33Z M0 40V33A7 7 0 0 1 7 40Z"/>';
+const MOTIFS = [
+  '<path d="M20 5C26 11 26 15 20 20C14 15 14 11 20 5Z M35 20C29 26 25 26 20 20C25 14 29 14 35 20Z M20 35C14 29 14 25 20 20C26 25 26 29 20 35Z M5 20C11 14 15 14 20 20C15 26 11 26 5 20Z"/>',
+  '<rect x="12" y="12" width="16" height="16"/><rect x="12" y="12" width="16" height="16" transform="rotate(45 20 20)"/>',
+  '<path fill-rule="evenodd" d="M20 5L35 20L20 35L5 20Z M20 11L11 20L20 29L29 20Z"/><path d="M20 15.5L24.5 20L20 24.5L15.5 20Z"/>',
+  '<path fill-rule="evenodd" d="M20 9a11 11 0 1 0 .01 0Z M20 13a7 7 0 1 1-.01 0Z"/><path d="M18.5 1h3v8h-3zM18.5 31h3v8h-3zM1 18.5h8v3H1zM31 18.5h8v3h-8z"/><circle cx="20" cy="20" r="3"/>'
+];
+const hash = s => { let h = 2166136261; for (const c of String(s)) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
+const tileSVG = (r, variant) => {
+  const v = variant ?? (hash(r.id) % MOTIFS.length);
+  return `<span class="tile cat-${r.protein}" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" fill="currentColor" opacity=".15"/><g fill="currentColor">${CORNERS}${MOTIFS[v]}</g></svg></span>`;
+};
+const MASK_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><g fill="#000">${CORNERS}${MOTIFS[0]}<path d="M0 18.5h3v3H0zM37 18.5h3v3h-3zM18.5 0h3v3h-3zM18.5 37h3v3h-3z"/></g></svg>`;
+
+/* ---------- translations ---------- */
+const STR = {
+en: {
+  nav:'Main', tab_today:'Today', tab_discover:'Discover', tab_library:'Library', settings:'Settings',
+  start_cooking:'Start cooking', something_else:'Something else', new_today:'New today',
+  creating_daily:'{ai} is creating today’s new recipe…',
+  not_tried:'Haven’t tried yet', cook_again:'Worth cooking again',
+  empty_again:'Rate recipes you love and they’ll show up here once you’ve cooked them.',
+  empty_tried:'You’ve cooked everything in your library. Time to discover something new.',
+  discover_title:'Find something new', discover_sub:'Tell {ai} what you’re in the mood for, or let your library surprise you.',
+  f_main:'Main ingredient', f_time:'Time', f_region:'Cuisine', f_useup:'Anything to use up?', f_useup_ph:'e.g. zucchini, half a lemon',
+  any:'Any', p_fish:'Fish & seafood', p_poultry:'Poultry', p_legumes:'Legumes', p_vegetarian:'Vegetarian', p_eggs:'Eggs',
+  t_30:'Under 30 min', t_45:'Under 45 min',
+  r_greek:'Greek', r_italian:'Italian', r_spanish:'Spanish', r_levantine:'Levantine', r_northafrican:'North African', r_turkish:'Turkish', r_french:'Provençal', r_other:'Mediterranean',
+  create:'Create a new recipe', surprise:'Surprise me from my library',
+  creating:'{ai} is writing your recipe…', creating_hint:'This usually takes under a minute.', stop:'Stop',
+  disc_empty:'Your next recipe will appear here.',
+  no_match:'No recipes in your library match these choices. Try fewer filters, or create a new one.',
+  ai_off:'Creating new recipes needs Claude, which isn’t available here. Your library still works.',
+  err_limit:'Too many requests right now. Try again in a little while.',
+  err_incomplete:'The recipe came back incomplete. Try again.',
+  err_refused:'{ai} couldn’t create that one. Try different wishes.',
+  err_failed:'Connection problem. Try again.', err_signin:'Sign in again to create recipes.',
+  lib_title:'Your library', n_recipes:'{n} recipes', search_ph:'Search recipes or ingredients', sort:'Sort',
+  all:'All', favorites:'Favorites', from_claude:'From Claude',
+  sort_new:'Newest first', sort_rated:'Highest rated', sort_stale:'Longest since cooked', sort_quick:'Quickest',
+  lib_empty:'Nothing matches. Try another search or filter.',
+  min:'{n} min', sec:'{n} sec', hmin:'{h} h {m} min', hrs:'{n} h', kcal:'~{n} kcal per serving',
+  servings:'Servings', ingredients:'Ingredients', method:'Method', to_taste:'to taste',
+  timer_start:'Start {t} timer', timer_done:'Timer done', step:'Step {n}',
+  pause:'Pause timer', resume:'Resume timer', cancel_timer:'Cancel timer', dismiss:'Dismiss',
+  your_rating:'Your rating', notes:'Your notes', notes_ph:'What would you change next time?',
+  cooked_today:'I cooked this today', cooked_logged:'Cooked today', cooked_info:'Cooked {n}× so far, last on {d}', never_cooked:'Not cooked yet',
+  fav_add:'Add to favorites', fav_remove:'Remove from favorites',
+  delete:'Delete', delete_again:'Tap again to delete', deleted:'Recipe deleted', close:'Close',
+  lang:'Language', units:'Units', metric:'Metric', imperial:'Imperial', appearance:'Appearance', auto:'Auto', light:'Light', dark:'Dark',
+  daily_toggle:'A new recipe every day', daily_desc:'When you open Tavola, {ai} adds one fresh recipe to your library each day.',
+  saved_account:'Favorites, ratings and recipes are saved to your account.', saved_browser:'Favorites, ratings and recipes are saved in this browser.',
+  new_badge:'New', added_lib:'Added to your library', open:'Open recipe', ai_made:'Created by {by}', from_ai:'AI recipes',
+  tips:'Tips', oven_toggle:'I have an oven', oven_desc:'Off: new recipes only use the air fryer and the stovetop.',
+  api_label:'Claude API key', api_desc:'Needed to create new recipes on this site. Stored only in this browser, never on GitHub.', api_save:'Save key', api_remove:'Remove key', api_saved:'API key saved', api_removed:'API key removed', api_set:'A key is saved in this browser.',
+  ai_need_key:'To create new recipes, add a Claude or Gemini API key in Settings. Your library works without it.',
+  ai_provider:'Recipe AI', api_label_gemini:'Gemini API key', err_gquota:'Your Gemini quota is used up for now. Check your limits in Google AI Studio.',
+  err_key:'The API key was rejected. Check it in Settings.', err_credit:'Your Anthropic account has no credit left. Top it up in the Claude Console.',
+  backup:'Backup', backup_desc:'Favorites, ratings and recipes are saved in this browser. Export a backup to move them to another device.', export:'Export', import:'Import', imported:'Backup imported', import_err:'That file isn’t a Tavola backup.',
+  foot:'Calorie values are estimates per serving. All recipes serve two and scale from there.'
+},
+de: {
+  nav:'Navigation', tab_today:'Heute', tab_discover:'Entdecken', tab_library:'Sammlung', settings:'Einstellungen',
+  start_cooking:'Jetzt kochen', something_else:'Etwas anderes', new_today:'Neu heute',
+  creating_daily:'{ai} erstellt das neue Rezept für heute …',
+  not_tried:'Noch nicht gekocht', cook_again:'Mal wieder kochen',
+  empty_again:'Bewerte Rezepte, die du magst – nach dem Kochen erscheinen sie hier.',
+  empty_tried:'Du hast schon alles aus deiner Sammlung gekocht. Zeit für etwas Neues.',
+  discover_title:'Neues entdecken', discover_sub:'Sag {ai}, worauf du Lust hast, oder lass dich von deiner Sammlung überraschen.',
+  f_main:'Hauptzutat', f_time:'Zeit', f_region:'Küche', f_useup:'Muss etwas weg?', f_useup_ph:'z. B. Zucchini, eine halbe Zitrone',
+  any:'Egal', p_fish:'Fisch & Meeresfrüchte', p_poultry:'Geflügel', p_legumes:'Hülsenfrüchte', p_vegetarian:'Vegetarisch', p_eggs:'Eier',
+  t_30:'Unter 30 Min.', t_45:'Unter 45 Min.',
+  r_greek:'Griechisch', r_italian:'Italienisch', r_spanish:'Spanisch', r_levantine:'Levantinisch', r_northafrican:'Nordafrikanisch', r_turkish:'Türkisch', r_french:'Provenzalisch', r_other:'Mediterran',
+  create:'Neues Rezept erstellen', surprise:'Überrasch mich aus der Sammlung',
+  creating:'{ai} schreibt dein Rezept …', creating_hint:'Das dauert meist weniger als eine Minute.', stop:'Abbrechen',
+  disc_empty:'Dein nächstes Rezept erscheint hier.',
+  no_match:'Keine Rezepte in deiner Sammlung passen dazu. Wähle weniger Filter oder erstelle ein neues.',
+  ai_off:'Neue Rezepte brauchen Claude, das hier nicht verfügbar ist. Deine Sammlung funktioniert trotzdem.',
+  err_limit:'Gerade zu viele Anfragen. Versuch es gleich noch einmal.',
+  err_incomplete:'Das Rezept kam unvollständig an. Versuch es noch einmal.',
+  err_refused:'Das konnte {ai} nicht erstellen. Probier andere Wünsche.',
+  err_failed:'Verbindungsproblem. Versuch es noch einmal.', err_signin:'Melde dich erneut an, um Rezepte zu erstellen.',
+  lib_title:'Deine Sammlung', n_recipes:'{n} Rezepte', search_ph:'Rezepte oder Zutaten suchen', sort:'Sortieren',
+  all:'Alle', favorites:'Favoriten', from_claude:'Von Claude',
+  sort_new:'Neueste zuerst', sort_rated:'Beste Bewertung', sort_stale:'Am längsten nicht gekocht', sort_quick:'Am schnellsten',
+  lib_empty:'Nichts gefunden. Probier eine andere Suche oder einen anderen Filter.',
+  min:'{n} Min.', sec:'{n} Sek.', hmin:'{h} Std. {m} Min.', hrs:'{n} Std.', kcal:'~{n} kcal pro Portion',
+  servings:'Portionen', ingredients:'Zutaten', method:'Zubereitung', to_taste:'nach Geschmack',
+  timer_start:'Timer {t} starten', timer_done:'Timer abgelaufen', step:'Schritt {n}',
+  pause:'Timer pausieren', resume:'Timer fortsetzen', cancel_timer:'Timer abbrechen', dismiss:'Schließen',
+  your_rating:'Deine Bewertung', notes:'Deine Notizen', notes_ph:'Was würdest du nächstes Mal anders machen?',
+  cooked_today:'Heute gekocht', cooked_logged:'Heute gekocht ✓', cooked_info:'Bisher {n}× gekocht, zuletzt am {d}', never_cooked:'Noch nie gekocht',
+  fav_add:'Zu Favoriten hinzufügen', fav_remove:'Aus Favoriten entfernen',
+  delete:'Löschen', delete_again:'Zum Löschen erneut tippen', deleted:'Rezept gelöscht', close:'Schließen',
+  lang:'Sprache', units:'Einheiten', metric:'Metrisch', imperial:'Imperial', appearance:'Darstellung', auto:'Automatisch', light:'Hell', dark:'Dunkel',
+  daily_toggle:'Jeden Tag ein neues Rezept', daily_desc:'Wenn du Tavola öffnest, fügt {ai} deiner Sammlung jeden Tag ein frisches Rezept hinzu.',
+  saved_account:'Favoriten, Bewertungen und Rezepte werden in deinem Konto gespeichert.', saved_browser:'Favoriten, Bewertungen und Rezepte werden in diesem Browser gespeichert.',
+  new_badge:'Neu', added_lib:'Zur Sammlung hinzugefügt', open:'Rezept öffnen', ai_made:'Von {by} erstellt', from_ai:'KI-Rezepte',
+  tips:'Tipps', oven_toggle:'Ich habe einen Backofen', oven_desc:'Aus: Neue Rezepte nutzen nur Air Fryer und Herd.',
+  api_label:'Claude-API-Schlüssel', api_desc:'Nötig, um auf dieser Seite neue Rezepte zu erstellen. Wird nur in diesem Browser gespeichert, nie auf GitHub.', api_save:'Schlüssel speichern', api_remove:'Schlüssel entfernen', api_saved:'API-Schlüssel gespeichert', api_removed:'API-Schlüssel entfernt', api_set:'In diesem Browser ist ein Schlüssel gespeichert.',
+  ai_need_key:'Um neue Rezepte zu erstellen, trag in den Einstellungen einen Claude- oder Gemini-API-Schlüssel ein. Deine Sammlung funktioniert auch ohne.',
+  ai_provider:'Rezept-KI', api_label_gemini:'Gemini-API-Schlüssel', err_gquota:'Dein Gemini-Kontingent ist gerade aufgebraucht. Prüf deine Limits in Google AI Studio.',
+  err_key:'Der API-Schlüssel wurde abgelehnt. Prüf ihn in den Einstellungen.', err_credit:'Dein Anthropic-Konto hat kein Guthaben mehr. Lade es in der Claude Console auf.',
+  backup:'Sicherung', backup_desc:'Favoriten, Bewertungen und Rezepte liegen in diesem Browser. Exportiere eine Sicherung, um sie auf ein anderes Gerät zu übertragen.', export:'Exportieren', import:'Importieren', imported:'Sicherung importiert', import_err:'Diese Datei ist keine Tavola-Sicherung.',
+  foot:'Kalorienangaben sind Schätzwerte pro Portion. Alle Rezepte sind für zwei Personen und lassen sich umrechnen.'
+},
+zh: {
+  nav:'主导航', tab_today:'今天', tab_discover:'发现', tab_library:'食谱库', settings:'设置',
+  start_cooking:'开始烹饪', something_else:'换一道', new_today:'今日新菜',
+  creating_daily:'{ai} 正在生成今日新食谱…',
+  not_tried:'还没做过', cook_again:'值得再做',
+  empty_again:'给喜欢的菜打分，做过之后它们就会出现在这里。',
+  empty_tried:'食谱库里的菜你都做过了，去发现点新的吧。',
+  discover_title:'发现新菜', discover_sub:'告诉 {ai} 你想吃什么，或者从食谱库里随机挑一道。',
+  f_main:'主要食材', f_time:'时间', f_region:'菜系', f_useup:'有需要用掉的食材吗？', f_useup_ph:'例如：西葫芦、半个柠檬',
+  any:'不限', p_fish:'鱼和海鲜', p_poultry:'禽肉', p_legumes:'豆类', p_vegetarian:'素食', p_eggs:'蛋类',
+  t_30:'30 分钟内', t_45:'45 分钟内',
+  r_greek:'希腊', r_italian:'意大利', r_spanish:'西班牙', r_levantine:'黎凡特', r_northafrican:'北非', r_turkish:'土耳其', r_french:'普罗旺斯', r_other:'地中海',
+  create:'生成新食谱', surprise:'从食谱库随机挑选',
+  creating:'{ai} 正在编写食谱…', creating_hint:'通常不到一分钟。', stop:'停止',
+  disc_empty:'新食谱会显示在这里。',
+  no_match:'食谱库中没有符合条件的菜。减少筛选条件，或生成一道新菜。',
+  ai_off:'生成新食谱需要 Claude，此处不可用。食谱库仍可正常使用。',
+  err_limit:'请求过多，请稍后再试。',
+  err_incomplete:'食谱内容不完整，请重试。',
+  err_refused:'{ai} 无法生成这道菜，请换个要求。',
+  err_failed:'连接出现问题，请重试。', err_signin:'请重新登录后再生成食谱。',
+  lib_title:'我的食谱库', n_recipes:'{n} 道菜', search_ph:'搜索菜名或食材', sort:'排序',
+  all:'全部', favorites:'收藏', from_claude:'Claude 生成',
+  sort_new:'最新', sort_rated:'评分最高', sort_stale:'最久没做', sort_quick:'最快',
+  lib_empty:'没有匹配结果，换个搜索词或筛选条件试试。',
+  min:'{n} 分钟', sec:'{n} 秒', hmin:'{h} 小时 {m} 分钟', hrs:'{n} 小时', kcal:'每份约 {n} 千卡',
+  servings:'份数', ingredients:'食材', method:'做法', to_taste:'适量',
+  timer_start:'开始计时 {t}', timer_done:'计时结束', step:'第 {n} 步',
+  pause:'暂停计时', resume:'继续计时', cancel_timer:'取消计时', dismiss:'知道了',
+  your_rating:'我的评分', notes:'我的笔记', notes_ph:'下次想怎么改进？',
+  cooked_today:'今天做了这道菜', cooked_logged:'今天已做', cooked_info:'已做过 {n} 次，最近一次是 {d}', never_cooked:'还没做过',
+  fav_add:'加入收藏', fav_remove:'取消收藏',
+  delete:'删除', delete_again:'再点一次删除', deleted:'已删除食谱', close:'关闭',
+  lang:'语言', units:'单位', metric:'公制', imperial:'英制', appearance:'外观', auto:'跟随系统', light:'浅色', dark:'深色',
+  daily_toggle:'每天一道新菜', daily_desc:'每天打开 Tavola 时，{ai} 会向你的食谱库添加一道新菜。',
+  saved_account:'收藏、评分和食谱保存在你的账户中。', saved_browser:'收藏、评分和食谱保存在此浏览器中。',
+  new_badge:'新', added_lib:'已加入食谱库', open:'查看食谱', ai_made:'由 {by} 生成', from_ai:'AI 食谱',
+  tips:'小贴士', oven_toggle:'我有烤箱', oven_desc:'关闭时，新食谱只使用空气炸锅和灶台。',
+  api_label:'Claude API 密钥', api_desc:'在此网站生成新食谱需要它。仅保存在此浏览器中，不会上传到 GitHub。', api_save:'保存密钥', api_remove:'移除密钥', api_saved:'已保存 API 密钥', api_removed:'已移除 API 密钥', api_set:'此浏览器中已保存密钥。',
+  ai_need_key:'要生成新食谱，请在设置中填写 Claude 或 Gemini API 密钥。没有密钥也能使用食谱库。',
+  ai_provider:'食谱 AI', api_label_gemini:'Gemini API 密钥', err_gquota:'你的 Gemini 配额暂时用完了，请在 Google AI Studio 查看限额。',
+  err_key:'API 密钥无效，请在设置中检查。', err_credit:'你的 Anthropic 账户余额不足，请在 Claude Console 充值。',
+  backup:'备份', backup_desc:'收藏、评分和食谱保存在此浏览器中。导出备份即可转移到其他设备。', export:'导出', import:'导入', imported:'已导入备份', import_err:'该文件不是 Tavola 备份。',
+  foot:'热量为每份的估算值。所有食谱均为两人份，可按需调整份数。'
+}
+};
+const UNIT_L = {
+  g:{en:'g',de:'g',zh:'克'}, kg:{en:'kg',de:'kg',zh:'千克'}, ml:{en:'ml',de:'ml',zh:'毫升'}, l:{en:'l',de:'l',zh:'升'},
+  tbsp:{en:'tbsp',de:'EL',zh:'汤匙'}, tsp:{en:'tsp',de:'TL',zh:'茶匙'}, pinch:{en:'pinch',de:'Prise',zh:'撮'}, handful:{en:'handful',de:'Handvoll',zh:'把'},
+  oz:{en:'oz',de:'oz',zh:'盎司'}, lb:{en:'lb',de:'lb',zh:'磅'}, cup:{en:'cup',de:'Cup',zh:'杯'}, cups:{en:'cups',de:'Cups',zh:'杯'}
+};
+
+/* ---------- seed recipes (all serve 2; no oven needed: air fryer + stovetop) ---------- */
+const T = (en, de, zh) => ({en, de, zh});
+const I = (q, u, en, de, zh) => ({q, u, n: T(en, de, zh)});
+const P = (t, en, de, zh) => ({t, x: T(en, de, zh)});
+const OIL = [ 'extra-virgin olive oil', 'natives Olivenöl extra', '特级初榨橄榄油' ];
+const SP = [ 'salt and black pepper', 'Salz und schwarzer Pfeffer', '盐和黑胡椒' ];
+const SALT = [ 'salt', 'Salz', '盐' ];
+const PEP = [ 'black pepper', 'schwarzer Pfeffer', '黑胡椒' ];
+const CHILI = [ 'chili flakes', 'Chiliflocken', '辣椒碎' ];
+const BASIL = [ 'fresh basil leaves', 'frische Basilikumblätter', '新鲜罗勒叶' ];
+const GARLIC_CH = [ 'garlic cloves, finely chopped', 'Knoblauchzehen, fein gehackt', '蒜瓣（切末）' ];
+const OREG = [ 'dried oregano', 'getrockneter Oregano', '干牛至' ];
+const THYME = [ 'dried thyme', 'getrockneter Thymian', '干百里香' ];
+const LEMON_ZJ = [ 'lemon, zest and juice', 'Zitrone, Schale und Saft', '柠檬（取皮屑和汁）' ];
+const LEMON_J = [ 'lemon, juiced', 'Zitrone, entsaftet', '柠檬（榨汁）' ];
+const SMOKED = [ 'smoked paprika', 'geräuchertes Paprikapulver', '烟熏红椒粉' ];
+const TOMS = [ 'cherry tomatoes', 'Kirschtomaten', '圣女果' ];
+const FETA_C = [ 'feta, crumbled', 'Feta, zerbröckelt', '菲达奶酪（捏碎）' ];
+const SEEDS = [
+/* ----- your favourites ----- */
+{ id:'f1', fav:true, region:'italian', protein:'fish', time:25, kcal:780,
+  title:T('Wholewheat spaghetti aglio e olio with prawns','Spaghetti Aglio e Olio mit Garnelen','蒜香橄榄油全麦意面配虾'),
+  desc:T('The classic Roman pasta with garlic, olive oil and chili, finished with juicy prawns. Simple, fast and wonderfully aromatic.','Klassische römische Pasta mit Knoblauch, Olivenöl und Chili, verfeinert mit saftigen Garnelen – schlicht, schnell und unglaublich aromatisch.','经典罗马意面，以蒜、橄榄油和辣椒调味，再加入多汁的虾。简单、快手、香气十足。'),
+  health:T('Wholewheat spaghetti is gentler on blood sugar, and prawns add lean protein.','Vollkornspaghetti sind blutzuckerfreundlicher, Garnelen liefern mageres Eiweiß.','全麦意面对血糖更友好，虾提供低脂蛋白。'),
+  ing:[ I(200,'g','wholewheat spaghetti','Vollkornspaghetti','全麦意大利面'),
+    I(300,'g','prawns, peeled and deveined','Garnelen, geschält und entdarmt','虾仁（去壳去虾线）'),
+    I(5,'pc','garlic cloves, thinly sliced','Knoblauchzehen, in dünnen Scheiben','蒜瓣（切薄片）'),
+    I(5,'tbsp',...OIL), I(0.5,'tsp',...CHILI), I(4,'pc',...BASIL), I(0.5,'tsp',...SALT),
+    I(0.5,'tsp','freshly ground black pepper','schwarzer Pfeffer, frisch gemahlen','现磨黑胡椒'), I(0.5,'pc',...LEMON_J) ],
+  steps:[ P(600,'Bring a large pot of lightly salted water to the boil and cook the spaghetti until al dente. Save about 150 ml of the pasta water before draining.','Einen großen Topf Wasser zum Kochen bringen, leicht salzen und die Spaghetti nach Packungsanleitung al dente kochen. Vor dem Abgießen etwa 150 ml Pastawasser aufbewahren.','大锅水烧开，加少许盐，按包装说明把意面煮至弹牙。沥水前留出约 150 毫升煮面水。'),
+    P(0,'Pat the prawns dry and season them with a little of the salt and pepper.','Die Garnelen trocken tupfen und mit etwas Salz und Pfeffer würzen.','虾仁擦干，用少许盐和黑胡椒调味。'),
+    P(120,'Warm the olive oil in a large pan over low to medium heat. Add the garlic and chili and let them sizzle gently until the garlic is golden, not brown.','Das Olivenöl in einer großen Pfanne bei niedriger bis mittlerer Hitze erwärmen. Knoblauch und Chiliflocken zugeben und langsam anschwitzen, bis der Knoblauch goldgelb (nicht braun!) ist.','大平底锅中小火加热橄榄油，放入蒜片和辣椒碎慢慢煸炒，至蒜片金黄（不要变褐！）。'),
+    P(180,'Add the prawns and fry over medium-high heat for 1–2 minutes per side until pink and just cooked. Lift them out and set aside.','Die Garnelen zugeben und bei mittlerer bis hoher Hitze 1–2 Minuten pro Seite braten, bis sie rosa und gerade durch sind. Herausnehmen und beiseitestellen.','放入虾仁，中大火每面煎 1–2 分钟，至变红刚熟，盛出备用。'),
+    P(0,'Take the pan off the heat. Stir in 3–4 tablespoons of pasta water until a lightly creamy emulsion forms.','Die Pfanne vom Herd nehmen. 3–4 EL Pastawasser zugeben und gut verrühren, bis eine leicht cremige Emulsion entsteht.','锅离火，加入 3–4 汤匙煮面水，搅拌至形成略微浓稠的乳化酱汁。'),
+    P(0,'Add the drained spaghetti and toss well over low heat. Return the prawns to warm through, adding more pasta water if needed, and season with the remaining salt and pepper.','Die abgegossenen Spaghetti in die Pfanne geben und bei niedriger Hitze gut durchschwenken. Die Garnelen zurückgeben und kurz erwärmen, bei Bedarf noch etwas Pastawasser zugeben und mit dem restlichen Salz und Pfeffer abschmecken.','把沥干的意面倒入锅中，小火充分翻拌。放回虾仁稍微加热，需要时再加些煮面水，用剩余的盐和黑胡椒调味。'),
+    P(0,'Off the heat, drizzle with the lemon juice and scatter over the torn basil. Serve straight away on warmed plates. Buon appetito!','Vom Herd nehmen, mit dem Zitronensaft beträufeln und das zerzupfte Basilikum darüberstreuen. Sofort auf vorgewärmten Tellern servieren. Buon appetito!','离火，淋上柠檬汁，撒上撕碎的罗勒叶，立即盛入温热的盘中享用。Buon appetito！') ],
+  tips:[ T('Don’t burn the garlic: it should turn golden, never brown, or it becomes bitter. Low to medium heat is the key.','Knoblauch nicht verbrennen! Er soll nur goldgelb werden, nicht braun – sonst wird er bitter. Niedrige bis mittlere Hitze ist der Schlüssel.','别把蒜炒焦：蒜片只需金黄，变褐就会发苦。关键是中小火。'),
+    T('Don’t overcook the prawns: once pink and slightly curled they’re done. Longer makes them rubbery.','Garnelen nicht übergaren: Sobald sie rosa und leicht gebogen sind, sind sie fertig. Länger braten macht sie gummiartig.','虾别煎过头：变红并微微卷曲就熟了，再煎会变老。'),
+    T('Pasta water is gold: it makes the sauce glossy and helps the oil turn into a creamy emulsion.','Pastawasser ist Gold: Es macht die Soße glänzend und hilft dem Öl, sich zu einer cremigen Emulsion zu verbinden.','煮面水是宝：它让酱汁有光泽，帮助橄榄油乳化成顺滑的酱汁。'),
+    T('Very little salt is needed, since garlic, chili and good olive oil carry the flavour. Ideal if you watch your sodium.','Sehr wenig Salz nötig: Knoblauch, Chili und gutes Olivenöl tragen den Geschmack – ideal, wenn du auf Natrium achtest.','几乎不需要多少盐，蒜、辣椒和好橄榄油就足够出味，适合控制钠摄入。'),
+    T('Cheese? Traditionally none, especially with seafood.','Käse? Klassisch wird hier keiner verwendet, besonders nicht bei Meeresfrüchten.','要加奶酪吗？传统做法不加，搭配海鲜时更是如此。') ] },
+{ id:'f2', fav:true, region:'greek', protein:'poultry', time:45, kcal:440,
+  title:T('Air fryer Mediterranean chicken skewers','Mediterrane Hähnchen-Schaschlik aus dem Air Fryer','空气炸锅地中海鸡肉串'),
+  desc:T('Juicy chicken marinated with lemon, garlic and herbs, lightly charred outside and tender inside, with colourful vegetables on the skewer.','Saftige Hähnchenwürfel, mediterran mariniert mit Zitrone, Knoblauch und Kräutern – außen leicht geröstet, innen zart. Dazu buntes Gemüse am Spieß.','鸡块用柠檬、蒜和香草腌制，烤得外微焦、内鲜嫩，搭配彩色蔬菜串。'),
+  health:T('Lean chicken breast and plenty of vegetables make a high-protein, low-fat dinner.','Mageres Hähnchenbrustfilet und viel Gemüse ergeben ein eiweißreiches, fettarmes Abendessen.','瘦鸡胸肉搭配大量蔬菜，高蛋白低脂肪。'),
+  ing:[ I(400,'g','chicken breast, in 3 cm cubes','Hähnchenbrustfilet, in 3-cm-Würfeln','鸡胸肉（切 3 厘米块）'),
+    I(1,'pc','red bell pepper, in pieces','rote Paprika, in Stücken','红甜椒（切块）'), I(1,'pc','zucchini, sliced','Zucchini, in Scheiben','西葫芦（切片）'),
+    I(200,'g',...TOMS), I(3,'tbsp',...OIL), I(3,'pc',...GARLIC_CH), I(1,'pc',...LEMON_ZJ), I(1.5,'tsp',...OREG),
+    I(1,'tsp',...SMOKED), I(0.5,'tsp',...CHILI), I(1,'tsp',...SALT), I(0.5,'tsp',...PEP), I(5,'pc',...BASIL) ],
+  steps:[ P(1200,'If using wooden skewers, soak them in water now. Mix the olive oil, garlic, lemon zest and most of the juice, oregano, paprika, chili, salt and pepper into a marinade. Turn the chicken in it and marinate for at least 20 minutes.','Falls du Holzspieße verwendest, jetzt in Wasser einlegen. Olivenöl, Knoblauch, Zitronenschale und den Großteil des Safts, Oregano, Paprikapulver, Chiliflocken, Salz und Pfeffer zu einer Marinade verrühren. Die Hähnchenwürfel darin wenden und mindestens 20 Minuten marinieren.','如果用木签，现在先泡水。把橄榄油、蒜末、柠檬皮屑和大部分柠檬汁、牛至、红椒粉、辣椒碎、盐和黑胡椒混合成腌料，放入鸡块拌匀，腌至少 20 分钟。'),
+    P(0,'Thread the chicken, pepper, zucchini and tomatoes alternately onto the skewers. Heat the air fryer to {T200}.','Hähnchen, Paprika, Zucchini und Kirschtomaten abwechselnd auf die Spieße stecken. Den Air Fryer auf {T200} vorheizen.','把鸡块、甜椒、西葫芦和圣女果交替串在签子上。空气炸锅预热至{T200}。'),
+    P(780,'Lay the skewers in the basket in a single layer and cook for 12–15 minutes, turning once halfway. Check at 12 minutes: the chicken must be white inside.','Die Spieße nebeneinander (nicht übereinander!) in den Air Fryer legen und 12–15 Minuten garen, nach der Hälfte einmal wenden. Bei 12 Minuten prüfen: Das Hähnchen muss innen weiß sein.','把肉串平铺在炸篮中（不要叠放！），烤 12–15 分钟，中途翻面一次。12 分钟时检查：鸡肉内部必须全白。'),
+    P(0,'Arrange on plates, scatter over the torn basil, add a last squeeze of lemon and serve straight away. Buon appetito!','Die Spieße anrichten, das zerzupfte Basilikum darüberstreuen, mit einem letzten Spritzer Zitrone beträufeln und sofort servieren. Buon appetito!','把肉串装盘，撒上撕碎的罗勒叶，再挤一点柠檬汁，立即享用。Buon appetito！') ],
+  tips:[ T('Soak wooden skewers in water for 20 minutes first so they don’t burn in the air fryer.','Holzspieße vorher 20 Minuten in Wasser einweichen, damit sie im Air Fryer nicht verbrennen.','木签先泡水 20 分钟，免得在空气炸锅里烤焦。'),
+    T('Marinate for at least 20 minutes, or better an hour in the fridge.','Mindestens 20 Minuten marinieren, noch besser 1 Stunde im Kühlschrank.','至少腌 20 分钟，放冰箱腌 1 小时更好。'),
+    T('Don’t overload the basket and never stack the skewers. Cook in two rounds if needed.','Den Air Fryer nicht zu voll beladen: Spieße nicht übereinanderlegen, lieber in zwei Runden garen.','炸篮别装太满，肉串不要叠放，必要时分两批烤。'),
+    T('Alternating meat and vegetables helps everything cook evenly, and it looks lovely.','Fleisch und Gemüse abwechseln: So gart alles gleichmäßig und sieht wunderschön aus.','肉和蔬菜交替串，受热更均匀，也更好看。'),
+    T('A tomato and mozzarella salad goes well with it.','Dazu passt ein Tomaten-Mozzarella-Salat.','可以搭配番茄马苏里拉沙拉。') ] },
+{ id:'f3', fav:true, region:'greek', protein:'legumes', time:35, kcal:690,
+  title:T('Mediterranean vegetable pan with feta','Mediterrane Gemüsepfanne mit Feta','菲达奶酪地中海蔬菜锅'),
+  desc:T('A colourful pan of eggplant, zucchini, chickpeas and feta. Vegetarian and ready in about 30 minutes.','Bunte mediterrane Gemüsepfanne mit Aubergine, Zucchini, Kichererbsen und Feta – vegetarisch und in rund 30 Minuten fertig.','茄子、西葫芦、鹰嘴豆和菲达奶酪做成的缤纷蔬菜锅，素食，约 30 分钟上桌。'),
+  health:T('Vegetables and chickpeas bring fibre and potassium, which support healthy blood pressure.','Gemüse und Kichererbsen liefern Ballaststoffe und Kalium – gut für einen gesunden Blutdruck.','蔬菜和鹰嘴豆富含纤维和钾，有助于维持健康血压。'),
+  ing:[ I(1,'pc','eggplant, diced','Aubergine, gewürfelt','茄子（切丁）'), I(1,'pc','zucchini, sliced','Zucchini, in Scheiben','西葫芦（切片）'),
+    I(400,'g','canned chickpeas, drained','Kichererbsen aus der Dose, abgetropft','罐装鹰嘴豆（沥干）'), I(250,'g','cherry tomatoes, halved','Kirschtomaten, halbiert','圣女果（对半切）'),
+    I(100,'g',...FETA_C), I(3,'pc',...GARLIC_CH), I(4,'tbsp',...OIL), I(1,'tsp',...OREG), I(0.5,'tsp',...THYME),
+    I(0.5,'tsp',...CHILI), I(5,'pc',...BASIL), I(0.5,'pc',...LEMON_J), I(1,'tsp',...SALT), I(0.5,'tsp',...PEP) ],
+  steps:[ P(900,'Sprinkle the eggplant with some of the salt and leave for 10–15 minutes, then pat dry. Pat the chickpeas dry too.','Die Auberginenwürfel mit etwas Salz bestreuen, 10–15 Minuten ziehen lassen und dann trocken tupfen. Die Kichererbsen ebenfalls gut trocken tupfen.','茄子丁撒少许盐腌 10–15 分钟，然后擦干。鹰嘴豆也充分擦干。'),
+    P(360,'Heat half the olive oil in a large pan over high heat and fry the eggplant for 5–6 minutes until golden. Lift out and set aside.','Die Hälfte des Olivenöls in einer großen Pfanne bei hoher Hitze erhitzen und die Auberginenwürfel 5–6 Minuten goldbraun anbraten. Herausnehmen und beiseitestellen.','大平底锅中大火加热一半橄榄油，放入茄子煎 5–6 分钟至金黄，盛出备用。'),
+    P(240,'Add a little more oil and fry the zucchini and chickpeas over medium heat for 3–4 minutes until lightly coloured.','Etwas mehr Öl in die Pfanne geben und Zucchini und Kichererbsen bei mittlerer Hitze 3–4 Minuten anbraten, bis sie leicht Farbe bekommen.','锅中再加少许油，中火煎西葫芦和鹰嘴豆 3–4 分钟至略上色。'),
+    P(300,'Add the garlic, chili, oregano and thyme and fry for 1 minute. Add the cherry tomatoes, return the eggplant, mix well and let everything cook together over medium heat for about 5 minutes. Season with the remaining salt and the pepper.','Knoblauch, Chiliflocken, Oregano und Thymian zugeben und 1 Minute mitbraten. Die Kirschtomaten zugeben, die Aubergine zurück in die Pfanne geben, alles gut vermischen und bei mittlerer Hitze etwa 5 Minuten zusammen schmoren. Mit dem restlichen Salz und dem Pfeffer abschmecken.','加入蒜末、辣椒碎、牛至和百里香炒 1 分钟。放入圣女果，倒回茄子，拌匀后中火一起焖煮约 5 分钟，用剩余的盐和黑胡椒调味。'),
+    P(0,'Off the heat, drizzle with lemon juice, crumble the feta over and scatter with torn basil. Finish with the last of the olive oil and serve straight away. Buon appetito!','Vom Herd nehmen, mit Zitronensaft beträufeln, den Feta darüberbröseln und das zerzupfte Basilikum darüberstreuen. Mit dem restlichen Olivenöl beträufeln und sofort servieren. Buon appetito!','离火，淋上柠檬汁，撒上捏碎的菲达奶酪和撕碎的罗勒叶，最后淋上剩余的橄榄油，立即享用。Buon appetito！') ],
+  tips:[ T('Salting the eggplant draws out bitterness and makes it creamier.','Aubergine salzen: Das zieht Bitterstoffe heraus und macht sie cremiger.','茄子先用盐腌，可去除苦味，口感更绵软。'),
+    T('Greek feta is quite salty, so go easy on the salt in the pan.','Griechischer Feta ist recht salzig – beim Salzen der Pfanne vorsichtig sein!','希腊菲达奶酪较咸，炒菜时盐要少放。'),
+    T('Dry the chickpeas well so they turn slightly crisp in the pan.','Kichererbsen gut abtropfen und trocken tupfen, damit sie in der Pfanne leicht knusprig werden.','鹰嘴豆要充分沥干擦干，煎时才会微脆。'),
+    T('Lovely with a slice of wholegrain bread, or on its own as a complete meal.','Passt wunderbar zu einem Stück Vollkornbrot oder einfach so als vollständige Mahlzeit.','配一片全麦面包很好，单吃也是完整的一餐。'),
+    T('Chickpeas have a very low glycaemic index, which keeps blood sugar steady.','Kichererbsen haben einen sehr niedrigen glykämischen Index – gut für einen stabilen Blutzucker.','鹰嘴豆升糖指数很低，有助于血糖平稳。') ] },
+{ id:'f4', fav:true, region:'italian', protein:'fish', time:30, kcal:790,
+  title:T('Air fryer salmon with white beans and tomatoes','Mediterraner Lachs aus dem Air Fryer','空气炸锅三文鱼配白芸豆番茄'),
+  desc:T('Juicy herb-crusted salmon from the air fryer on braised cherry tomatoes and white beans from the stove.','Saftiger Lachs mit Kräuterkruste aus dem Air Fryer, dazu geschmorte Kirschtomaten mit weißen Bohnen vom Herd.','空气炸锅烤出的香草三文鱼，配灶台上焖煮的圣女果和白芸豆。'),
+  health:T('Salmon provides omega-3 fats, while beans and spinach add fibre and potassium.','Lachs liefert Omega-3-Fettsäuren, Bohnen und Spinat Ballaststoffe und Kalium.','三文鱼提供 Omega-3 脂肪酸，白芸豆和菠菜补充纤维和钾。'),
+  ing:[ I(400,'g','skinless salmon fillet','Lachsfilet ohne Haut','去皮三文鱼柳'), I(3,'tbsp',...OIL), I(3,'pc',...GARLIC_CH),
+    I(1,'pc',...LEMON_ZJ), I(1,'tsp',...OREG), I(0.5,'tsp',...THYME), I(4,'pc',...BASIL), I(1,'tsp',...SALT), I(0.5,'tsp',...PEP),
+    I(250,'g',...TOMS), I(400,'g','canned white beans, drained','weiße Bohnen aus der Dose, abgetropft','罐装白芸豆（沥干）'),
+    I(80,'g','baby spinach','Babyspinat','嫩菠菜'), I(1,'tbsp','capers (optional)','Kapern (optional)','刺山柑（可选）') ],
+  steps:[ P(600,'In a small bowl, mix most of the olive oil with half the garlic, the lemon zest and most of the juice, the oregano and thyme. Pat the salmon dry, season with salt and pepper and spread the marinade over it. Leave for 10 minutes.','In einer kleinen Schüssel den Großteil des Olivenöls mit der Hälfte des Knoblauchs, der Zitronenschale und dem Großteil des Safts, Oregano und Thymian verrühren. Den Lachs trocken tupfen, mit Salz und Pfeffer würzen und die Marinade gleichmäßig auftragen. 10 Minuten einwirken lassen.','小碗中将大部分橄榄油、一半蒜末、柠檬皮屑和大部分柠檬汁、牛至和百里香拌匀。三文鱼擦干，用盐和黑胡椒调味，均匀抹上腌料，腌 10 分钟。'),
+    P(660,'Heat the air fryer to {T190}. Lay the salmon in the basket (baking paper underneath is recommended) and cook for 10–12 minutes. Check at 10 minutes: the centre may still be slightly translucent.','Den Air Fryer auf {T190} vorheizen. Den Lachs in den Korb legen (Backpapier darunter empfohlen) und 10–12 Minuten garen. Bei 10 Minuten prüfen: Die Mitte darf noch leicht glasig sein!','空气炸锅预热至{T190}。把三文鱼放入炸篮（建议垫烘焙纸），烤 10–12 分钟。10 分钟时检查：中心略带半透明正好。'),
+    P(240,'Meanwhile, heat the remaining oil in a pan over medium heat. Add the tomatoes and the rest of the garlic and fry for 3–4 minutes until the tomatoes start to burst.','Inzwischen das restliche Öl in einer Pfanne bei mittlerer Hitze erhitzen. Kirschtomaten und den restlichen Knoblauch zugeben und 3–4 Minuten anbraten, bis die Tomaten leicht aufplatzen.','同时，平底锅中火加热剩余的油，放入圣女果和剩余蒜末炒 3–4 分钟，至番茄微微爆开。'),
+    P(180,'Stir in the white beans and capers and warm for 3 minutes. Fold in the spinach until just wilted and season with salt and pepper.','Weiße Bohnen und Kapern unterrühren und 3 Minuten erwärmen. Den Babyspinat unterheben, kurz zusammenfallen lassen und mit Salz und Pfeffer abschmecken.','拌入白芸豆和刺山柑加热 3 分钟，再拌入菠菜至刚变软，用盐和黑胡椒调味。'),
+    P(0,'Spoon the beans and tomatoes onto plates and top with the salmon. Scatter over the torn basil and finish with a squeeze of lemon. Buon appetito!','Die Bohnen-Tomaten-Mischung auf Tellern anrichten und den Lachs darauflegen. Das zerzupfte Basilikum darüberstreuen und mit einem Spritzer Zitrone abrunden. Buon appetito!','把豆子番茄盛入盘中，放上三文鱼，撒上撕碎的罗勒叶，再挤一点柠檬汁。Buon appetito！') ],
+  tips:[ T('Don’t overdo the salmon: it’s ready when the centre is still slightly translucent. That’s perfect, not raw.','Lachs nicht zu lange garen! Er ist fertig, wenn die Mitte noch leicht glasig ist – das ist perfekt, nicht roh.','三文鱼别烤过头：中心略带半透明就熟了，这是最佳状态，并不是生的。'),
+    T('Bought it with skin? No problem: cook it skin-side down. The skin protects the flesh and turns crisp.','Mit Haut gekauft? Kein Problem: einfach mit der Haut nach unten in den Air Fryer legen – die Haut schützt das Fleisch und wird schön knusprig.','买的是带皮的？没关系，皮朝下放入空气炸锅，鱼皮能保护鱼肉，还会变得酥脆。'),
+    T('Omega-3 from the salmon and potassium from the beans and spinach make this kind to blood pressure.','Omega-3 aus dem Lachs und Kalium aus Bohnen und Spinat – blutdruckfreundlich.','三文鱼的 Omega-3 加上豆子和菠菜的钾，对血压很友好。'),
+    T('Baking paper in the air fryer stops the fish from sticking.','Backpapier im Air Fryer verhindert, dass der Fisch klebt.','空气炸锅里垫烘焙纸，鱼不会粘篮。') ] },
+{ id:'f5', fav:true, region:'northafrican', protein:'eggs', time:30, kcal:720,
+  title:T('Classic shakshuka with feta','Klassische Shakshuka mit Feta','经典菲达奶酪北非蛋'),
+  desc:T('Eggs poached in a spiced tomato and pepper sauce, topped with feta, with crisp bread for dipping.','Würzige Tomaten-Paprika-Soße, pochierte Eier und Feta obendrauf – herzhaft, mediterran und mit knusprigem Brot zum Dippen.','鸡蛋在香料番茄甜椒酱中焖熟，撒上菲达奶酪，配香脆面包蘸着吃。'),
+  health:T('Eggs bring quality protein, and wholegrain bread adds fibre for steady energy.','Eier liefern hochwertiges Eiweiß, Vollkornbrot Ballaststoffe für lang anhaltende Energie.','鸡蛋提供优质蛋白，全麦面包补充纤维，能量更持久。'),
+  ing:[ I(4,'pc','eggs','Eier','鸡蛋'), I(400,'g','canned chopped tomatoes','gehackte Tomaten aus der Dose','罐装番茄碎'),
+    I(1,'pc','red bell pepper, in strips','rote Paprika, in Streifen','红甜椒（切条）'), I(1,'pc','onion, finely chopped','Zwiebel, fein gehackt','洋葱（切碎）'),
+    I(4,'pc',...GARLIC_CH), I(3,'tbsp',...OIL), I(100,'g',...FETA_C), I(1,'tsp',...SMOKED),
+    I(0.5,'tsp','ground cumin','gemahlener Kreuzkümmel','孜然粉'), I(0.25,'tsp','ground cinnamon','gemahlener Zimt','肉桂粉'),
+    I(0.5,'tsp',...CHILI), I(1,'tsp',...OREG), I(1,'tsp',...SALT), I(0.5,'tsp',...PEP), I(5,'pc',...BASIL), I(0.5,'pc',...LEMON_J),
+    I(4,'pc','slices of wholegrain bread','Scheiben Vollkornbrot','全麦面包片') ],
+  steps:[ P(420,'Heat the olive oil in a large pan over medium heat. Soften the onion for 3–4 minutes, then add the pepper and cook for another 3 minutes until soft.','Das Olivenöl in einer großen Pfanne bei mittlerer Hitze erhitzen. Die Zwiebel 3–4 Minuten glasig anschwitzen, dann die Paprika zugeben und weitere 3 Minuten mitbraten, bis sie weich wird.','大平底锅中火加热橄榄油，洋葱炒 3–4 分钟至透明，再加入甜椒炒 3 分钟至变软。'),
+    P(60,'Add the garlic, paprika, cumin, cinnamon, chili and oregano and fry for 1 minute until fragrant.','Knoblauch, Paprikapulver, Kreuzkümmel, Zimt, Chiliflocken und Oregano zugeben und 1 Minute mitbraten, bis die Gewürze duften.','加入蒜末、红椒粉、孜然粉、肉桂粉、辣椒碎和牛至炒 1 分钟，至香料出香味。'),
+    P(600,'Add the tomatoes, stir well and simmer over medium heat for 8–10 minutes until the sauce thickens. Season with salt and pepper.','Die Dosentomaten zugeben, gut umrühren und bei mittlerer Hitze 8–10 Minuten köcheln lassen, bis die Soße eindickt. Mit Salz und Pfeffer abschmecken.','倒入番茄碎拌匀，中火炖 8–10 分钟至酱汁变稠，用盐和黑胡椒调味。'),
+    P(360,'Press four wells into the sauce. Crack each egg into a cup and slide it gently into a well. Cover and poach over medium heat for 4–6 minutes until the whites are set but the yolks are still runny.','Vier Mulden in die Soße drücken. Die Eier einzeln in eine Tasse aufschlagen und vorsichtig in die Mulden gleiten lassen. Deckel drauf und 4–6 Minuten bei mittlerer Hitze pochieren, bis das Eiweiß gestockt ist, das Eigelb aber noch flüssig bleibt.','在酱中压出四个小坑。鸡蛋逐个打入杯中，再轻轻滑入坑里。盖上锅盖中火焖 4–6 分钟，至蛋白凝固、蛋黄仍是流心。'),
+    P(240,'Crumble the feta over, drizzle with the lemon juice and scatter with torn basil. Toast the bread in the air fryer at {T180} and serve straight from the pan.','Den Feta darüberbröseln, mit dem Zitronensaft beträufeln und das zerzupfte Basilikum darüberstreuen. Das Vollkornbrot im Air Fryer bei {T180} toasten und direkt aus der Pfanne servieren!','撒上捏碎的菲达奶酪，淋上柠檬汁，撒上撕碎的罗勒叶。全麦面包放入空气炸锅以{T180}烤脆，直接连锅上桌。') ],
+  tips:[ T('Don’t overcook the eggs: keep the lid on and watch closely. The yolks should stay runny.','Eier nicht übergaren! Deckel drauf und genau im Auge behalten – das Eigelb muss noch flüssig sein.','鸡蛋别煮过头：盖上锅盖并留意观察，蛋黄要保持流心。'),
+    T('Crack each egg into a cup first, then slide it into its well, so the yolk stays whole.','Eier einzeln in eine Tasse aufschlagen und dann vorsichtig in die Mulde gleiten lassen – so bleibt das Eigelb ganz.','鸡蛋先逐个打入杯中，再滑进小坑，蛋黄就不会破。'),
+    T('Toast the bread in the air fryer at {T180} for 3–4 minutes for a lovely crunch.','Brot im Air Fryer bei {T180} 3–4 Minuten toasten – wird herrlich knusprig.','面包用空气炸锅以{T180}烤 3–4 分钟，香脆可口。'),
+    T('Oxalate-friendly: no high-oxalate ingredients, and tomatoes are only moderate.','Oxalat-freundlich: keine oxalatreichen Zutaten – Tomaten haben nur moderate Werte.','低草酸友好：没有高草酸食材，番茄的草酸含量也只是中等。') ] },
+/* ----- starter ideas ----- */
+{ id:'s1', region:'greek', protein:'poultry', time:40, kcal:540,
+  title:T('Air fryer lemon-oregano chicken with crispy chickpeas','Zitronen-Oregano-Hähnchen aus dem Air Fryer mit Kichererbsen','空气炸锅柠檬牛至鸡腿配鹰嘴豆'),
+  desc:T('Juicy chicken thighs from the air fryer on peppers, zucchini and chickpeas from the pan, with plenty of lemon.','Saftige Hähnchenschenkel aus dem Air Fryer auf Paprika, Zucchini und Kichererbsen aus der Pfanne, mit viel Zitrone.','空气炸锅烤出的多汁鸡腿，配锅中炒香的甜椒、西葫芦和鹰嘴豆，柠檬味十足。'),
+  health:T('Chickpeas and vegetables bring fibre, while lean chicken and olive oil keep it filling without heavy fats.','Kichererbsen und Gemüse liefern Ballaststoffe, mageres Hähnchen und Olivenöl machen satt ohne schwere Fette.','鹰嘴豆和蔬菜提供膳食纤维，瘦鸡肉和橄榄油让这道菜饱腹又不油腻。'),
+  ing:[ I(300,'g','skinless boneless chicken thighs','Hähnchenschenkel ohne Haut und Knochen','去皮去骨鸡腿肉'),
+    I(240,'g','cooked chickpeas, drained','gegarte Kichererbsen, abgetropft','熟鹰嘴豆（沥干）'),
+    I(1,'pc','red bell pepper','rote Paprika','红甜椒'), I(1,'pc','zucchini','Zucchini','西葫芦'), I(1,'pc','red onion','rote Zwiebel','红洋葱'),
+    I(3,'pc','garlic cloves','Knoblauchzehen','蒜瓣'), I(1,'pc',...LEMON_ZJ),
+    I(2,'tbsp',...OIL), I(2,'tsp',...OREG), I(40,'g','feta','Feta','菲达奶酪'), I(0,'',...SP) ],
+  steps:[ P(0,'Mix the olive oil, lemon zest, half the lemon juice, crushed garlic, oregano, salt and pepper. Coat the chicken in half of this marinade.','Olivenöl, Zitronenschale, die Hälfte des Zitronensafts, zerdrückten Knoblauch, Oregano, Salz und Pfeffer verrühren. Das Hähnchen mit der Hälfte der Marinade einreiben.','将橄榄油、柠檬皮屑、一半柠檬汁、蒜末、牛至、盐和胡椒混合，用一半腌料抹匀鸡肉。'),
+    P(1080,'Heat the air fryer to {T200}. Cook the chicken in a single layer, turning it halfway, until cooked through and golden.','Den Air Fryer auf {T200} vorheizen. Das Hähnchen nebeneinander hineinlegen und garen, bis es durch und goldbraun ist; nach der Hälfte einmal wenden.','空气炸锅预热至{T200}。把鸡肉平铺放入，烤至熟透金黄，中途翻面一次。'),
+    P(600,'Meanwhile, cut the pepper, zucchini and onion into chunks. Fry them with the chickpeas and the rest of the marinade in a large pan over medium-high heat, stirring now and then, until tender and lightly charred.','Inzwischen Paprika, Zucchini und Zwiebel in grobe Stücke schneiden und mit den Kichererbsen und der restlichen Marinade in einer großen Pfanne bei mittlerer bis hoher Hitze braten, bis alles weich und leicht gebräunt ist; ab und zu umrühren.','同时，甜椒、西葫芦和洋葱切块，与鹰嘴豆和剩余腌料一起放入大平底锅，中大火翻炒至变软并略带焦色。'),
+    P(120,'Slice the chicken over the vegetables, squeeze over the remaining lemon juice and crumble the feta on top. Let it rest briefly before serving.','Das Hähnchen in Scheiben auf dem Gemüse anrichten, mit dem restlichen Zitronensaft beträufeln und den Feta darüberbröseln. Kurz ruhen lassen.','鸡肉切片铺在蔬菜上，淋上剩余柠檬汁，撒上碾碎的菲达奶酪，稍微静置后上桌。') ] },
+{ id:'s4', region:'spanish', protein:'legumes', time:25, kcal:450,
+  title:T('Spanish chickpeas with spinach','Spanische Kichererbsen mit Spinat','西班牙菠菜炖鹰嘴豆'),
+  desc:T('Espinacas con garbanzos, a tapa from Seville turned into a quick, hearty dinner.','Espinacas con garbanzos: eine Tapa aus Sevilla als schnelles, sättigendes Abendessen.','塞维利亚的经典小吃 Espinacas con garbanzos，变身快手又饱腹的晚餐。'),
+  health:T('Chickpeas are packed with plant protein and fibre; spinach adds folate and iron.','Kichererbsen stecken voller pflanzlichem Eiweiß und Ballaststoffen, Spinat liefert Folsäure und Eisen.','鹰嘴豆富含植物蛋白和膳食纤维，菠菜补充叶酸和铁。'),
+  ing:[ I(2,'tbsp',...OIL), I(1,'pc','slice of wholegrain bread','Scheibe Vollkornbrot','全麦面包片'), I(3,'pc','garlic cloves','Knoblauchzehen','蒜瓣'),
+    I(1,'tsp','smoked paprika','geräuchertes Paprikapulver','烟熏红椒粉'), I(1,'tsp','ground cumin','gemahlener Kreuzkümmel','孜然粉'),
+    I(1,'tbsp','sherry or red wine vinegar','Sherry- oder Rotweinessig','雪利醋或红酒醋'), I(480,'g','cooked chickpeas, drained','gegarte Kichererbsen, abgetropft','熟鹰嘴豆（沥干）'),
+    I(200,'g','spinach','Spinat','菠菜'), I(150,'ml','vegetable stock','Gemüsebrühe','蔬菜高汤'), I(0,'',...SP) ],
+  steps:[ P(180,'Heat the oil in a pan and fry the bread and whole garlic cloves until golden. Lift them out and set aside.','Das Öl in einer Pfanne erhitzen und Brot und ganze Knoblauchzehen goldbraun braten. Herausnehmen und beiseitestellen.','锅中热油，放入面包和整瓣蒜煎至金黄，捞出备用。'),
+    P(0,'Crush the bread and garlic with the paprika, cumin and vinegar into a coarse paste, using a mortar or a small blender.','Brot und Knoblauch mit Paprikapulver, Kreuzkümmel und Essig im Mörser oder Mixer zu einer groben Paste verarbeiten.','用研钵或小型搅拌机把面包、蒜、红椒粉、孜然粉和醋捣成粗糙的酱。'),
+    P(120,'Wilt the spinach in the same pan with a pinch of salt.','Den Spinat in derselben Pfanne mit einer Prise Salz zusammenfallen lassen.','在同一口锅中放入菠菜和少许盐，炒至变软。'),
+    P(480,'Add the chickpeas, the paste and the stock, then simmer until thick and saucy.','Kichererbsen, Paste und Brühe zugeben und köcheln lassen, bis alles sämig ist.','加入鹰嘴豆、酱料和高汤，小火煮至汤汁浓稠。'),
+    P(0,'Season to taste and finish with a drizzle of olive oil.','Abschmecken und mit etwas Olivenöl beträufeln.','调味后淋少许橄榄油即可。') ] },
+{ id:'s5', region:'greek', protein:'fish', time:30, kcal:480,
+  title:T('Greek prawns with tomato and feta','Griechische Garnelen mit Tomate und Feta','希腊番茄菲达奶酪虾'),
+  desc:T('Garides saganaki: sweet prawns in a quick tomato sauce under melting feta.','Garides Saganaki: zarte Garnelen in schneller Tomatensoße mit schmelzendem Feta.','希腊名菜 Garides saganaki：鲜甜的虾配快手番茄酱和融化的菲达奶酪。'),
+  health:T('Prawns are lean and high in protein, and wholegrain orzo keeps you full for longer.','Garnelen sind mager und eiweißreich, Vollkorn-Orzo hält lange satt.','虾低脂高蛋白，全麦米型面饱腹感更持久。'),
+  ing:[ I(300,'g','raw prawns, peeled','rohe Garnelen, geschält','生虾仁'), I(120,'g','wholewheat orzo','Vollkorn-Orzo','全麦米型面'), I(1,'tbsp',...OIL),
+    I(1,'pc','small onion, chopped','kleine Zwiebel, gehackt','小洋葱（切碎）'), I(2,'pc','garlic cloves, chopped','Knoblauchzehen, gehackt','蒜瓣（切碎）'),
+    I(400,'g','canned chopped tomatoes','gehackte Tomaten aus der Dose','罐装番茄碎'), I(1,'tsp','dried oregano','getrockneter Oregano','干牛至'),
+    I(1,'pinch','chili flakes','Chiliflocken','辣椒碎'), I(60,'g','feta','Feta','菲达奶酪'), I(0.5,'pc','lemon','Zitrone','柠檬'),
+    I(1,'handful','parsley','Petersilie','欧芹'), I(0,'',...SP) ],
+  steps:[ P(540,'Cook the orzo in salted boiling water until al dente, then drain.','Den Orzo in kochendem Salzwasser al dente garen und abgießen.','米型面放入加盐的沸水中煮至弹牙，沥干。'),
+    P(300,'Meanwhile, soften the onion in the olive oil in a frying pan.','Inzwischen die Zwiebel im Olivenöl in einer Pfanne glasig dünsten.','同时，在平底锅中用橄榄油把洋葱炒软。'),
+    P(600,'Add the garlic, oregano and chili, then the tomatoes, and simmer until rich.','Knoblauch, Oregano und Chili zugeben, dann die Tomaten, und kräftig einköcheln lassen.','加入蒜末、牛至和辣椒碎，再倒入番茄碎，小火炖至浓郁。'),
+    P(240,'Add the prawns, crumble the feta over, cover and cook until the prawns turn pink.','Die Garnelen hineingeben, den Feta darüberbröseln, zudecken und garen, bis die Garnelen rosa sind.','放入虾仁，撒上碾碎的菲达奶酪，盖上锅盖煮至虾仁变红。'),
+    P(0,'Scatter with parsley, squeeze over the lemon and serve with the orzo.','Mit Petersilie bestreuen, mit Zitrone beträufeln und mit dem Orzo servieren.','撒上欧芹，挤上柠檬汁，搭配米型面上桌。') ] },
+{ id:'s6', region:'levantine', protein:'legumes', time:45, kcal:590,
+  title:T('Mujaddara with cucumber yogurt','Mujaddara mit Gurkenjoghurt','黎巴嫩扁豆焦洋葱饭配黄瓜酸奶'),
+  desc:T('Lentils and bulgur crowned with sweet, deeply browned onions.','Linsen und Bulgur mit süßen, tief gebräunten Zwiebeln.','扁豆与碎小麦，铺上香甜焦糖化的洋葱。'),
+  health:T('Lentils and whole-grain bulgur together make a complete protein with plenty of fibre.','Linsen und Vollkorn-Bulgur ergeben zusammen vollwertiges Eiweiß mit vielen Ballaststoffen.','扁豆搭配全谷物碎小麦，提供完整蛋白和丰富纤维。'),
+  ing:[ I(120,'g','brown or green lentils','braune oder grüne Linsen','褐扁豆或绿扁豆'), I(80,'g','coarse bulgur','grober Bulgur','粗粒碎小麦'),
+    I(2,'pc','large onions','große Zwiebeln','大洋葱'), I(3,'tbsp',...OIL), I(1,'tsp','ground cumin','gemahlener Kreuzkümmel','孜然粉'),
+    I(0.5,'tsp','ground coriander','gemahlener Koriander','芫荽籽粉'), I(200,'ml','water','Wasser','水'),
+    I(150,'g','Greek yogurt','griechischer Joghurt','希腊酸奶'), I(0.5,'pc','cucumber','Salatgurke','黄瓜'), I(1,'handful','fresh mint','frische Minze','新鲜薄荷'), I(0,'',...SP) ],
+  steps:[ P(900,'Rinse the lentils and simmer them in plenty of unsalted water until just tender, then drain.','Die Linsen abspülen und in reichlich ungesalzenem Wasser bissfest köcheln, dann abgießen.','扁豆洗净，放入大量不加盐的水中煮至刚好变软，沥干。'),
+    P(1200,'Meanwhile, slice the onions thinly and cook them in the olive oil over medium heat, stirring often, until deep golden brown.','Inzwischen die Zwiebeln in feine Ringe schneiden und im Olivenöl bei mittlerer Hitze unter häufigem Rühren tief goldbraun braten.','同时，洋葱切细丝，用橄榄油中火翻炒，经常翻动，炒至深金棕色。'),
+    P(720,'Lift out half of the onions. Add the cumin, coriander, bulgur, lentils, water and a good pinch of salt to the pan. Cover and cook on low until the water is absorbed.','Die Hälfte der Zwiebeln herausnehmen. Kreuzkümmel, Koriander, Bulgur, Linsen, Wasser und eine gute Prise Salz in den Topf geben. Zugedeckt bei schwacher Hitze garen, bis das Wasser aufgesogen ist.','盛出一半洋葱。锅中加入孜然粉、芫荽籽粉、碎小麦、扁豆、水和一撮盐，盖上锅盖小火煮至水分吸收。'),
+    P(0,'Mix the yogurt with diced cucumber, chopped mint and a pinch of salt.','Joghurt mit gewürfelter Gurke, gehackter Minze und einer Prise Salz verrühren.','将酸奶与黄瓜丁、薄荷碎和少许盐拌匀。'),
+    P(300,'Let the pot rest, covered, then serve topped with the crispy onions and the cucumber yogurt.','Den Topf zugedeckt ruhen lassen und mit den knusprigen Zwiebeln und dem Gurkenjoghurt servieren.','盖着锅盖静置片刻，盛出后铺上酥脆的洋葱，配黄瓜酸奶食用。') ] },
+{ id:'s7', region:'italian', protein:'vegetarian', time:25, kcal:560,
+  title:T('Wholewheat orecchiette with broccoli and lemon','Vollkorn-Orecchiette mit Brokkoli und Zitrone','西兰花柠檬全麦猫耳朵面'),
+  desc:T('Pasta the Puglian way, with broccoli cooked until it melts into a garlicky sauce.','Pasta nach apulischer Art, bei der der Brokkoli zu einer Knoblauchsoße zerfällt.','普利亚风格意面，西兰花煮软后融入蒜香酱汁。'),
+  health:T('Whole-wheat pasta and broccoli deliver fibre, vitamin C and slow-release energy.','Vollkornnudeln und Brokkoli liefern Ballaststoffe, Vitamin C und lang anhaltende Energie.','全麦意面和西兰花提供膳食纤维、维生素 C 和缓释能量。'),
+  ing:[ I(180,'g','wholewheat orecchiette or short pasta','Vollkorn-Orecchiette oder kurze Nudeln','全麦猫耳朵面或其他短意面'),
+    I(300,'g','broccoli, in small florets','Brokkoli, in kleinen Röschen','西兰花（切小朵）'), I(2,'tbsp',...OIL),
+    I(3,'pc','garlic cloves, sliced','Knoblauchzehen, in Scheiben','蒜瓣（切片）'), I(0.5,'tsp','chili flakes','Chiliflocken','辣椒碎'),
+    I(1,'pc','lemon, zest only','Zitrone, nur die Schale','柠檬（仅取皮屑）'), I(30,'g','parmesan or pecorino, grated','Parmesan oder Pecorino, gerieben','帕玛森或佩科里诺奶酪（擦碎）'),
+    I(20,'g','pine nuts','Pinienkerne','松子'), I(0,'',...SP) ],
+  steps:[ P(180,'Bring a large pot of salted water to the boil. Toast the pine nuts in a dry pan until golden and set aside.','Einen großen Topf Salzwasser zum Kochen bringen. Die Pinienkerne in einer trockenen Pfanne goldbraun rösten und beiseitestellen.','大锅加盐水烧开。松子放入干锅中焙至金黄，盛出备用。'),
+    P(660,'Cook the pasta, adding the broccoli for the last 4 minutes.','Die Nudeln garen und den Brokkoli in den letzten 4 Minuten mitkochen.','煮意面，最后 4 分钟放入西兰花一起煮。'),
+    P(120,'Meanwhile, gently warm the olive oil with the garlic and chili until the garlic turns pale gold.','Inzwischen das Olivenöl mit Knoblauch und Chili sanft erhitzen, bis der Knoblauch hellgolden ist.','同时，用小火加热橄榄油、蒜片和辣椒碎，至蒜片呈浅金色。'),
+    P(0,'Save a cup of pasta water, drain, and toss everything in the garlic oil, mashing some broccoli into a sauce. Loosen with pasta water as needed.','Eine Tasse Nudelwasser aufheben, abgießen und alles im Knoblauchöl schwenken, dabei etwas Brokkoli zu einer Soße zerdrücken. Nach Bedarf mit Nudelwasser lockern.','留一杯煮面水后沥干，把面和西兰花倒入蒜油中翻拌，将部分西兰花压碎成酱汁，需要时加煮面水调稀。'),
+    P(0,'Finish with lemon zest, cheese and the toasted pine nuts.','Mit Zitronenschale, Käse und den gerösteten Pinienkernen vollenden.','撒上柠檬皮屑、奶酪和烤松子即可。') ] },
+{ id:'s8', region:'northafrican', protein:'fish', time:35, kcal:430,
+  title:T('Moroccan cod with chermoula','Marokkanischer Kabeljau mit Chermoula','摩洛哥香草酱鳕鱼'),
+  desc:T('Flaky white fish from the air fryer under a bright herb and spice sauce, with couscous.','Zarter weißer Fisch aus dem Air Fryer unter einer frischen Kräuter-Gewürz-Soße, dazu Couscous.','空气炸锅烤出的嫩滑白鱼，配清新的香草香料酱和古斯米。'),
+  health:T('Cod is very lean protein, and fresh herbs add antioxidants and flavour without extra salt.','Kabeljau ist sehr mageres Eiweiß, frische Kräuter liefern Antioxidantien und Geschmack ohne viel Salz.','鳕鱼是低脂优质蛋白，新鲜香草带来抗氧化物质，少盐也够味。'),
+  ing:[ I(300,'g','cod fillets (2 pieces)','Kabeljaufilets (2 Stück)','鳕鱼柳（2 块）'), I(1,'handful','fresh coriander','frischer Koriander','新鲜香菜'),
+    I(1,'handful','fresh parsley','frische Petersilie','新鲜欧芹'), I(2,'pc','garlic cloves','Knoblauchzehen','蒜瓣'),
+    I(1,'tsp','ground cumin','gemahlener Kreuzkümmel','孜然粉'), I(1,'tsp','sweet paprika','edelsüßes Paprikapulver','甜椒粉'),
+    I(1,'pc',...LEMON_J), I(3,'tbsp',...OIL), I(1,'pc','yellow bell pepper, sliced','gelbe Paprika, in Streifen','黄甜椒（切条）'),
+    I(200,'g',...TOMS), I(120,'g','wholewheat couscous','Vollkorn-Couscous','全麦古斯米'),
+    I(180,'ml','boiling water','kochendes Wasser','沸水'), I(0,'',...SALT) ],
+  steps:[ P(0,'Blend the herbs, garlic, cumin, paprika, lemon juice, olive oil and a pinch of salt into a loose green chermoula.','Kräuter, Knoblauch, Kreuzkümmel, Paprikapulver, Zitronensaft, Olivenöl und eine Prise Salz zu einer flüssigen grünen Chermoula pürieren.','将香草、蒜、孜然粉、甜椒粉、柠檬汁、橄榄油和少许盐打成稀稠的绿色香草酱（chermoula）。'),
+    P(480,'Cook the pepper and tomatoes with a third of the chermoula in a pan over medium heat until soft and jammy.','Paprika und Tomaten mit einem Drittel der Chermoula in einer Pfanne bei mittlerer Hitze weich schmoren.','平底锅中火加热，放入甜椒、番茄和三分之一的香草酱，焖煮至软烂。'),
+    P(600,'Heat the air fryer to {T200}. Spread another third of the chermoula over the cod, lay it on baking paper in the basket and cook until it flakes easily.','Den Air Fryer auf {T200} vorheizen. Ein weiteres Drittel der Chermoula auf dem Kabeljau verteilen, den Fisch auf Backpapier in den Korb legen und garen, bis er leicht zerfällt.','空气炸锅预热至{T200}。把另外三分之一香草酱抹在鳕鱼上，垫烘焙纸放入炸篮，烤至鱼肉易散开。'),
+    P(300,'Meanwhile, pour the boiling water over the couscous with a pinch of salt, cover and leave to swell, then fluff with a fork.','Inzwischen das kochende Wasser mit einer Prise Salz über den Couscous gießen, abdecken und quellen lassen, dann mit einer Gabel auflockern.','同时，把沸水和少许盐倒在古斯米上，盖住焖至膨胀，再用叉子拨松。'),
+    P(0,'Serve the vegetables and fish on the couscous with the remaining chermoula.','Gemüse und Fisch auf dem Couscous anrichten und mit der restlichen Chermoula servieren.','把蔬菜和鱼盛在古斯米上，淋上剩余的香草酱。') ] }
+];
+SEEDS.forEach(r => { r.created = 0; });
+
+/* ---------- helpers ---------- */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const PROTEINS = ['fish','poultry','legumes','vegetarian','eggs'];
+const REGIONS = ['greek','italian','spanish','levantine','northafrican','turkish','french'];
+const LOCALES = {en:'en-GB', de:'de-DE', zh:'zh-CN'};
+const LOC = () => LOCALES[S.settings.lang] || 'en-GB';
+const LS_KEY = 'tavola:v1';
+const todayKey = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
+const daysSince = k => (Date.parse(todayKey()) - Date.parse(k)) / 864e5;
+const fmtDay = k => new Date(k + 'T12:00:00').toLocaleDateString(LOC(), {day:'numeric', month:'short'});
+
+function t(k, v) {
+  let s = (STR[S.settings.lang] || STR.en)[k] ?? STR.en[k] ?? k;
+  if (v) for (const [a, b] of Object.entries(v)) s = s.split('{' + a + '}').join(b);
+  if (s.includes('{ai}')) s = s.split('{ai}').join(aiName());
+  return s;
+}
+const tx = o => o ? (o[S.settings.lang] || o.en || '') : '';
+
+/* ---------- state ---------- */
+function normPrefs(p) {
+  p = p && typeof p === 'object' ? p : {};
+  const o = x => (x && typeof x === 'object' && !Array.isArray(x)) ? x : {};
+  return {
+    favs: o(p.favs), ratings: o(p.ratings), notes: o(p.notes), cooked: o(p.cooked),
+    daily: p.daily && p.daily.id ? p.daily : null,
+    genDate: typeof p.genDate === 'string' ? p.genDate : null,
+    featured: Array.isArray(p.featured) ? p.featured.slice(-20) : [],
+    deleted: Array.isArray(p.deleted) ? p.deleted.slice(-200) : [],
+    seeded: Array.isArray(p.seeded) ? p.seeded.slice(-100) : []
+  };
+}
+const validRecipe = r => r && typeof r.id === 'string' && r.title && r.title.en && Array.isArray(r.ing) && Array.isArray(r.steps);
+
+const local = (() => { try { return JSON.parse(localStorage.getItem(LS_KEY) || 'null') || {}; } catch { return {}; } })();
+const S = {
+  settings: Object.assign({lang:'en', units:'metric', theme:'auto', autoDaily:true, oven:false, provider:'claude'}, local.settings || {}),
+  prefs: normPrefs(local.prefs),
+  ai: Array.isArray(local.ai) ? local.ai.filter(validRecipe) : [],
+  view: 'today',
+  disc: {protein:'any', time:'any', region:'any', useup:''},
+  discResult: null, discMsg: null,
+  lib: {q:'', filter:'all', sort:'new'},
+  openId: null, servings: 2, checked: new Set(), confirmDel: null,
+  gen: {busy:false, ctl:null, origin:null, error:null, chars:0},
+  aiAvailable: true, settingsOpen: false, timers: []
+};
+const allRecipes = () => SEEDS.concat(S.ai);
+const byId = id => allRecipes().find(r => r.id === id);
+const rating = id => +S.prefs.ratings[id] || 0;
+const cookedList = id => Array.isArray(S.prefs.cooked[id]) ? S.prefs.cooked[id] : [];
+const lastCooked = id => { const c = cookedList(id); return c[c.length - 1] || ''; };
+
+/* ---------- storage: account (db) with browser fallback ---------- */
+const Store = {
+  mode: 'local', db: null, uid: null, chain: Promise.resolve(),
+  saveLocal() { try { localStorage.setItem(LS_KEY, JSON.stringify({settings:S.settings, prefs:S.prefs, ai:S.ai})); } catch {} },
+  prefsRef() { return this.db.doc(`data/users/${this.uid}/prefs`); },
+  recCol() { return this.prefsRef().collection('recipes'); },
+  async connect() {
+    const c = window.claude;
+    if (!c || typeof c.use !== 'function') return;
+    let db = null, user = null;
+    try { [db, user] = await Promise.all([c.use('db'), c.use('user')]); } catch { return; }
+    if (!db || !user) return;
+    let uid = null;
+    try { uid = await user.id(); } catch {}
+    if (!uid) return;
+    this.db = db; this.uid = uid;
+    try {
+      const [ps, rs] = await Promise.all([this.prefsRef().get(), this.recCol().limit(500).get()]);
+      this.mode = 'db';
+      if (ps.exists) S.prefs = normPrefs((ps.data() || {}).prefs);
+      else this.pushPrefs();
+      const gone = new Set(S.prefs.deleted);
+      const remote = rs.docs.map(d => d.data()).filter(validRecipe);
+      const ids = new Set(remote.map(r => r.id));
+      const localOnly = S.ai.filter(r => !ids.has(r.id) && !gone.has(r.id));
+      S.ai = remote.concat(localOnly).sort((a, b) => (a.created || 0) - (b.created || 0));
+      localOnly.forEach(r => this.saveRecipe(r));
+      this.saveLocal();
+    } catch (e) { console.warn('Tavola: account storage unavailable', e); this.mode = 'local'; }
+  },
+  write(fn) { this.chain = this.chain.then(fn).catch(e => this.fail(e)); },
+  pushPrefs() { if (this.mode !== 'db') return; const body = {prefs: JSON.parse(JSON.stringify(S.prefs)), updated: Date.now()}; this.write(() => this.prefsRef().set(body)); },
+  saveRecipe(r) { this.saveLocal(); if (this.mode !== 'db') return; const body = JSON.parse(JSON.stringify(r)); this.write(() => this.recCol().doc(r.id).set(body)); },
+  deleteRecipe(id) { this.saveLocal(); if (this.mode !== 'db') return; this.write(() => this.recCol().doc(id).delete()); },
+  fail(e) { console.warn('Tavola: save failed', e); if (e && ['invalid_argument','revoked','not_granted','capability_disabled','capability_removed'].includes(e.code)) this.mode = 'local'; }
+};
+let prefTimer = null;
+function savePrefs() { Store.saveLocal(); clearTimeout(prefTimer); prefTimer = setTimeout(() => { prefTimer = null; Store.pushPrefs(); }, 800); }
+window.addEventListener('pagehide', () => { if (prefTimer) { clearTimeout(prefTimer); prefTimer = null; Store.pushPrefs(); } });
+
+/* ---------- Claude: claude.ai runtime, or your own API key when self-hosted ---------- */
+const IN_CLAUDE = !!(window.claude && typeof window.claude.use === 'function');
+const KEYS_LS = {claude: 'tavola:apikey', gemini: 'tavola:geminikey'};
+const MODEL_LS = 'tavola:model', GMODEL_LS = 'tavola:gmodel';
+const API_MODELS = ['claude-sonnet-5-5', 'claude-sonnet-5', 'claude-haiku-4-5'];
+const GEMINI_MODEL = '';   // leer = automatisch das neueste stabile Gemini-Flash-Modell wählen
+const provider = () => IN_CLAUDE ? 'claude' : (S.settings.provider === 'gemini' ? 'gemini' : 'claude');
+const aiName = () => provider() === 'gemini' ? 'Gemini' : 'Claude';
+const getKey = p => { try { return localStorage.getItem(KEYS_LS[p]) || ''; } catch { return ''; } };
+const apiKey = () => getKey('claude');
+const activeKey = () => getKey(provider());
+function parseJSONLoose(txt) {
+  try { return JSON.parse(txt); } catch {}
+  const m = txt.match(/```(?:json)?\s*([\s\S]*?)```/); if (m) { try { return JSON.parse(m[1]); } catch {} }
+  const a = txt.indexOf('{'), b = txt.lastIndexOf('}');
+  if (a >= 0 && b > a) { try { return JSON.parse(txt.slice(a, b + 1)); } catch {} }
+  throw {code: 'invalid_json'};
+}
+const API = {
+  async call(model, prompt, signal, onText) {
+    let res;
+    try {
+      res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST', signal,
+        headers: {'content-type': 'application/json', 'x-api-key': apiKey(), 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true'},
+        body: JSON.stringify({model, max_tokens: 12000, stream: true, messages: [{role: 'user', content: prompt}]})
+      });
+    } catch (e) { throw {code: e && e.name === 'AbortError' ? 'cancelled' : 'upstream_error'}; }
+    if (!res.ok) {
+      let msg = '', type = '';
+      try { const j = await res.json(); msg = (j.error && j.error.message) || ''; type = (j.error && j.error.type) || ''; } catch {}
+      if (res.status === 401 || res.status === 403) throw {code: 'bad_key'};
+      if (res.status === 404 || type === 'not_found_error') throw {code: 'model_missing'};
+      if (res.status === 429) throw {code: 'rate_limited'};
+      if (/credit|balance|billing/i.test(msg)) throw {code: 'no_credit'};
+      throw {code: 'upstream_error', message: msg};
+    }
+    const reader = res.body.getReader(), dec = new TextDecoder();
+    let buf = '', text = '', stop = '';
+    try {
+      for (;;) {
+        const {value, done} = await reader.read();
+        if (done) break;
+        buf += dec.decode(value, {stream: true});
+        const lines = buf.split('\n'); buf = lines.pop();
+        for (const line of lines) {
+          if (!line.startsWith('data:')) continue;
+          let ev; try { ev = JSON.parse(line.slice(5)); } catch { continue; }
+          if (ev.type === 'content_block_delta' && ev.delta && ev.delta.type === 'text_delta') { text += ev.delta.text; onText && onText({text, delta: ev.delta.text}); }
+          else if (ev.type === 'message_delta' && ev.delta && ev.delta.stop_reason) stop = ev.delta.stop_reason;
+          else if (ev.type === 'error') throw {code: /overload/i.test(JSON.stringify(ev)) ? 'rate_limited' : 'upstream_error'};
+        }
+      }
+    } catch (e) { if (e && e.code) throw e; throw {code: e && e.name === 'AbortError' ? 'cancelled' : 'upstream_error'}; }
+    if (stop === 'max_tokens') throw {code: 'invalid_json'};
+    return parseJSONLoose(text);
+  },
+  async json(prompt, {signal, onText} = {}) {
+    let saved = ''; try { saved = localStorage.getItem(MODEL_LS) || ''; } catch {}
+    const models = saved ? [saved, ...API_MODELS.filter(m => m !== saved)] : API_MODELS;
+    for (const m of models) {
+      try { const out = await this.call(m, prompt, signal, onText); try { localStorage.setItem(MODEL_LS, m); } catch {} return out; }
+      catch (e) { if (!(e && e.code === 'model_missing')) throw e; }
+    }
+    throw {code: 'upstream_error'};
+  }
+};
+/* Gemini (self-hosted only): streams from generateContent, picks a model automatically */
+const GEMINI = {
+  base: 'https://generativelanguage.googleapis.com/v1beta',
+  headers() { return {'content-type': 'application/json', 'x-goog-api-key': getKey('gemini')}; },
+  async errorOf(res) {
+    let msg = ''; try { const j = await res.json(); msg = JSON.stringify(j.error || j); } catch {}
+    if (res.status === 400 && /API_KEY_INVALID|API key not valid/i.test(msg)) return {code: 'bad_key'};
+    if (res.status === 401 || res.status === 403) return {code: 'bad_key'};
+    if (res.status === 404) return {code: 'model_missing'};
+    if (res.status === 429) return {code: 'gquota'};
+    return {code: 'upstream_error', message: msg};
+  },
+  async pickModel(signal) {
+    if (GEMINI_MODEL) return GEMINI_MODEL;
+    try { const m = localStorage.getItem(GMODEL_LS); if (m) return m; } catch {}
+    let names = [];
+    try {
+      const res = await fetch(this.base + '/models?pageSize=200', {headers: this.headers(), signal});
+      if (!res.ok) throw await this.errorOf(res);
+      const j = await res.json();
+      names = (j.models || []).filter(m => (m.supportedGenerationMethods || []).includes('generateContent')).map(m => String(m.name).replace(/^models\//, ''));
+    } catch (e) { if (e && (e.code === 'bad_key' || e.name === 'AbortError')) throw e.code ? e : {code: 'cancelled'}; }
+    const ver = n => parseFloat((n.match(/gemini-(\d+(?:\.\d+)?)/) || [])[1] || 0);
+    const bad = /lite|image|tts|live|audio|embed|thinking|exp|learn|robotics|computer/i;
+    const stable = names.filter(n => /^gemini-\d+(\.\d+)?-flash$/.test(n)).sort((a, b) => ver(b) - ver(a));
+    const any = names.filter(n => /^gemini-\d+(\.\d+)?-flash/.test(n) && !bad.test(n)).sort((a, b) => ver(b) - ver(a));
+    return stable[0] || (names.includes('gemini-flash-latest') ? 'gemini-flash-latest' : any[0]) || 'gemini-2.5-flash';
+  },
+  async call(model, prompt, signal, onText) {
+    let res;
+    try {
+      res = await fetch(`${this.base}/models/${encodeURIComponent(model)}:streamGenerateContent?alt=sse`, {
+        method: 'POST', signal, headers: this.headers(),
+        body: JSON.stringify({contents: [{role: 'user', parts: [{text: prompt}]}], generationConfig: {responseMimeType: 'application/json', maxOutputTokens: 16384}})
+      });
+    } catch (e) { throw {code: e && e.name === 'AbortError' ? 'cancelled' : 'upstream_error'}; }
+    if (!res.ok) throw await this.errorOf(res);
+    const reader = res.body.getReader(), dec = new TextDecoder();
+    let buf = '', text = '', finish = '';
+    try {
+      for (;;) {
+        const {value, done} = await reader.read();
+        if (done) break;
+        buf += dec.decode(value, {stream: true});
+        const lines = buf.split('\n'); buf = lines.pop();
+        for (const line of lines) {
+          if (!line.startsWith('data:')) continue;
+          let ev; try { ev = JSON.parse(line.slice(5)); } catch { continue; }
+          if (ev.error) throw {code: ev.error.code === 429 ? 'gquota' : 'upstream_error'};
+          if (ev.promptFeedback && ev.promptFeedback.blockReason) throw {code: 'refused'};
+          const c = (ev.candidates || [])[0]; if (!c) continue;
+          for (const part of ((c.content && c.content.parts) || [])) {
+            if (part.thought || typeof part.text !== 'string' || !part.text) continue;
+            text += part.text; onText && onText({text, delta: part.text});
+          }
+          if (c.finishReason) finish = c.finishReason;
+        }
+      }
+    } catch (e) { if (e && e.code) throw e; throw {code: e && e.name === 'AbortError' ? 'cancelled' : 'upstream_error'}; }
+    if (finish === 'MAX_TOKENS') throw {code: 'invalid_json'};
+    if (/SAFETY|RECITATION|PROHIBITED|BLOCKLIST|SPII/.test(finish)) throw {code: 'refused'};
+    return parseJSONLoose(text);
+  },
+  async json(prompt, {signal, onText} = {}) {
+    let model = await this.pickModel(signal);
+    try { const out = await this.call(model, prompt, signal, onText); try { localStorage.setItem(GMODEL_LS, model); } catch {} return out; }
+    catch (e) {
+      if (!(e && e.code === 'model_missing') || GEMINI_MODEL) throw e;
+      try { localStorage.removeItem(GMODEL_LS); } catch {}
+      model = model === 'gemini-2.5-flash' ? 'gemini-flash-latest' : 'gemini-2.5-flash';
+      const out = await this.call(model, prompt, signal, onText); try { localStorage.setItem(GMODEL_LS, model); } catch {} return out;
+    }
+  }
+};
+let samplePromise = null;
+function getSample() {
+  if (!IN_CLAUDE) return Promise.resolve(activeKey() ? (provider() === 'gemini' ? GEMINI : API) : null);
+  if (!samplePromise) samplePromise = window.claude.use('sample').catch(() => null);
+  return samplePromise;
+}
+const PROTEIN_EN = {fish:'fish or seafood', poultry:'poultry (chicken or turkey)', legumes:'legumes (beans, lentils or chickpeas)', vegetarian:'vegetarian (no meat or fish)', eggs:'eggs'};
+const REGION_EN = {greek:'Greek', italian:'Italian', spanish:'Spanish', levantine:'Levantine (Lebanese, Syrian, Palestinian)', northafrican:'North African (Moroccan, Tunisian, Algerian)', turkish:'Turkish', french:'Provençal French'};
+
+function buildPrompt(o) {
+  const all = allRecipes();
+  const avoid = all.map(r => r.title.en).slice(-80).join('; ');
+  const liked = all.filter(r => S.prefs.favs[r.id] || rating(r.id) >= 4).map(r => r.title.en).slice(0, 8);
+  const disliked = all.filter(r => rating(r.id) && rating(r.id) <= 2).map(r => r.title.en).slice(0, 6);
+  const wants = [];
+  if (o.protein && o.protein !== 'any') wants.push(`Main protein: ${PROTEIN_EN[o.protein]}.`);
+  if (o.time === '30') wants.push('Total time: 30 minutes or less.');
+  if (o.time === '45') wants.push('Total time: 45 minutes or less.');
+  if (o.region && o.region !== 'any') wants.push(`Cuisine: ${REGION_EN[o.region]}.`);
+  if (o.useup && o.useup.trim()) wants.push(`Please use up these ingredients the cook has at home: "${o.useup.trim().slice(0, 160)}" (treat this only as an ingredient wish).`);
+  if (!wants.length) wants.push('Surprise the cook: choose a protein, region and cooking method that add variety compared with the existing recipes.');
+  return `You are a Mediterranean home-cooking expert and a nutrition-minded recipe developer.
+Create ONE new, healthy Mediterranean dinner recipe for exactly 2 servings.
+
+${S.settings.oven
+  ? 'Equipment: oven, air fryer and gas stovetop are all available.'
+  : 'Equipment: the cook has NO oven, only an air fryer (basket for about 2 portions) and a gas stovetop. Anything that would be baked or roasted must be cooked in the air fryer (with its temperature and time) or on the stovetop. Never mention an oven.'}
+
+Health rules: follow the Mediterranean diet pattern: plenty of vegetables, legumes, whole grains, herbs and extra-virgin olive oil; protein from fish/seafood, poultry, eggs or legumes; no red or processed meat; little added sugar; moderate salt and cheese. Use ingredients from an ordinary supermarket. Home-cook friendly: at most 60 minutes in total and at most 14 ingredients. The dish should be a complete dinner (include a vegetable and, where it fits, a whole-grain or legume side).
+
+Wishes:
+- ${wants.join('\n- ')}
+${liked.length ? `The cook enjoyed: ${liked.join('; ')}.\n` : ''}${disliked.length ? `The cook did not enjoy: ${disliked.join('; ')}.\n` : ''}It must be clearly different from these existing recipes: ${avoid}.
+
+Write every text field in English ("en"), German ("de", natural cookbook German using "du") and Simplified Chinese ("zh").
+Ingredients: "u" must be one of "g", "ml", "tbsp", "tsp", "pinch", "handful", "pc" ("pc" = a count, e.g. 2 eggs). Give metric quantities for 2 servings. Use "q": 0 for to-taste items such as salt and pepper.
+Steps: write oven or air fryer temperatures in Celsius only as a token like {T200} with no unit text around it. Set "timer" in seconds on every step that involves waiting, simmering, roasting, baking, resting or boiling; otherwise 0.
+"kcal" is an honest estimate per serving. Add 2 or 3 short, practical "tips" (technique, swaps or serving ideas).
+
+Reply with only JSON in exactly this shape:
+{"title":{"en":"","de":"","zh":""},"description":{"en":"one appetising sentence","de":"","zh":""},"health":{"en":"one sentence on why it is healthy","de":"","zh":""},"region":"greek|italian|spanish|levantine|northafrican|turkish|french","protein":"fish|poultry|legumes|vegetarian|eggs","time":35,"kcal":480,"ingredients":[{"q":200,"u":"g","name":{"en":"","de":"","zh":""}}],"steps":[{"text":{"en":"","de":"","zh":""},"timer":600}],"tips":[{"en":"","de":"","zh":""}]}`;
+}
+
+function L3(o, max = 600) {
+  const s = v => typeof v === 'string' ? v.trim().slice(0, max) : '';
+  if (typeof o === 'string') return {en: s(o), de: s(o), zh: s(o)};
+  o = o || {};
+  const en = s(o.en) || s(o.de) || s(o.zh);
+  return {en, de: s(o.de) || en, zh: s(o.zh) || en};
+}
+const clamp = (x, a, b, d) => { x = Math.round(Number(x)); return Number.isFinite(x) ? Math.min(b, Math.max(a, x)) : d; };
+function normalizeRecipe(d) {
+  if (d && d.recipe) d = d.recipe;
+  if (!d || typeof d !== 'object') throw {code:'invalid_json'};
+  const UMAP = {g:'g', gram:'g', grams:'g', kg:'kg', ml:'ml', l:'l', tbsp:'tbsp', tablespoon:'tbsp', tablespoons:'tbsp', tsp:'tsp', teaspoon:'tsp', teaspoons:'tsp', pinch:'pinch', handful:'handful', pc:'pc', piece:'pc', pieces:'pc', '':'pc'};
+  const ing = (Array.isArray(d.ingredients) ? d.ingredients : []).slice(0, 24).map(x => {
+    let u = UMAP[String(x.u ?? x.unit ?? '').toLowerCase().trim()] || 'pc';
+    let q = Number(x.q ?? x.qty ?? x.amount); if (!Number.isFinite(q) || q < 0) q = 0;
+    if (u === 'kg') { u = 'g'; q *= 1000; } if (u === 'l') { u = 'ml'; q *= 1000; }
+    return {q, u, n: L3(x.name ?? x.n, 120)};
+  }).filter(x => x.n.en);
+  const steps = (Array.isArray(d.steps) ? d.steps : []).slice(0, 14).map(s => ({x: L3(s && (s.text ?? s), 900), t: clamp(s && s.timer, 0, 14400, 0)})).filter(s => s.x.en);
+  const title = L3(d.title, 120);
+  if (!title.en || ing.length < 3 || steps.length < 2) throw {code:'invalid_json'};
+  const reg = String(d.region || '').toLowerCase().replace(/[^a-z]/g, '');
+  const region = REGIONS.includes(reg) ? reg : /afric|morocc|tunis/.test(reg) ? 'northafrican' : /levant|leban|syria/.test(reg) ? 'levantine' : /proven|french/.test(reg) ? 'french' : 'other';
+  const pr = String(d.protein || '').toLowerCase();
+  const protein = PROTEINS.includes(pr) ? pr : /fish|sea|prawn|shrimp/.test(pr) ? 'fish' : /chick|poult|turkey/.test(pr) ? 'poultry' : /egg/.test(pr) ? 'eggs' : /leg|bean|lentil/.test(pr) ? 'legumes' : 'vegetarian';
+  return {
+    id: 'ai_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+    ai: true, created: Date.now(), region, protein,
+    time: clamp(d.time, 10, 120, 40), kcal: clamp(d.kcal, 150, 1200, 500),
+    title, desc: L3(d.description ?? d.desc, 300), health: L3(d.health, 300), ing, steps,
+    tips: (Array.isArray(d.tips) ? d.tips : []).slice(0, 4).map(x => L3(x, 300)).filter(x => x.en)
+  };
+}
+const ERR = {gquota:'err_gquota', bad_key:'err_key', no_credit:'err_credit', rate_limited:'err_limit', invalid_json:'err_incomplete', empty_completion:'err_incomplete', refused:'err_refused', session_expired:'err_signin'};
+const GONE = ['not_granted','sampling_disabled','not_declared','capability_disabled','capability_removed'];
+
+async function generate(origin) {
+  if (S.gen.busy) return;
+  const sample = await getSample();
+  if (!sample) { S.aiAvailable = false; if (origin === 'discover') S.gen.error = IN_CLAUDE ? 'ai_off' : 'ai_need_key'; refreshGen(); return; }
+  const ctl = new AbortController();
+  S.gen = {busy:true, ctl, origin, error:null, chars:0};
+  if (origin === 'discover') { S.discResult = null; S.discMsg = null; }
+  refreshGen();
+  try {
+    const data = await sample.json(buildPrompt(origin === 'daily' ? {} : S.disc), {
+      signal: ctl.signal, cache: false,
+      onText: ({text}) => { S.gen.chars = text.length; updateProgress(); }
+    });
+    const r = normalizeRecipe(data);
+    r.by = provider();
+    S.ai.push(r);
+    Store.saveRecipe(r);
+    if (origin === 'daily') setDaily(r.id, true); else S.discResult = r.id;
+    toast(t('added_lib'));
+  } catch (e) {
+    const code = e && e.code;
+    if (code === 'cancelled') { /* stopped by the cook */ }
+    else if (GONE.includes(code)) { S.aiAvailable = false; if (origin === 'discover') S.gen.error = 'ai_off'; }
+    else if (origin === 'discover') S.gen.error = ERR[code] || 'err_failed';
+    else {
+      console.warn('Tavola: daily recipe not created', e);
+      if (['bad_key','no_credit','gquota','rate_limited','upstream_error','invalid_json','empty_completion'].includes(code)) { S.prefs.genDate = null; savePrefs(); }
+      if (['bad_key','no_credit','gquota'].includes(code)) toast(t(ERR[code]));
+    }
+  } finally {
+    S.gen.busy = false; S.gen.ctl = null;
+    refreshGen();
+  }
+}
+async function maybeAutoDaily() {
+  if (!S.settings.autoDaily || S.gen.busy || S.prefs.genDate === todayKey()) return;
+  const sample = await getSample();
+  if (!sample || S.gen.busy || S.prefs.genDate === todayKey()) return;
+  S.prefs.genDate = todayKey();
+  savePrefs();
+  generate('daily');
+}
+function refreshGen() {
+  if (S.view === 'discover') {
+    const out = $('#discOut'); if (out) out.innerHTML = renderDiscOut();
+    const b = $('[data-action="create"]'); if (b) b.disabled = S.gen.busy;
+    if (!S.aiAvailable && b) b.remove();
+  } else if (S.view === 'today') renderMain();
+  else renderLibList();
+}
+const progPct = () => Math.min(96, 6 + S.gen.chars / 42);
+function updateProgress() {
+  const p = $('#genProg'); if (!p) return;
+  p.classList.remove('indet');
+  p.firstElementChild.style.setProperty('--p', progPct() + '%');
+}
+
+/* ---------- seed favourites (applied once, unfavouriting sticks) ---------- */
+function applySeedFavs() {
+  let changed = false;
+  for (const r of SEEDS) if (r.fav && !S.prefs.seeded.includes(r.id)) { S.prefs.favs[r.id] = true; S.prefs.seeded.push(r.id); changed = true; }
+  if (changed) savePrefs();
+}
+
+/* ---------- backup (self-hosted) ---------- */
+function exportBackup() {
+  const data = {app: 'tavola', v: 1, exported: new Date().toISOString(), settings: S.settings, prefs: S.prefs, ai: S.ai};
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(data)], {type: 'application/json'}));
+  a.download = `tavola-backup-${todayKey()}.json`;
+  document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+}
+async function importBackup(file) {
+  try {
+    const d = JSON.parse(await file.text());
+    if (!d || d.app !== 'tavola') throw 0;
+    const p = normPrefs(d.prefs), cur = S.prefs;
+    const cooked = {...cur.cooked};
+    for (const [id, list] of Object.entries(p.cooked)) if (Array.isArray(list)) cooked[id] = [...new Set([...(cooked[id] || []), ...list])].sort().slice(-60);
+    const gone = new Set([...cur.deleted, ...p.deleted]);
+    S.prefs = {...cur, favs: {...cur.favs, ...p.favs}, ratings: {...cur.ratings, ...p.ratings}, notes: {...cur.notes, ...p.notes}, cooked,
+      deleted: [...gone].slice(-200), seeded: [...new Set([...cur.seeded, ...p.seeded])]};
+    const byKey = new Map(S.ai.map(r => [r.id, r]));
+    (Array.isArray(d.ai) ? d.ai : []).filter(validRecipe).forEach(r => byKey.set(r.id, r));
+    S.ai = [...byKey.values()].filter(r => !gone.has(r.id)).sort((a, b) => (a.created || 0) - (b.created || 0));
+    savePrefs(); ensureDaily(); renderAll(); toast(t('imported'));
+  } catch { toast(t('import_err')); }
+}
+
+/* ---------- daily pick ---------- */
+function pickFrom(list, excludeId) {
+  const recent = new Set(S.prefs.featured.slice(-6));
+  let best = null, bestS = -Infinity;
+  for (const r of list) {
+    if (r.id === excludeId) continue;
+    let s = Math.random() * 1.5;
+    const c = cookedList(r.id);
+    if (!c.length) s += 1.4; else if (daysSince(c[c.length - 1]) > 14) s += 1;
+    if (S.prefs.favs[r.id]) s += .6;
+    const rt = rating(r.id); if (rt >= 4) s += .6; if (rt && rt <= 2) s -= 2;
+    if (recent.has(r.id)) s -= 1.5;
+    if (s > bestS) { bestS = s; best = r; }
+  }
+  return best;
+}
+function setDaily(id, fresh) {
+  S.prefs.daily = {date: todayKey(), id, fresh: !!fresh};
+  S.prefs.featured = S.prefs.featured.filter(x => x !== id).concat(id).slice(-20);
+  savePrefs();
+}
+function ensureDaily() {
+  const d = S.prefs.daily;
+  if (!d || d.date !== todayKey() || !byId(d.id)) setDaily(pickFrom(allRecipes()).id, false);
+}
+
+/* ---------- formatting ---------- */
+const UL = u => (UNIT_L[u] && (UNIT_L[u][S.settings.lang] || UNIT_L[u].en)) || u;
+const nfmt = (x, d = 1) => x.toLocaleString(LOC(), {maximumFractionDigits: d});
+function frac(x) {
+  let q = Math.round(x * 4) / 4; if (q <= 0) q = .25;
+  const w = Math.floor(q), r = q - w;
+  return (w ? String(w) : '') + ({0:'', .25:'¼', .5:'½', .75:'¾'}[r] ?? '');
+}
+function amount(g, f) {
+  if (!g.q) return t('to_taste');
+  const q = g.q * f, imp = S.settings.units === 'imperial';
+  const metricNum = v => v >= 50 ? Math.round(v / 5) * 5 : Math.max(1, Math.round(v));
+  switch (g.u) {
+    case 'g':
+      if (imp) { const oz = q / 28.3495; return oz >= 16 ? `${nfmt(Math.round(oz / 1.6) / 10)} ${UL('lb')}` : `${frac(oz >= 4 ? Math.round(oz * 2) / 2 : oz)} ${UL('oz')}`; }
+      return q >= 1000 ? `${nfmt(q / 1000, 2)} ${UL('kg')}` : `${metricNum(q)} ${UL('g')}`;
+    case 'ml':
+      if (imp) { if (q < 15) return `${frac(q / 4.929)} ${UL('tsp')}`; if (q < 60) return `${frac(q / 14.787)} ${UL('tbsp')}`; const c = q / 236.6; return `${frac(c)} ${UL(c > 1.1 ? 'cups' : 'cup')}`; }
+      return q >= 1000 ? `${nfmt(q / 1000, 2)} ${UL('l')}` : `${metricNum(q)} ${UL('ml')}`;
+    case 'tbsp': case 'tsp': return `${frac(q)} ${UL(g.u)}`;
+    case 'pinch': case 'handful': return `${frac(Math.round(q * 2) / 2)} ${UL(g.u)}`;
+    default: return frac(Math.round(q * 2) / 2);
+  }
+}
+const fmtTemp = c => S.settings.units === 'imperial' ? `${Math.round((c * 9 / 5 + 32) / 25) * 25} °F` : `${c} °C`;
+const richText = str => esc(str).replace(/\{T(\d{2,3})\}(?:\s*(?:°\s*[CF]|℃))?/g, (_, c) => `<strong>${fmtTemp(+c)}</strong>`);
+const stepHTML = s => richText(tx(s.x));
+function fmtClock(sec) {
+  sec = Math.max(0, Math.ceil(sec));
+  const h = Math.floor(sec / 3600), m = Math.floor(sec % 3600 / 60), s = sec % 60;
+  return h ? `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}` : `${m}:${String(s).padStart(2,'0')}`;
+}
+function fmtDur(sec) {
+  if (sec < 60) return t('sec', {n: sec});
+  const m = Math.round(sec / 60);
+  if (m < 60) return t('min', {n: m});
+  const h = Math.floor(m / 60), mm = m % 60;
+  return mm ? t('hmin', {h, m: mm}) : t('hrs', {n: h});
+}
+const regionLabel = r => t('r_' + (REGIONS.includes(r.region) ? r.region : 'other'));
+const isNew = r => r.ai && Date.now() - (r.created || 0) < 3 * 864e5 && !cookedList(r.id).length;
+
+/* ---------- render: shared pieces ---------- */
+function metaList(r) {
+  return `<ul class="meta">
+    <li>${ICON.clock}${esc(t('min', {n: r.time}))}</li>
+    <li>${ICON.pin}${esc(regionLabel(r))}</li>
+    <li>${ICON.flame}${esc(t('kcal', {n: r.kcal}))}</li>
+    ${r.ai ? `<li>${ICON.sparkle}${esc(t('ai_made', {by: r.by === 'gemini' ? 'Gemini' : 'Claude'}))}</li>` : ''}
+  </ul>`;
+}
+function rlist(items, cls = '') {
+  return `<ul class="rlist ${cls}">${items.map(r => `<li><button class="row" data-action="open" data-id="${r.id}">
+    ${tileSVG(r)}
+    <span class="rbody"><span class="rt">${esc(tx(r.title))}</span>
+      <span class="rm"><span>${ICON.clock}${esc(t('min', {n: r.time}))}</span><span>${esc(regionLabel(r))}</span>${isNew(r) ? `<span class="new">${esc(t('new_badge'))}</span>` : ''}</span></span>
+    <span class="side">${S.prefs.favs[r.id] ? `<span class="hfav" title="${esc(t('favorites'))}">${ICON.heartFill}</span>` : ''}${rating(r.id) ? `<span class="rstar">${ICON.star}${rating(r.id)}</span>` : ''}</span>
+  </button></li>`).join('')}</ul>`;
+}
+
+/* ---------- render: header + settings ---------- */
+function renderTop() {
+  const s = S.settings;
+  const seg = (key, opts) => `<div class="seg" role="group">${opts.map(([v, l]) => `<button data-action="set" data-k="${key}" data-v="${v}" aria-pressed="${s[key] === v}">${esc(l)}</button>`).join('')}</div>`;
+  $('#top').innerHTML = `
+    <a class="brand" href="#" data-action="tab" data-v="today">${tileSVG({id:'brand', protein:'brand'}, 0)}<span class="wordmark">Tavola</span></a>
+    <nav class="nav" aria-label="${esc(t('nav'))}">${['today','discover','library'].map(v => `<button data-action="tab" data-v="${v}" ${S.view === v ? 'aria-current="page"' : ''}>${esc(t('tab_' + v))}</button>`).join('')}</nav>
+    <button class="icon-btn" id="setBtn" data-action="settings" aria-haspopup="dialog" aria-expanded="${S.settingsOpen}" aria-label="${esc(t('settings'))}">${ICON.gear}</button>
+    ${S.settingsOpen ? `<div class="pop" id="settingsPop" role="dialog" aria-label="${esc(t('settings'))}">
+      <div class="pop-row"><span class="pop-lbl">${esc(t('lang'))}</span>${seg('lang', [['en','English'],['de','Deutsch'],['zh','中文']])}</div>
+      <div class="pop-row"><span class="pop-lbl">${esc(t('units'))}</span>${seg('units', [['metric',t('metric')],['imperial',t('imperial')]])}</div>
+      <div class="pop-row"><span class="pop-lbl">${esc(t('appearance'))}</span>${seg('theme', [['auto',t('auto')],['light',t('light')],['dark',t('dark')]])}</div>
+      <div class="pop-switch"><div><div class="pop-lbl" id="dailyLbl">${esc(t('daily_toggle'))}</div><p class="pop-desc">${esc(t('daily_desc'))}</p></div>
+        <button class="switch" role="switch" aria-checked="${s.autoDaily}" aria-labelledby="dailyLbl" data-action="toggle-daily"><span></span></button></div>
+      <div class="pop-switch"><div><div class="pop-lbl" id="ovenLbl">${esc(t('oven_toggle'))}</div><p class="pop-desc">${esc(t('oven_desc'))}</p></div>
+        <button class="switch" role="switch" aria-checked="${!!s.oven}" aria-labelledby="ovenLbl" data-action="toggle-oven"><span></span></button></div>
+      ${IN_CLAUDE ? `<p class="pop-note">${esc(t(Store.mode === 'db' ? 'saved_account' : 'saved_browser'))}</p>` : `
+      <div class="pop-field"><span class="pop-lbl">${esc(t('ai_provider'))}</span>${seg('provider', [['claude','Claude'],['gemini','Gemini']])}
+        <label class="pop-lbl" for="apiKey" style="margin-top:6px">${esc(t(provider() === 'gemini' ? 'api_label_gemini' : 'api_label'))}</label><p class="pop-desc">${esc(t('api_desc'))}</p>
+        ${activeKey() ? `<p class="pop-desc">${esc(t('api_set'))}</p><div class="pop-actions"><button class="btn btn-ghost sm" data-action="api-remove">${esc(t('api_remove'))}</button></div>`
+          : `<input id="apiKey" class="input" type="password" autocomplete="off" spellcheck="false" placeholder="${provider() === 'gemini' ? 'AIza…' : 'sk-ant-…'}"><div class="pop-actions"><button class="btn btn-primary sm" data-action="api-save">${esc(t('api_save'))}</button></div>`}</div>
+      <div class="pop-field"><span class="pop-lbl">${esc(t('backup'))}</span><p class="pop-desc">${esc(t('backup_desc'))}</p>
+        <div class="pop-actions"><button class="btn btn-ghost sm" data-action="export">${esc(t('export'))}</button><label class="btn btn-ghost sm" for="importFile">${esc(t('import'))}</label><input id="importFile" type="file" accept="application/json,.json" class="sr"></div></div>`}
+    </div>` : ''}`;
+}
+
+/* ---------- render: views ---------- */
+function renderToday() {
+  const d = S.prefs.daily;
+  const r = (d && byId(d.id)) || allRecipes()[0];
+  const fresh = d && d.fresh && d.date === todayKey() && d.id === r.id;
+  const dateStr = new Date().toLocaleDateString(LOC(), {weekday:'long', day:'numeric', month:'long'});
+  const genDaily = S.gen.busy && S.gen.origin === 'daily';
+  const newest = (a, b) => (b.created || 0) - (a.created || 0);
+  const untried = allRecipes().filter(x => x.id !== r.id && !cookedList(x.id).length).sort(newest).slice(0, 4);
+  const again = allRecipes().filter(x => x.id !== r.id && cookedList(x.id).length && (S.prefs.favs[x.id] || rating(x.id) >= 4))
+    .sort((a, b) => lastCooked(a.id).localeCompare(lastCooked(b.id))).slice(0, 4);
+  return `
+  <section class="hero" aria-labelledby="heroTitle"><div class="hero-in">
+    <p class="date">${esc(dateStr)}${fresh ? `<span class="badge">${ICON.sparkle}${esc(t('new_today'))}</span>` : ''}</p>
+    <h1 id="heroTitle">${esc(tx(r.title))}</h1>
+    <p class="desc">${esc(tx(r.desc))}</p>
+    ${metaList(r)}
+    <div class="actions">
+      <button class="btn btn-primary" data-action="open" data-id="${r.id}">${ICON.pot}${esc(t('start_cooking'))}</button>
+      <button class="btn btn-ghost" data-action="reroll">${ICON.shuffle}${esc(t('something_else'))}</button>
+    </div>
+    ${genDaily ? `<p class="status" role="status"><span class="spin">${tileSVG({id:'s', protein:'fish'}, 0)}</span>${esc(t('creating_daily'))}</p>` : ''}
+  </div></section>
+  <div class="cols">
+    <section class="sec"><h2>${esc(t('not_tried'))}</h2>${untried.length ? rlist(untried) : `<p class="empty">${esc(t('empty_tried'))}</p>`}</section>
+    <section class="sec"><h2>${esc(t('cook_again'))}</h2>${again.length ? rlist(again) : `<p class="empty">${esc(t('empty_again'))}</p>`}</section>
+  </div>`;
+}
+
+function renderDiscover() {
+  const d = S.disc;
+  const group = (k, label, opts) => `<fieldset class="fgroup"><legend>${esc(label)}</legend><div class="chips">${opts.map(([v, l]) =>
+    `<button type="button" class="chip" data-action="disc" data-k="${k}" data-v="${v}" aria-pressed="${d[k] === v}">${esc(l)}</button>`).join('')}</div></fieldset>`;
+  return `
+  <div class="page-head"><h1>${esc(t('discover_title'))}</h1><p>${esc(t('discover_sub'))}</p></div>
+  <div class="disc">
+    <div>
+      ${group('protein', t('f_main'), [['any', t('any')], ...PROTEINS.map(p => [p, t('p_' + p)])])}
+      ${group('time', t('f_time'), [['any', t('any')], ['30', t('t_30')], ['45', t('t_45')]])}
+      ${group('region', t('f_region'), [['any', t('any')], ...REGIONS.map(r => [r, t('r_' + r)])])}
+      <div class="fgroup"><label class="flabel" for="useup">${esc(t('f_useup'))}</label>
+        <input id="useup" class="input" maxlength="160" autocomplete="off" value="${esc(d.useup)}" placeholder="${esc(t('f_useup_ph'))}"></div>
+      <div class="disc-actions">
+        ${S.aiAvailable ? `<button class="btn btn-primary" data-action="create" ${S.gen.busy ? 'disabled' : ''}>${ICON.sparkle}${esc(t('create'))}</button>` : ''}
+        <button class="btn btn-ghost" data-action="surprise">${ICON.shuffle}${esc(t('surprise'))}</button>
+      </div>
+    </div>
+    <div class="disc-out" id="discOut" aria-live="polite">${renderDiscOut()}</div>
+  </div>`;
+}
+function renderDiscOut() {
+  if (S.gen.busy) {
+    return `<div class="working">
+      <p class="w-title">${esc(t(S.gen.origin === 'daily' ? 'creating_daily' : 'creating'))}</p>
+      <div class="progress ${S.gen.chars ? '' : 'indet'}" id="genProg"><span style="--p:${progPct()}%"></span></div>
+      <p class="w-hint">${esc(t('creating_hint'))}</p>
+      ${S.gen.origin === 'discover' ? `<button class="btn btn-ghost sm" data-action="stop">${esc(t('stop'))}</button>` : ''}
+    </div>`;
+  }
+  let html = '';
+  if (S.gen.error) html += `<p class="err" role="alert">${esc(t(S.gen.error))}</p>`;
+  else if (!S.aiAvailable) html += `<p class="note">${esc(t(IN_CLAUDE ? 'ai_off' : 'ai_need_key'))}</p>`;
+  if (S.discMsg) html += `<p class="note">${esc(t(S.discMsg))}</p>`;
+  const r = S.discResult && byId(S.discResult);
+  if (r) {
+    html += `<article class="result">
+      ${tileSVG(r)}
+      <h2>${esc(tx(r.title))}</h2>
+      <p class="desc">${esc(tx(r.desc))}</p>
+      ${metaList(r)}
+      ${tx(r.health) ? `<p class="health">${ICON.leaf}<span>${esc(tx(r.health))}</span></p>` : ''}
+      <button class="btn btn-primary" data-action="open" data-id="${r.id}">${ICON.pot}${esc(t('open'))}</button>
+    </article>`;
+  } else if (!S.gen.error && !S.discMsg) {
+    html += `<div class="placeholder"><div class="row3">${PROTEINS.slice(0, 4).map((p, i) => tileSVG({id:p, protein:p}, i)).join('')}</div><p>${esc(t('disc_empty'))}</p></div>`;
+  }
+  return html;
+}
+
+function renderLibrary() {
+  const filters = [['all', t('all')], ['favs', t('favorites')], ['ai', t(IN_CLAUDE ? 'from_claude' : 'from_ai')], ...PROTEINS.map(p => [p, t('p_' + p)])];
+  return `
+  <div class="page-head"><h1>${esc(t('lib_title'))}</h1><p id="libCount"></p></div>
+  <div class="toolbar">
+    <label class="search"><span class="sr">${esc(t('search_ph'))}</span>${ICON.search}<input id="libQ" class="input" type="search" autocomplete="off" value="${esc(S.lib.q)}" placeholder="${esc(t('search_ph'))}"></label>
+    <label class="sortl"><span class="sr">${esc(t('sort'))}</span><select id="libSort" class="input">${['new','rated','stale','quick'].map(v => `<option value="${v}" ${S.lib.sort === v ? 'selected' : ''}>${esc(t('sort_' + v))}</option>`).join('')}</select></label>
+  </div>
+  <div class="chips lib-chips" role="group" aria-label="${esc(t('lib_title'))}">${filters.map(([v, l]) => `<button class="chip" data-action="libf" data-v="${v}" aria-pressed="${S.lib.filter === v}">${esc(l)}</button>`).join('')}</div>
+  <div id="libList"></div>`;
+}
+function libItems() {
+  const q = S.lib.q.trim().toLowerCase(), f = S.lib.filter;
+  const list = allRecipes().filter(r => {
+    if (f === 'favs' && !S.prefs.favs[r.id]) return false;
+    if (f === 'ai' && !r.ai) return false;
+    if (PROTEINS.includes(f) && r.protein !== f) return false;
+    if (!q) return true;
+    return [tx(r.title), r.title.en, ...r.ing.map(i => tx(i.n) + ' ' + i.n.en)].join(' ').toLowerCase().includes(q);
+  });
+  const cmp = {
+    new: (a, b) => (b.created || 0) - (a.created || 0),
+    rated: (a, b) => (rating(b.id) - rating(a.id)) || ((S.prefs.favs[b.id] ? 1 : 0) - (S.prefs.favs[a.id] ? 1 : 0)),
+    stale: (a, b) => lastCooked(a.id).localeCompare(lastCooked(b.id)),
+    quick: (a, b) => a.time - b.time
+  }[S.lib.sort];
+  return list.sort(cmp);
+}
+function renderLibList() {
+  const box = $('#libList'); if (!box) return;
+  const list = libItems();
+  $('#libCount').textContent = t('n_recipes', {n: list.length});
+  box.innerHTML = list.length ? rlist(list, 'grid2') : `<p class="empty">${esc(t('lib_empty'))}</p>`;
+}
+
+function renderMain() {
+  const ae = document.activeElement, aid = ae && ae.id;
+  const sel = aid && typeof ae.selectionStart === 'number' ? [ae.selectionStart, ae.selectionEnd] : null;
+  $('#main').innerHTML = S.view === 'discover' ? renderDiscover() : S.view === 'library' ? renderLibrary() : renderToday();
+  if (S.view === 'library') renderLibList();
+  if (aid) { const n = document.getElementById(aid); if (n && n !== ae && $('#main').contains(n)) { n.focus(); if (sel) try { n.setSelectionRange(...sel); } catch {} } }
+}
+function renderFoot() { $('#foot').textContent = t('foot'); }
+
+/* ---------- render: recipe sheet ---------- */
+function timerBtn(r, i, s) {
+  if (!s.t) return '';
+  const tm = S.timers.find(x => x.rid === r.id && x.step === i);
+  if (!tm) return `<button class="tbtn" data-action="tstart" data-id="${r.id}" data-step="${i}">${ICON.timer}<span>${esc(t('timer_start', {t: fmtDur(s.t)}))}</span></button>`;
+  if (tm.done) return `<button class="tbtn done" data-action="tdismiss" data-tid="${tm.tid}">${ICON.bell}<span>${esc(t('timer_done'))}</span></button>`;
+  return `<button class="tbtn ${tm.paused ? 'paused' : 'run'}" data-action="ttoggle" data-tid="${tm.tid}" aria-label="${esc(t(tm.paused ? 'resume' : 'pause'))}">${tm.paused ? ICON.play : ICON.pause}<span data-ttime="${tm.tid}">${fmtClock(remaining(tm))}</span></button>`;
+}
+function renderDetail() {
+  const ov = $('#overlay'), r = byId(S.openId);
+  if (!r) { closeDetail(); return; }
+  const f = S.servings / 2, fav = !!S.prefs.favs[r.id], rt = rating(r.id);
+  const cooked = cookedList(r.id), cookedToday = cooked[cooked.length - 1] === todayKey();
+  ov.innerHTML = `<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="dTitle">
+    <div class="sheet-bar">
+      <button class="icon-btn" data-action="close" aria-label="${esc(t('close'))}">${ICON.x}</button>
+      <span class="bar-title" aria-hidden="true">${esc(tx(r.title))}</span>
+      ${r.ai ? `<button class="btn btn-ghost sm danger" data-action="delete" data-id="${r.id}">${ICON.trash}<span>${esc(t(S.confirmDel === r.id ? 'delete_again' : 'delete'))}</span></button>` : ''}
+      <button class="icon-btn fav ${fav ? 'on' : ''}" data-action="fav" data-id="${r.id}" aria-pressed="${fav}" aria-label="${esc(t(fav ? 'fav_remove' : 'fav_add'))}">${fav ? ICON.heartFill : ICON.heart}</button>
+    </div>
+    <div class="sheet-body">
+      <header class="d-head">
+        ${tileSVG(r)}
+        <h2 id="dTitle">${esc(tx(r.title))}</h2>
+        <p class="desc">${esc(tx(r.desc))}</p>
+        ${metaList(r)}
+        ${tx(r.health) ? `<p class="health">${ICON.leaf}<span>${esc(tx(r.health))}</span></p>` : ''}
+      </header>
+      <div class="d-controls">
+        <div class="stepper"><span class="lbl" id="servLbl">${esc(t('servings'))}</span>
+          <button data-action="serv" data-d="-1" aria-label="${esc(t('servings'))} −" ${S.servings <= 1 ? 'disabled' : ''}>${ICON.minus}</button>
+          <output aria-labelledby="servLbl" aria-live="polite">${S.servings}</output>
+          <button data-action="serv" data-d="1" aria-label="${esc(t('servings'))} +" ${S.servings >= 8 ? 'disabled' : ''}>${ICON.plus}</button>
+        </div>
+        <div class="seg" role="group" aria-label="${esc(t('units'))}">${[['metric', t('metric')], ['imperial', t('imperial')]].map(([v, l]) =>
+          `<button data-action="set" data-k="units" data-v="${v}" aria-pressed="${S.settings.units === v}">${esc(l)}</button>`).join('')}</div>
+      </div>
+      <div class="d-cols">
+        <section><h3>${esc(t('ingredients'))}</h3><ul class="ings">${r.ing.map((g, i) =>
+          `<li><button class="ing" data-action="ing" data-i="${i}" aria-pressed="${S.checked.has(i)}"><span class="box">${ICON.check}</span><span class="amt">${esc(amount(g, f))}</span><span class="nm">${esc(tx(g.n))}</span></button></li>`).join('')}</ul></section>
+        <section><h3>${esc(t('method'))}</h3><ol class="steps">${r.steps.map((s, i) =>
+          `<li class="step"><span class="num" aria-hidden="true">${i + 1}</span><div><p>${stepHTML(s)}</p>${timerBtn(r, i, s)}</div></li>`).join('')}</ol>
+          ${r.tips && r.tips.length ? `<div class="tips"><h3>${esc(t('tips'))}</h3><ul>${r.tips.map(x => `<li>${richText(tx(x))}</li>`).join('')}</ul></div>` : ''}</section>
+      </div>
+      <section class="mine">
+        <div>
+          <h3>${esc(t('your_rating'))}</h3>
+          <div class="stars" role="group" aria-label="${esc(t('your_rating'))}">${[1,2,3,4,5].map(n =>
+            `<button class="star ${n <= rt ? 'on' : ''}" data-action="rate" data-id="${r.id}" data-n="${n}" aria-pressed="${n <= rt}" aria-label="${n} / 5">${ICON.star}</button>`).join('')}</div>
+          <div class="cooked">
+            <button class="btn ${cookedToday ? 'btn-done' : 'btn-ghost'}" data-action="cooked" data-id="${r.id}" aria-pressed="${cookedToday}">${ICON.check}${esc(t(cookedToday ? 'cooked_logged' : 'cooked_today'))}</button>
+            <p class="cooked-info">${esc(cooked.length ? t('cooked_info', {n: cooked.length, d: fmtDay(cooked[cooked.length - 1])}) : t('never_cooked'))}</p>
+          </div>
+        </div>
+        <div><label class="h3like" for="notes">${esc(t('notes'))}</label>
+          <textarea id="notes" class="input" data-id="${r.id}" placeholder="${esc(t('notes_ph'))}">${esc(S.prefs.notes[r.id] || '')}</textarea></div>
+      </section>
+    </div>
+  </div>`;
+}
+function focusKey(el) {
+  if (el.id) return '#' + CSS.escape(el.id);
+  if (!el.dataset || !el.dataset.action) return null;
+  let s = `[data-action="${el.dataset.action}"]`;
+  for (const k of ['id','n','i','step','d','k','v','tid']) if (el.dataset[k] != null) s += `[data-${k}="${CSS.escape(el.dataset[k])}"]`;
+  return s;
+}
+function renderDetailKeep() {
+  const ov = $('#overlay'), sc = ov.scrollTop, ae = document.activeElement;
+  const key = ae && ov.contains(ae) ? focusKey(ae) : null;
+  renderDetail();
+  ov.scrollTop = sc;
+  if (key) { const n = ov.querySelector(key); if (n) n.focus({preventScroll: true}); }
+}
+let lastOpener = null;
+function openDetail(id, opener) {
+  if (S.openId !== id) { S.servings = 2; S.checked = new Set(); S.confirmDel = null; }
+  S.openId = id; lastOpener = opener ? focusKey(opener) : null;
+  const ov = $('#overlay'); ov.hidden = false;
+  document.body.classList.add('locked');
+  renderDetail(); ov.scrollTop = 0;
+  const c = ov.querySelector('[data-action="close"]'); if (c) c.focus({preventScroll: true});
+}
+function closeDetail() {
+  const ov = $('#overlay');
+  S.openId = null; S.confirmDel = null;
+  ov.hidden = true; ov.innerHTML = '';
+  document.body.classList.remove('locked');
+  renderMain();
+  if (lastOpener) { const n = $('#main').querySelector(lastOpener) || $(lastOpener); if (n) n.focus({preventScroll: true}); }
+}
+
+/* ---------- timers ---------- */
+let AC = null, tickH = null;
+function unlockAudio() { try { AC = AC || new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === 'suspended') AC.resume(); } catch {} }
+function chime() {
+  if (!AC) return;
+  try {
+    const now = AC.currentTime;
+    [659.25, 783.99, 1046.5].forEach((fq, i) => {
+      const o = AC.createOscillator(), g = AC.createGain(), t0 = now + i * .22;
+      o.type = 'sine'; o.frequency.value = fq;
+      g.gain.setValueAtTime(.0001, t0); g.gain.exponentialRampToValueAtTime(.32, t0 + .02); g.gain.exponentialRampToValueAtTime(.0001, t0 + .9);
+      o.connect(g).connect(AC.destination); o.start(t0); o.stop(t0 + 1);
+    });
+  } catch {}
+}
+const remaining = tm => tm.done ? 0 : tm.paused ? tm.left / 1000 : (tm.endAt - Date.now()) / 1000;
+function startTimer(rid, step) {
+  const r = byId(rid); if (!r || !r.steps[step]) return;
+  unlockAudio();
+  const secs = r.steps[step].t;
+  S.timers.push({tid: 't' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), rid, step, endAt: Date.now() + secs * 1000, left: secs * 1000, paused: false, done: false, rings: 0, nextRing: 0});
+  ensureTick(); renderTimers();
+  if (S.openId) renderDetailKeep();
+}
+function toggleTimer(tid) {
+  const tm = S.timers.find(x => x.tid === tid); if (!tm || tm.done) return;
+  unlockAudio();
+  if (tm.paused) { tm.endAt = Date.now() + tm.left; tm.paused = false; ensureTick(); }
+  else { tm.left = Math.max(0, tm.endAt - Date.now()); tm.paused = true; }
+  renderTimers(); if (S.openId) renderDetailKeep();
+}
+function dismissTimer(tid) {
+  S.timers = S.timers.filter(x => x.tid !== tid);
+  renderTimers(); if (S.openId) renderDetailKeep();
+}
+function ensureTick() { if (!tickH) tickH = setInterval(tick, 500); }
+function tick() {
+  const now = Date.now(); let changed = false;
+  for (const tm of S.timers) {
+    if (!tm.done && !tm.paused && tm.endAt <= now) {
+      tm.done = true; changed = true;
+      const r = byId(tm.rid);
+      toast(`${t('timer_done')}: ${t('step', {n: tm.step + 1})}, ${r ? tx(r.title) : ''}`);
+      try { navigator.vibrate && navigator.vibrate([300, 150, 300, 150, 300]); } catch {}
+    }
+    if (tm.done && tm.rings < 6 && now >= tm.nextRing) { chime(); tm.rings++; tm.nextRing = now + 4000; }
+  }
+  if (changed) { renderTimers(); if (S.openId) renderDetailKeep(); }
+  else for (const tm of S.timers) {
+    if (tm.done) continue;
+    const v = fmtClock(remaining(tm));
+    $$(`[data-ttime="${tm.tid}"]`).forEach(e => { if (e.textContent !== v) e.textContent = v; });
+  }
+  updateTitle();
+  if (!S.timers.some(tm => (!tm.done && !tm.paused) || (tm.done && tm.rings < 6))) { clearInterval(tickH); tickH = null; }
+}
+function renderTimers() {
+  document.body.classList.toggle('has-timers', S.timers.length > 0);
+  $('#timers').innerHTML = S.timers.map(tm => {
+    const r = byId(tm.rid);
+    return `<div class="timer ${tm.done ? 'done' : ''} ${tm.paused ? 'paused' : ''}">
+      <span class="t-ic">${tm.done ? ICON.bell : ICON.timer}</span>
+      <button class="t-main" data-action="open" data-id="${tm.rid}">
+        <span class="t-time" ${tm.done ? '' : `data-ttime="${tm.tid}"`}>${tm.done ? esc(t('timer_done')) : fmtClock(remaining(tm))}</span>
+        <span class="t-label">${esc(t('step', {n: tm.step + 1}))}: ${esc(r ? tx(r.title) : '')}</span>
+      </button>
+      ${tm.done ? `<button class="icon-btn sm" data-action="tdismiss" data-tid="${tm.tid}" aria-label="${esc(t('dismiss'))}">${ICON.check}</button>`
+        : `<button class="icon-btn sm" data-action="ttoggle" data-tid="${tm.tid}" aria-label="${esc(t(tm.paused ? 'resume' : 'pause'))}">${tm.paused ? ICON.play : ICON.pause}</button>
+           <button class="icon-btn sm" data-action="tdismiss" data-tid="${tm.tid}" aria-label="${esc(t('cancel_timer'))}">${ICON.x}</button>`}
+    </div>`;
+  }).join('');
+  updateTitle();
+}
+function updateTitle() {
+  const running = S.timers.filter(x => !x.done && !x.paused).map(remaining);
+  document.title = S.timers.some(x => x.done) ? `⏰ ${t('timer_done')}` : running.length ? `${fmtClock(Math.min(...running))} – Tavola` : 'Tavola';
+}
+
+/* ---------- actions ---------- */
+let toastT = null;
+function toast(msg) { const el = $('#toast'); el.textContent = msg; el.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('show'), 3400); }
+const hostTheme = document.documentElement.getAttribute('data-theme');
+function applyTheme() {
+  const th = S.settings.theme, root = document.documentElement;
+  if (th === 'auto') { if (hostTheme) root.setAttribute('data-theme', hostTheme); else root.removeAttribute('data-theme'); }
+  else root.setAttribute('data-theme', th);
+}
+function applyLang() { document.documentElement.lang = {en:'en', de:'de', zh:'zh-CN'}[S.settings.lang] || 'en'; }
+function renderAll() { renderTop(); renderMain(); renderFoot(); if (S.openId) renderDetailKeep(); renderTimers(); }
+function setSetting(k, v) {
+  S.settings[k] = v; Store.saveLocal();
+  if (k === 'theme') applyTheme();
+  if (k === 'lang') applyLang();
+  if (k === 'provider') { S.aiAvailable = !!activeKey(); S.gen.error = null; if (S.aiAvailable) maybeAutoDaily(); }
+  renderAll();
+  const n = $(`#settingsPop [data-k="${k}"][data-v="${v}"]`); if (n) n.focus();
+}
+function toggleFav(id) { if (S.prefs.favs[id]) delete S.prefs.favs[id]; else S.prefs.favs[id] = true; savePrefs(); renderDetailKeep(); }
+function setRating(id, n) { if (rating(id) === n) delete S.prefs.ratings[id]; else S.prefs.ratings[id] = n; savePrefs(); renderDetailKeep(); }
+function logCooked(id) {
+  const c = cookedList(id).slice(), td = todayKey();
+  if (c[c.length - 1] === td) c.pop(); else c.push(td);
+  if (c.length) S.prefs.cooked[id] = c.slice(-60); else delete S.prefs.cooked[id];
+  savePrefs(); renderDetailKeep();
+}
+let delT = null;
+function deleteRecipe(id) {
+  if (S.confirmDel !== id) {
+    S.confirmDel = id; renderDetailKeep();
+    clearTimeout(delT); delT = setTimeout(() => { if (S.confirmDel === id) { S.confirmDel = null; if (S.openId === id) renderDetailKeep(); } }, 4000);
+    return;
+  }
+  S.ai = S.ai.filter(r => r.id !== id);
+  for (const k of ['favs','ratings','notes','cooked']) delete S.prefs[k][id];
+  S.prefs.deleted = S.prefs.deleted.concat(id).slice(-200);
+  S.timers = S.timers.filter(x => x.rid !== id);
+  if (S.discResult === id) S.discResult = null;
+  if (S.prefs.daily && S.prefs.daily.id === id) setDaily(pickFrom(allRecipes()).id, false);
+  Store.deleteRecipe(id); savePrefs();
+  lastOpener = null; closeDetail(); renderTimers(); toast(t('deleted'));
+}
+function surprise() {
+  const d = S.disc, words = d.useup.toLowerCase().split(/[,;]+/).map(s => s.trim()).filter(Boolean);
+  let list = allRecipes().filter(r =>
+    (d.protein === 'any' || r.protein === d.protein) && (d.region === 'any' || r.region === d.region) && (d.time === 'any' || r.time <= +d.time));
+  if (words.length) { const hit = list.filter(r => r.ing.some(i => words.some(w => (i.n.en + ' ' + tx(i.n)).toLowerCase().includes(w)))); if (hit.length) list = hit; }
+  const r = pickFrom(list, S.discResult);
+  S.gen.error = null;
+  if (r) { S.discResult = r.id; S.discMsg = null; } else { S.discResult = null; S.discMsg = 'no_match'; }
+  $('#discOut').innerHTML = renderDiscOut();
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-action]');
+  if (S.settingsOpen && !e.target.closest('#settingsPop') && !e.target.closest('#setBtn')) { S.settingsOpen = false; renderTop(); if (!a) return; }
+  if (!a) { if (e.target.id === 'overlay') closeDetail(); return; }
+  const act = a.dataset.action, id = a.dataset.id;
+  switch (act) {
+    case 'tab':
+      e.preventDefault();
+      if (S.openId) { lastOpener = null; closeDetail(); }
+      S.view = a.dataset.v; S.settingsOpen = false; renderTop(); renderMain(); window.scrollTo(0, 0);
+      break;
+    case 'settings': S.settingsOpen = !S.settingsOpen; renderTop(); if (S.settingsOpen) { const b = $('#settingsPop button'); if (b) b.focus(); } else $('#setBtn').focus(); break;
+    case 'set': setSetting(a.dataset.k, a.dataset.v); break;
+    case 'toggle-daily': S.settings.autoDaily = !S.settings.autoDaily; Store.saveLocal(); renderTop(); { const b = $('#settingsPop .switch'); if (b) b.focus(); } if (S.settings.autoDaily) maybeAutoDaily(); break;
+    case 'toggle-oven': S.settings.oven = !S.settings.oven; Store.saveLocal(); renderTop(); { const b = $('#settingsPop [data-action="toggle-oven"]'); if (b) b.focus(); } break;
+    case 'api-save': {
+      const v = ($('#apiKey') || {}).value || '';
+      if (!v.trim()) { const i = $('#apiKey'); if (i) i.focus(); break; }
+      try { localStorage.setItem(KEYS_LS[provider()], v.trim()); } catch {}
+      S.aiAvailable = true; S.gen.error = null; renderTop(); renderMain(); toast(t('api_saved')); maybeAutoDaily(); break;
+    }
+    case 'api-remove': try { localStorage.removeItem(KEYS_LS[provider()]); } catch {} S.aiAvailable = false; renderTop(); renderMain(); toast(t('api_removed')); break;
+    case 'export': exportBackup(); break;
+    case 'open': openDetail(id, a); break;
+    case 'close': closeDetail(); break;
+    case 'fav': toggleFav(id); break;
+    case 'rate': setRating(id, +a.dataset.n); break;
+    case 'cooked': logCooked(id); break;
+    case 'delete': deleteRecipe(id); break;
+    case 'serv': S.servings = Math.min(8, Math.max(1, S.servings + +a.dataset.d)); renderDetailKeep(); break;
+    case 'ing': { const i = +a.dataset.i; if (S.checked.has(i)) S.checked.delete(i); else S.checked.add(i); a.setAttribute('aria-pressed', S.checked.has(i)); break; }
+    case 'tstart': startTimer(id, +a.dataset.step); break;
+    case 'ttoggle': toggleTimer(a.dataset.tid); break;
+    case 'tdismiss': dismissTimer(a.dataset.tid); break;
+    case 'reroll': { const cur = S.prefs.daily && S.prefs.daily.id; setDaily(pickFrom(allRecipes(), cur).id, false); renderMain(); const b = $('[data-action="reroll"]'); if (b) b.focus(); break; }
+    case 'disc': S.disc[a.dataset.k] = a.dataset.v; $$(`.chip[data-k="${a.dataset.k}"]`).forEach(c => c.setAttribute('aria-pressed', c.dataset.v === a.dataset.v)); break;
+    case 'create': generate('discover'); break;
+    case 'stop': if (S.gen.ctl) S.gen.ctl.abort(); break;
+    case 'surprise': surprise(); break;
+    case 'libf': S.lib.filter = a.dataset.v; $$('.lib-chips .chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.v === S.lib.filter)); renderLibList(); break;
+  }
+});
+document.addEventListener('input', e => {
+  const el = e.target;
+  if (el.id === 'libQ') { S.lib.q = el.value; renderLibList(); }
+  else if (el.id === 'useup') S.disc.useup = el.value;
+  else if (el.id === 'notes') { const id = el.dataset.id; if (el.value.trim()) S.prefs.notes[id] = el.value.slice(0, 4000); else delete S.prefs.notes[id]; savePrefs(); }
+});
+document.addEventListener('change', e => {
+  if (e.target.id === 'libSort') { S.lib.sort = e.target.value; renderLibList(); }
+  else if (e.target.id === 'importFile' && e.target.files && e.target.files[0]) importBackup(e.target.files[0]);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.id === 'apiKey') { e.preventDefault(); const b = $('[data-action="api-save"]'); if (b) b.click(); } });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (S.settingsOpen) { S.settingsOpen = false; renderTop(); $('#setBtn').focus(); }
+    else if (S.openId) closeDetail();
+  } else if (e.key === 'Tab' && S.openId) {
+    const f = $$('#overlay button, #overlay textarea, #overlay input, #overlay select').filter(x => !x.disabled && x.offsetParent !== null);
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
+
+/* ---------- start ---------- */
+document.documentElement.style.setProperty('--tile-mask', `url("data:image/svg+xml,${encodeURIComponent(MASK_SVG)}")`);
+applyTheme(); applyLang();
+if (!IN_CLAUDE) S.aiAvailable = !!activeKey();
+applySeedFavs();
+ensureDaily();
+renderAll();
+getSample().then(s => { if (!s) { S.aiAvailable = false; if (S.view === 'discover') refreshGen(); } });
+Store.connect().then(() => { applySeedFavs(); ensureDaily(); renderAll(); }).catch(() => {}).finally(() => setTimeout(maybeAutoDaily, 600));
+</script>
+</body>
+</html>
