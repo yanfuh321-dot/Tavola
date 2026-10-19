@@ -1,4 +1,4 @@
-# Tavola – mediterrane Abendessen für zwei
+# Tavola – Frühstück und mediterrane Abendessen für zwei
 
 Tavola ist eine kleine Web-App für gesunde mediterrane Rezepte: Jeden Tag ein Rezeptvorschlag, Favoriten und Bewertungen, Timer in jedem Schritt, Umrechnung metrisch/imperial, Englisch/Deutsch/Chinesisch und Dark Mode. Alle Rezepte sind für zwei Personen und kommen ohne Backofen aus (Air Fryer und Herd).
 
@@ -122,3 +122,69 @@ Einfacher geht es, wenn du Claude das Rezept schickst und es einbauen lässt.
 - **„Gemini-Kontingent aufgebraucht“:** Das Tageslimit bei Google ist erreicht. Später erneut versuchen oder die Limits in Google AI Studio prüfen.
 - **Ein falscher Schlüssel im falschen Feld:** Claude-Schlüssel beginnen mit `sk-ant-`, Gemini-Schlüssel mit `AIza`. Prüf unter „Rezept-KI“, welcher Anbieter ausgewählt ist.
 - **Kein Timer-Ton:** Prüfen, ob das Handy stumm geschaltet ist. Wenn sich der Bildschirm sperrt, pausieren manche Browser den Ton. Die Zeit läuft trotzdem korrekt weiter. Beim Kochen den Bildschirm am besten anlassen.
+
+
+## 7. Externe Rezepte importieren (neu)
+
+Unter **Entdecken → Rezept importieren** den vollständigen Rezepttext (Zutaten, Mengen, Zubereitung und ursprüngliche Portionszahl) einfügen. Eine Quelle oder URL kannst du separat speichern. **Mit KI umwandeln** verwendet den unter Einstellungen hinterlegten Claude- oder Gemini-Schlüssel. Der eingegebene Rezepttext wird an diesen Anbieter gesendet; dafür gelten dessen API-Kosten.
+
+Die KI rechnet auf zwei Personen um, übersetzt in Deutsch, Englisch und Chinesisch und ergänzt Timer und Temperatur-Tokens. Standardmäßig bleiben Zutaten und Geräte erhalten. Optional kann die Zubereitung an deine Geräteeinstellung angepasst werden. Änderungen und Annahmen erscheinen in der Vorschau. Dort alle Mengen und Garzeiten prüfen; Kalorien sind Schätzwerte. Erst **In Sammlung speichern** übernimmt das Rezept. Zum Korrigieren den Ausgangstext ändern und erneut umwandeln.
+
+Importiert wird kopierter Text, keine Webseite hinter einem Link und kein PDF-/Foto-Anhang. Bei PDF-Rezepten zunächst den Text kopieren. Die Quellenangabe bleibt am gespeicherten Rezept erhalten und wird mit der bestehenden Sicherungsfunktion exportiert. Wie bisher werden Rezepte lokal auf dem jeweiligen Gerät gespeichert.
+
+Zum Aktualisieren zuerst in Tavola eine Sicherung exportieren, dann die neue index.html im bisherigen GitHub-Repository ersetzen. Die Browser-Speicherschlüssel bleiben gleich. Die Online-Version wird durch diese ZIP-Datei nicht automatisch aktualisiert.
+
+
+## 8. Bestehende Rezepte mit KI anpassen (neu)
+
+Ein Rezept öffnen und **Mit KI anpassen** auswählen. Beschreibe deinen Wunsch, zum Beispiel: „Meine Frau mag keine Petersilie. Bitte durch ein passendes Kraut ersetzen.“ Der Schnellvorschlag **Ohne Petersilie ausprobieren** füllt dieses Anliegen für dich aus; erst **Variante vorschlagen** sendet die Anfrage.
+
+Tavola nutzt deinen eingestellten Claude- oder Gemini-Anbieter und API-Schlüssel. Das Rezept und der Änderungswunsch werden an diesen Anbieter gesendet. Die KI soll passende Ersatzmengen wählen, Zutaten und Zubereitung konsistent aktualisieren und die Änderungen erläutern. Die Ausgabe umfasst wie bisher Deutsch, Englisch und Chinesisch, Timer und Temperaturen.
+
+Prüfe die vollständige Vorschau für zwei Personen und wähle **Als neue Variante speichern**. Das Original samt Bewertungen und Notizen bleibt unverändert. Die neue Variante erhält einen eigenen Eintrag in deiner Sammlung und einen Verweis auf den Originaltitel sowie den umgesetzten Wunsch. Ihre Bewertungen und Notizen beginnen leer. Um den Wunsch zu überarbeiten, zuerst den Vorschlag verwerfen und eine neue Anfrage stellen. **Stoppen** bricht eine laufende Anfrage ab.
+
+Die Portionsauswahl im Rezept dient der Anzeige; die KI arbeitet immer mit den hinterlegten zwei Basisportionen. Der Petersilienwunsch gilt jeweils für dieses Rezept und wird nicht automatisch als allgemeine Vorliebe gespeichert. Varianten sind Teil der bestehenden Export-/Import-Sicherung. Nicht gespeicherte Vorschläge gehen beim Neuladen verloren. Geräteübergreifender Sync ist in dieser Version weiterhin nicht eingerichtet.
+
+Update: zuerst in Tavola eine Sicherung exportieren, dann die index.html aus dieser ZIP im bisherigen GitHub-Repository ersetzen. Deine lokal gespeicherten Rezepte bleiben unter demselben Speicherschlüssel erhalten.
+
+
+## 9. Frühstück und Dinner (neu)
+
+Über **Frühstück / Dinner** oberhalb des Inhalts wählst du die Mahlzeit. Die Auswahl gilt für **Heute**, **Entdecken** und **Sammlung**. Vier Frühstücksrezepte sind ohne API-Schlüssel enthalten: Apfel-Walnuss-Porridge, Beeren-Joghurt-Bowl, Spinat-Rührei auf Vollkorntoast und Hummus-Gurken-Brot. Die angegebenen Kalorien sind Schätzwerte pro Person.
+
+Frühstück unterstützt dieselben Funktionen: KI-Rezepte, Textimport, KI-Anpassungen, Favoriten, Bewertungen, Notizen, Kochhistorie, Portionen, Timer, Einheiten und drei Sprachen. Unter Entdecken gibt es zusätzlich den Zeitfilter **Bis 15 Min.**. Beim Textimport wird die ausgewählte Mahlzeit zugeordnet; Varianten behalten die Kategorie des Ausgangsrezepts.
+
+Bestehende Rezepte ohne Mahlzeit-Feld werden weiterhin als Dinner behandelt. Für jede Kategorie wird ein eigener Tagesvorschlag gespeichert. Ist die automatische KI-Erstellung aktiviert, wird pro geöffneter Kategorie höchstens ein neues Rezept täglich angefragt, also insgesamt bis zu zwei. Dafür können entsprechend zusätzliche API-Kosten entstehen.
+
+Die Mahlzeit-Kategorie ist in der bestehenden Datensicherung enthalten. Geräteübergreifender Sync ist weiterhin nicht eingerichtet. Zum Update wie bisher zuerst die Daten exportieren und anschließend die index.html ersetzen.
+
+
+## 10. Individuelle Refluxwünsche (neu)
+
+Unter dem Mahlzeit-Umschalter **Reflux berücksichtigen** öffnen, aktivieren, Ausschlüsse anpassen und **Einstellungen speichern** wählen. Gilt für neue KI-Rezepte (auch automatische Tagesrezepte) und KI-Anpassungen bei Frühstück und Dinner. Die Grundeinstellung berücksichtigt häufig genannte Auslöser: Zitrusfrüchte, Tomaten, scharfe Gewürze, Minze, Kakao/Schokolade, Kaffee/Koffein und Alkohol. Jede Gruppe lässt sich abwählen; weitere persönliche Auslöser können durch Kommas getrennt ergänzt werden. Zusätzlich wird die KI um milde Zubereitung, mäßige Fettmengen und moderate Portionen gebeten.
+
+Bestehende Rezepte, Tagesvorschläge aus der Sammlung und reine Textimporte werden nicht automatisch verändert oder als verträglich eingestuft. Öffne ein solches Rezept, wähle **Mit KI anpassen → Refluxwünsche anwenden → Variante vorschlagen** und prüfe das Ergebnis. Für ein neues Rezept: **Entdecken → Neues Rezept erstellen**. Bereits heute erzeugte Tagesrezepte werden durch Einschalten nicht erneut automatisch erzeugt.
+
+Die Einstellungen werden auf diesem Gerät gespeichert. Sie werden bei KI-Anfragen an deinen ausgewählten Anbieter gesendet; Rezepte behalten eine Kopie der bei der Anfrage verwendeten Einstellungen. Exporte enthalten diese Daten. Der bestehende Sicherungsimport übernimmt die gespeicherten Rezepte, jedoch nicht die globalen Geräteeinstellungen; den Modus auf einem neuen Gerät bitte separat konfigurieren. Die Kennzeichnung bedeutet nur „mit diesen Wünschen angefragt“, nicht medizinisch geprüft. Die KI kann Fehler machen; Zutaten und Varianten vor Verwendung prüfen.
+
+Auslöser und Verträglichkeit sind individuell. Eine bestimmte Ernährung verhindert Beschwerden nicht garantiert; unnötig umfassende Lebensmittelverbote sind nicht das Ziel. Anhaltende Rachenbeschwerden sollten ärztlich abgeklärt werden. Diese Funktion diagnostiziert oder behandelt weder GERD noch LPR.
+
+Grundlagen (abgerufen 10.10.2026):
+- NIDDK: https://www.niddk.nih.gov/health-information/digestive-diseases/acid-reflux-ger-gerd-adults/eating-diet-nutrition
+- American Academy of Otolaryngology–Head and Neck Surgery: https://www.enthealth.org/conditions/gerd-and-lpr/
+
+
+## 11. OpenRouter als Rezept-KI (neu)
+
+1. Zahnrad → **Rezept-KI → OpenRouter**.
+2. Auf https://openrouter.ai/models ein Text-/Chatmodell wählen und dessen genaue ID in **Modell-ID** einfügen (anbieter/modell).
+3. Den persönlichen OpenRouter-Schlüssel eintragen und speichern. Das Modell wird dabei ebenfalls gespeichert. Alternativ die Modell-ID separat mit **Modell speichern** ändern.
+4. Unter **Entdecken** ein Rezept erstellen oder ein vorhandenes Rezept importieren/anpassen. Frühstück, Dinner und Refluxwünsche verwenden denselben ausgewählten Anbieter.
+
+OpenRouter erhält die Rezeptanfragen und leitet sie an einen Modellanbieter weiter. Preise, Limits, Modellverfügbarkeit und Datenregeln gelten entsprechend. Ein ChatGPT-/Claude-Abonnement ist dafür kein API-Guthaben. Es wird nicht automatisch auf ein anderes Modell gewechselt. Die App wartet auf eine vollständige Antwort; bei langen Anfragen erscheint bis dahin die laufende Ladeanzeige. Stoppen bleibt verfügbar; Abbruch bedeutet nicht zwingend, dass beim Anbieter keine Kosten entstehen. Nach zwei Minuten wird die Anfrage beendet.
+
+**Schlüsselspeicherung:** Der neue OpenRouter-Key bleibt standardmäßig nur im Arbeitsspeicher des Tabs und muss nach dem Neuladen erneut eingegeben werden. **Schlüssel auf diesem Gerät merken** ist eine optionale dauerhafte Speicherung im Browser. Zum Wechseln dieser Einstellung den Key entfernen und neu eintragen. Der Key wird nie in Rezept-Backups oder in diese ZIP geschrieben. Bestehende Claude-/Gemini-Schlüssel behalten ihr bisheriges Speicherverhalten. Browserseitige Schlüssel sind kein Ersatz für eine abgesicherte Serverlösung; nutze einen separaten Schlüssel mit Ausgabenlimit. Das Speichern des OpenRouter-Schlüssels allein startet keine kostenpflichtige Rezeptanfrage. Die bestehende Option für tägliche automatische Rezepte gilt beim späteren Öffnen und Kategorien-/Anbieterwechsel weiterhin.
+
+**Sicherheitskorrektur:** Rezept-IDs und relevante Importfelder werden strenger geprüft; IDs und Kategorien werden bei der HTML-Ausgabe maskiert. Fehlerhafte Sicherungen werden vor dem Zusammenführen abgewiesen. Die konkret gefundene HTML-Attribut-Injektion über Backup-Rezept-IDs ist damit geschlossen. Dies ist kein vollständiges Sicherheitszertifikat.
+
+API-Dokumentation: https://openrouter.ai/docs/api/api-reference/chat/create-a-chat-completion (abgerufen 19.10.2026).

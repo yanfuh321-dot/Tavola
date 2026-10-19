@@ -342,7 +342,7 @@ const MOTIFS = [
 const hash = s => { let h = 2166136261; for (const c of String(s)) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
 const tileSVG = (r, variant) => {
   const v = variant ?? (hash(r.id) % MOTIFS.length);
-  return `<span class="tile cat-${r.protein}" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" fill="currentColor" opacity=".15"/><g fill="currentColor">${CORNERS}${MOTIFS[v]}</g></svg></span>`;
+  return `<span class="tile cat-${esc(r.protein)}" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" fill="currentColor" opacity=".15"/><g fill="currentColor">${CORNERS}${MOTIFS[v]}</g></svg></span>`;
 };
 const MASK_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><g fill="#000">${CORNERS}${MOTIFS[0]}<path d="M0 18.5h3v3H0zM37 18.5h3v3h-3zM18.5 0h3v3h-3zM18.5 37h3v3h-3z"/></g></svg>`;
 
@@ -756,7 +756,13 @@ function normPrefs(p) {
     seeded: Array.isArray(p.seeded) ? p.seeded.slice(-100) : []
   };
 }
-const validRecipe = r => r && typeof r.id === 'string' && r.title && r.title.en && Array.isArray(r.ing) && Array.isArray(r.steps);
+const safeRecipeId = id => typeof id === 'string' && /^[a-zA-Z0-9][a-zA-Z0-9_-]{0,95}$/.test(id) && !['constructor','prototype','__proto__'].includes(id);
+const safeRecipeText = v => v && typeof v === 'object' && !Array.isArray(v) && typeof v.en === 'string' && v.en.trim() && ['en','de','zh'].every(k=>v[k] === undefined || typeof v[k] === 'string');
+const validRecipe = r => !!(r && safeRecipeId(r.id) && safeRecipeText(r.title) &&
+ (PROTEINS.includes(r.protein) || r.protein === 'other') && (REGIONS.includes(r.region) || r.region === 'other') &&
+ Number.isFinite(r.time) && r.time > 0 && Number.isFinite(r.kcal) && r.kcal >= 0 &&
+ Array.isArray(r.ing) && r.ing.length > 0 && r.ing.length <= 24 && r.ing.every(i=>i && Number.isFinite(i.q) && i.q >= 0 && ['g','ml','tbsp','tsp','pinch','handful','pc',''].includes(i.u) && safeRecipeText(i.n)) &&
+ Array.isArray(r.steps) && r.steps.length > 0 && r.steps.length <= 14 && r.steps.every(st=>st && safeRecipeText(st.x) && Number.isFinite(st.t) && st.t >= 0 && st.t <= 14400));
 
 const local = (() => { try { return JSON.parse(localStorage.getItem(LS_KEY) || 'null') || {}; } catch { return {}; } })();
 const S = {
@@ -839,13 +845,17 @@ window.addEventListener('pagehide', () => { if (prefTimer) { clearTimeout(prefTi
 
 /* ---------- Claude: claude.ai runtime, or your own API key when self-hosted ---------- */
 const IN_CLAUDE = !!(window.claude && typeof window.claude.use === 'function');
-const KEYS_LS = {claude: 'tavola:apikey', gemini: 'tavola:geminikey'};
+const KEYS_LS = {claude: 'tavola:apikey', gemini: 'tavola:geminikey', openrouter:'tavola:openrouterkey'};
 const MODEL_LS = 'tavola:model', GMODEL_LS = 'tavola:gmodel';
 const API_MODELS = ['claude-sonnet-5-5', 'claude-sonnet-5', 'claude-haiku-4-5'];
 const GEMINI_MODEL = '';   // leer = automatisch das neueste stabile Gemini-Flash-Modell wählen
-const provider = () => IN_CLAUDE ? 'claude' : (S.settings.provider === 'gemini' ? 'gemini' : 'claude');
-const aiName = () => provider() === 'gemini' ? 'Gemini' : 'Claude';
-const getKey = p => { try { return localStorage.getItem(KEYS_LS[p]) || ''; } catch { return ''; } };
+const provider = () => IN_CLAUDE ? 'claude' : (['gemini','openrouter'].includes(S.settings.provider) ? S.settings.provider : 'claude');
+const providerName = p => ({claude:'Claude',gemini:'Gemini',openrouter:'OpenRouter'}[p] || 'Claude');
+const aiName = () => providerName(provider());
+let openrouterSessionKey = '';
+const openrouterModel = () => typeof S.settings.openrouterModel === 'string' ? S.settings.openrouterModel.trim() : '';
+const validModelId = m => typeof m === 'string' && m.length <= 160 && /^[a-zA-Z0-9][a-zA-Z0-9._-]*\/[a-zA-Z0-9][a-zA-Z0-9._:/-]*$/.test(m);
+const getKey = p => { if (p === 'openrouter' && openrouterSessionKey) return openrouterSessionKey; try { return localStorage.getItem(KEYS_LS[p]) || ''; } catch { return ''; } };
 const apiKey = () => getKey('claude');
 const activeKey = () => getKey(provider());
 function parseJSONLoose(txt) {
@@ -978,9 +988,66 @@ const GEMINI = {
     }
   }
 };
+
+/* OpenRouter: standard chat completions, no automatic model substitution. */
+const OR_COPY = {
+ en:['OpenRouter API key','Model ID','Copy the exact text/chat model ID from OpenRouter (provider/model). There is no automatic model switch. Requests, including dietary preferences, go to OpenRouter and the selected model provider; their prices and data policies apply.','Save model','Remember key on this device (optional)','By default this key stays in this tab’s memory until reload. Remembering it stores it in browser storage, readable by scripts on this origin. Use a separate key with a spending limit.','Enter a valid model ID in provider/model format.','OpenRouter rejected the model or request. Check model access and text-output support.','The provider refused this request.','The request took too long. Please try again.','Key active. Remove it to change storage mode.','Key enabled for this tab.'],
+ de:['OpenRouter-API-Schlüssel','Modell-ID','Die genaue ID eines Text-/Chatmodells von OpenRouter kopieren (anbieter/modell). Kein automatischer Modellwechsel. Anfragen einschließlich Ernährungswünschen gehen an OpenRouter und den Modellanbieter; deren Preise und Datenregeln gelten.','Modell speichern','Schlüssel auf diesem Gerät merken (optional)','Standardmäßig bleibt dieser Schlüssel bis zum Neuladen nur im Arbeitsspeicher dieses Tabs. „Merken“ speichert ihn im Browser; Skripte derselben Website können darauf zugreifen. Verwende einen separaten Schlüssel mit Ausgabenlimit.','Bitte eine gültige Modell-ID im Format anbieter/modell eingeben.','OpenRouter hat das Modell oder die Anfrage abgelehnt. Modellzugriff und Unterstützung für Textausgabe prüfen.','Der Anbieter hat diese Anfrage abgelehnt.','Die Anfrage hat zu lange gedauert. Bitte erneut versuchen.','Schlüssel aktiv. Zum Ändern der Speicherung erst entfernen.','Schlüssel für diesen Tab aktiviert.'],
+ zh:['OpenRouter API 密钥','模型 ID','从 OpenRouter 复制准确的文本/聊天模型 ID（提供商/模型）。不会自动更换模型。包括饮食偏好的请求将发送至 OpenRouter 和模型提供商，适用其价格和数据政策。','保存模型','在此设备记住密钥（可选）','默认仅保存在当前标签页内存，刷新后清除。选择记住后将存入浏览器，同一来源脚本可以读取。建议使用设置支出限额的独立密钥。','请输入有效的 提供商/模型 格式的模型 ID。','OpenRouter 拒绝了模型或请求。请检查模型权限及文本输出支持。','提供商拒绝了此请求。','请求超时，请重试。','密钥已启用。要更改存储方式，请先移除。','已为此标签页启用密钥。']
+};
+const orText = n => (OR_COPY[S.settings.lang] || OR_COPY.en)[n];
+for (const lang of ['en','de','zh']) Object.assign(STR[lang], {err_or_model:OR_COPY[lang][6],err_or_request:OR_COPY[lang][7],err_or_refused:OR_COPY[lang][8],err_or_timeout:OR_COPY[lang][9]});
+function renderOpenRouterModel() {
+ return `<label class="pop-lbl" for="orModel">${esc(orText(1))}</label><input class="input" id="orModel" maxlength="160" autocomplete="off" spellcheck="false" placeholder="provider/model-id" value="${esc(openrouterModel())}"><p class="pop-desc">${esc(orText(2))} <a href="https://openrouter.ai/models" target="_blank" rel="noopener noreferrer">OpenRouter Models</a></p><button class="btn btn-ghost sm" data-action="or-model-save">${esc(orText(3))}</button>`;
+}
+function saveOpenRouterModel() {
+ const model = ($('#orModel') || {}).value || '';
+ if (!validModelId(model.trim())) { toast(orText(6)); return false; }
+ S.settings.openrouterModel = model.trim(); Store.saveLocal(); return true;
+}
+function openRouterError(status) {
+ const n = Number(status);
+ return {code: n === 401 ? 'bad_key' : n === 402 ? 'no_credit' : n === 403 ? 'or_refused' : n === 429 ? 'rate_limited' : n === 400 || n === 404 || n === 422 ? 'or_request' : 'upstream_error'};
+}
+const OPENROUTER = {
+ async json(prompt, {signal,onText} = {}) {
+  const model = openrouterModel(), key = getKey('openrouter');
+  if (!validModelId(model)) throw {code:'or_model'};
+  if (!key) throw {code:'bad_key'};
+  if (signal && signal.aborted) throw {code:'cancelled'};
+  const ctl = new AbortController(); let timedOut = false;
+  const cancel = () => ctl.abort();
+  if (signal) signal.addEventListener('abort',cancel,{once:true});
+  const timeout = setTimeout(()=>{timedOut=true;ctl.abort();},120000);
+  try {
+   const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    method:'POST',signal:ctl.signal,redirect:'error',credentials:'omit',referrerPolicy:'no-referrer',
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},
+    body:JSON.stringify({model,messages:[{role:'user',content:prompt}],stream:false,max_tokens:12000})
+   });
+   if (!res.ok) throw openRouterError(res.status);
+   const data = await res.json();
+   if (ctl.signal.aborted) throw {code:timedOut?'or_timeout':'cancelled'};
+   if (data.error) throw openRouterError(data.error.code);
+   const choice = data.choices && data.choices[0];
+   if (!choice || choice.finish_reason === 'length') throw {code:'invalid_json'};
+   if (choice.finish_reason === 'content_filter' || (choice.message && choice.message.refusal)) throw {code:'or_refused'};
+   if (choice.finish_reason !== 'stop') throw {code:'or_request'};
+   const text = choice.message && choice.message.content;
+   if (typeof text !== 'string' || !text.trim()) throw {code:'empty_completion'};
+   if (onText) onText({text,delta:text});
+   return parseJSONLoose(text);
+  } catch(e) {
+   if (ctl.signal.aborted) throw {code:timedOut?'or_timeout':'cancelled'};
+   if (e && e.code) throw e;
+   throw {code:e instanceof SyntaxError ? 'invalid_json' : 'upstream_error'};
+  } finally { clearTimeout(timeout); if (signal) signal.removeEventListener('abort',cancel); }
+ }
+};
+
 let samplePromise = null;
 function getSample() {
-  if (!IN_CLAUDE) return Promise.resolve(activeKey() ? (provider() === 'gemini' ? GEMINI : API) : null);
+  if (!IN_CLAUDE) return Promise.resolve(activeKey() ? (provider() === 'openrouter' ? OPENROUTER : provider() === 'gemini' ? GEMINI : API) : null);
   if (!samplePromise) samplePromise = window.claude.use('sample').catch(() => null);
   return samplePromise;
 }
@@ -1106,7 +1173,7 @@ function normalizeRecipe(d, imported = false) {
     tips: (Array.isArray(d.tips) ? d.tips : []).slice(0, 4).map(x => L3(x, 300)).filter(x => x.en)
   };
 }
-const ERR = {gquota:'err_gquota', bad_key:'err_key', no_credit:'err_credit', rate_limited:'err_limit', invalid_json:'err_incomplete', empty_completion:'err_incomplete', refused:'err_refused', session_expired:'err_signin'};
+const ERR = {or_model:'err_or_model',or_request:'err_or_request',or_refused:'err_or_refused',or_timeout:'err_or_timeout',gquota:'err_gquota', bad_key:'err_key', no_credit:'err_credit', rate_limited:'err_limit', invalid_json:'err_incomplete', empty_completion:'err_incomplete', refused:'err_refused', session_expired:'err_signin'};
 const GONE = ['not_granted','sampling_disabled','not_declared','capability_disabled','capability_removed'];
 
 
@@ -1318,7 +1385,7 @@ async function generate(origin, meal = currentMeal()) {
     else if (origin === 'discover') S.gen.error = ERR[code] || 'err_failed';
     else {
       console.warn('Tavola: daily recipe not created', e);
-      if (['bad_key','no_credit','gquota','rate_limited','upstream_error','invalid_json','empty_completion'].includes(code)) { S.prefs[genDateKey(meal)] = null; savePrefs(); }
+      if (['or_model','or_request','or_timeout','bad_key','no_credit','gquota','rate_limited','upstream_error','invalid_json','empty_completion'].includes(code)) { S.prefs[genDateKey(meal)] = null; savePrefs(); }
       if (['bad_key','no_credit','gquota'].includes(code)) toast(t(ERR[code]));
     }
   } finally {
@@ -1367,8 +1434,10 @@ function exportBackup() {
 }
 async function importBackup(file) {
   try {
+    if (file.size > 10 * 1024 * 1024) throw 0;
     const d = JSON.parse(await file.text());
-    if (!d || d.app !== 'tavola') throw 0;
+    if (!d || d.app !== 'tavola' || !Array.isArray(d.ai) || d.ai.length > 2000 || !d.ai.every(validRecipe) || new Set(d.ai.map(r=>r.id)).size !== d.ai.length || d.ai.some(r=>SEEDS.some(seed=>seed.id===r.id))) throw 0;
+    if (d.prefs && ['favs','ratings','notes','cooked'].some(k => d.prefs[k] && Object.keys(d.prefs[k]).some(id=>!safeRecipeId(id)))) throw 0;
     const p = normPrefs(d.prefs), cur = S.prefs;
     const cooked = {...cur.cooked};
     for (const [id, list] of Object.entries(p.cooked)) if (Array.isArray(list)) cooked[id] = [...new Set([...(cooked[id] || []), ...list])].sort().slice(-60);
@@ -1460,11 +1529,11 @@ function metaList(r) {
     <li>${ICON.clock}${esc(t('min', {n: r.time}))}</li>
     <li>${ICON.pin}${esc(regionLabel(r))}</li>
     <li>${ICON.flame}${esc(t('kcal', {n: r.kcal}))}</li>
-    ${r.ai ? `<li>${ICON.sparkle}${esc(t('ai_made', {by: r.by === 'gemini' ? 'Gemini' : 'Claude'}))}</li>` : ''}
+    ${r.ai ? `<li>${ICON.sparkle}${esc(t('ai_made', {by: providerName(r.by)}))}</li>` : ''}
   </ul>`;
 }
 function rlist(items, cls = '') {
-  return `<ul class="rlist ${cls}">${items.map(r => `<li><button class="row" data-action="open" data-id="${r.id}">
+  return `<ul class="rlist ${cls}">${items.map(r => `<li><button class="row" data-action="open" data-id="${esc(r.id)}">
     ${tileSVG(r)}
     <span class="rbody"><span class="rt">${esc(tx(r.title))}</span>
       <span class="rm"><span>${ICON.clock}${esc(t('min', {n: r.time}))}</span><span>${esc(regionLabel(r))}</span>${isNew(r) ? `<span class="new">${esc(t('new_badge'))}</span>` : ''}</span></span>
@@ -1489,10 +1558,10 @@ function renderTop() {
       <div class="pop-switch"><div><div class="pop-lbl" id="ovenLbl">${esc(t('oven_toggle'))}</div><p class="pop-desc">${esc(t('oven_desc'))}</p></div>
         <button class="switch" role="switch" aria-checked="${!!s.oven}" aria-labelledby="ovenLbl" data-action="toggle-oven"><span></span></button></div>
       ${IN_CLAUDE ? `<p class="pop-note">${esc(t(Store.mode === 'db' ? 'saved_account' : 'saved_browser'))}</p>` : `
-      <div class="pop-field"><span class="pop-lbl">${esc(t('ai_provider'))}</span>${seg('provider', [['claude','Claude'],['gemini','Gemini']])}
-        <label class="pop-lbl" for="apiKey" style="margin-top:6px">${esc(t(provider() === 'gemini' ? 'api_label_gemini' : 'api_label'))}</label><p class="pop-desc">${esc(t('api_desc'))}</p>
-        ${activeKey() ? `<p class="pop-desc">${esc(t('api_set'))}</p><div class="pop-actions"><button class="btn btn-ghost sm" data-action="api-remove">${esc(t('api_remove'))}</button></div>`
-          : `<input id="apiKey" class="input" type="password" autocomplete="off" spellcheck="false" placeholder="${provider() === 'gemini' ? 'AIza…' : 'sk-ant-…'}"><div class="pop-actions"><button class="btn btn-primary sm" data-action="api-save">${esc(t('api_save'))}</button></div>`}</div>
+      <div class="pop-field"><span class="pop-lbl">${esc(t('ai_provider'))}</span>${seg('provider', [['claude','Claude'],['gemini','Gemini'],['openrouter','OpenRouter']])}
+        <label class="pop-lbl" for="apiKey" style="margin-top:6px">${esc(provider() === 'openrouter' ? orText(0) : t(provider() === 'gemini' ? 'api_label_gemini' : 'api_label'))}</label><p class="pop-desc">${esc(provider() === 'openrouter' ? orText(5) : t('api_desc'))}</p>${provider() === 'openrouter' ? renderOpenRouterModel() : ''}
+        ${activeKey() ? `<p class="pop-desc">${esc(provider() === 'openrouter' ? orText(10) : t('api_set'))}</p><div class="pop-actions"><button class="btn btn-ghost sm" data-action="api-remove">${esc(t('api_remove'))}</button></div>`
+          : `<input id="apiKey" class="input" type="password" autocomplete="off" spellcheck="false" placeholder="${provider() === 'openrouter' ? 'sk-or-…' : provider() === 'gemini' ? 'AIza…' : 'sk-ant-…'}">${provider() === 'openrouter' ? `<p class="pop-desc"><label><input type="checkbox" id="orRemember"> ${esc(orText(4))}</label></p>` : ''}<div class="pop-actions"><button class="btn btn-primary sm" data-action="api-save">${esc(t('api_save'))}</button></div>`}</div>
       <div class="pop-field"><span class="pop-lbl">${esc(t('backup'))}</span><p class="pop-desc">${esc(t('backup_desc'))}</p>
         <div class="pop-actions"><button class="btn btn-ghost sm" data-action="export">${esc(t('export'))}</button><label class="btn btn-ghost sm" for="importFile">${esc(t('import'))}</label><input id="importFile" type="file" accept="application/json,.json" class="sr"></div></div>`}
     </div>` : ''}`;
@@ -1516,7 +1585,7 @@ function renderToday() {
     <p class="desc">${esc(tx(r.desc))}</p>
     ${metaList(r)}
     <div class="actions">
-      <button class="btn btn-primary" data-action="open" data-id="${r.id}">${ICON.pot}${esc(t('start_cooking'))}</button>
+      <button class="btn btn-primary" data-action="open" data-id="${esc(r.id)}">${ICON.pot}${esc(t('start_cooking'))}</button>
       <button class="btn btn-ghost" data-action="reroll">${ICON.shuffle}${esc(t('something_else'))}</button>
     </div>
     ${genDaily ? `<p class="status" role="status"><span class="spin">${tileSVG({id:'s', protein:'fish'}, 0)}</span>${esc(t('creating_daily'))}</p>` : ''}
@@ -1569,7 +1638,7 @@ function renderDiscOut() {
       <p class="desc">${esc(tx(r.desc))}</p>
       ${metaList(r)}
       ${adaptationSource(r)}${importSource(r)}${tx(r.health) ? `<p class="health">${ICON.leaf}<span>${esc(tx(r.health))}</span></p>` : ''}
-      <button class="btn btn-primary" data-action="open" data-id="${r.id}">${ICON.pot}${esc(t('open'))}</button>
+      <button class="btn btn-primary" data-action="open" data-id="${esc(r.id)}">${ICON.pot}${esc(t('open'))}</button>
     </article>`;
   } else if (!S.gen.error && !S.discMsg) {
     html += `<div class="placeholder"><div class="row3">${PROTEINS.slice(0, 4).map((p, i) => tileSVG({id:p, protein:p}, i)).join('')}</div><p>${esc(t('disc_empty'))}</p></div>`;
@@ -1625,9 +1694,9 @@ function renderFoot() { $('#foot').textContent = t('foot'); }
 function timerBtn(r, i, s) {
   if (!s.t) return '';
   const tm = S.timers.find(x => x.rid === r.id && x.step === i);
-  if (!tm) return `<button class="tbtn" data-action="tstart" data-id="${r.id}" data-step="${i}">${ICON.timer}<span>${esc(t('timer_start', {t: fmtDur(s.t)}))}</span></button>`;
-  if (tm.done) return `<button class="tbtn done" data-action="tdismiss" data-tid="${tm.tid}">${ICON.bell}<span>${esc(t('timer_done'))}</span></button>`;
-  return `<button class="tbtn ${tm.paused ? 'paused' : 'run'}" data-action="ttoggle" data-tid="${tm.tid}" aria-label="${esc(t(tm.paused ? 'resume' : 'pause'))}">${tm.paused ? ICON.play : ICON.pause}<span data-ttime="${tm.tid}">${fmtClock(remaining(tm))}</span></button>`;
+  if (!tm) return `<button class="tbtn" data-action="tstart" data-id="${esc(r.id)}" data-step="${i}">${ICON.timer}<span>${esc(t('timer_start', {t: fmtDur(s.t)}))}</span></button>`;
+  if (tm.done) return `<button class="tbtn done" data-action="tdismiss" data-tid="${esc(tm.tid)}">${ICON.bell}<span>${esc(t('timer_done'))}</span></button>`;
+  return `<button class="tbtn ${tm.paused ? 'paused' : 'run'}" data-action="ttoggle" data-tid="${esc(tm.tid)}" aria-label="${esc(t(tm.paused ? 'resume' : 'pause'))}">${tm.paused ? ICON.play : ICON.pause}<span data-ttime="${esc(tm.tid)}">${fmtClock(remaining(tm))}</span></button>`;
 }
 function renderDetail() {
   const ov = $('#overlay'), r = byId(S.openId);
@@ -1638,8 +1707,8 @@ function renderDetail() {
     <div class="sheet-bar">
       <button class="icon-btn" data-action="close" aria-label="${esc(t('close'))}">${ICON.x}</button>
       <span class="bar-title" aria-hidden="true">${esc(tx(r.title))}</span>
-      ${r.ai ? `<button class="btn btn-ghost sm danger" data-action="delete" data-id="${r.id}">${ICON.trash}<span>${esc(t(S.confirmDel === r.id ? 'delete_again' : 'delete'))}</span></button>` : ''}
-      <button class="icon-btn fav ${fav ? 'on' : ''}" data-action="fav" data-id="${r.id}" aria-pressed="${fav}" aria-label="${esc(t(fav ? 'fav_remove' : 'fav_add'))}">${fav ? ICON.heartFill : ICON.heart}</button>
+      ${r.ai ? `<button class="btn btn-ghost sm danger" data-action="delete" data-id="${esc(r.id)}">${ICON.trash}<span>${esc(t(S.confirmDel === r.id ? 'delete_again' : 'delete'))}</span></button>` : ''}
+      <button class="icon-btn fav ${fav ? 'on' : ''}" data-action="fav" data-id="${esc(r.id)}" aria-pressed="${fav}" aria-label="${esc(t(fav ? 'fav_remove' : 'fav_add'))}">${fav ? ICON.heartFill : ICON.heart}</button>
     </div>
     <div class="sheet-body">
       <header class="d-head">
@@ -1670,14 +1739,14 @@ function renderDetail() {
         <div>
           <h3>${esc(t('your_rating'))}</h3>
           <div class="stars" role="group" aria-label="${esc(t('your_rating'))}">${[1,2,3,4,5].map(n =>
-            `<button class="star ${n <= rt ? 'on' : ''}" data-action="rate" data-id="${r.id}" data-n="${n}" aria-pressed="${n <= rt}" aria-label="${n} / 5">${ICON.star}</button>`).join('')}</div>
+            `<button class="star ${n <= rt ? 'on' : ''}" data-action="rate" data-id="${esc(r.id)}" data-n="${n}" aria-pressed="${n <= rt}" aria-label="${n} / 5">${ICON.star}</button>`).join('')}</div>
           <div class="cooked">
-            <button class="btn ${cookedToday ? 'btn-done' : 'btn-ghost'}" data-action="cooked" data-id="${r.id}" aria-pressed="${cookedToday}">${ICON.check}${esc(t(cookedToday ? 'cooked_logged' : 'cooked_today'))}</button>
+            <button class="btn ${cookedToday ? 'btn-done' : 'btn-ghost'}" data-action="cooked" data-id="${esc(r.id)}" aria-pressed="${cookedToday}">${ICON.check}${esc(t(cookedToday ? 'cooked_logged' : 'cooked_today'))}</button>
             <p class="cooked-info">${esc(cooked.length ? t('cooked_info', {n: cooked.length, d: fmtDay(cooked[cooked.length - 1])}) : t('never_cooked'))}</p>
           </div>
         </div>
         <div><label class="h3like" for="notes">${esc(t('notes'))}</label>
-          <textarea id="notes" class="input" data-id="${r.id}" placeholder="${esc(t('notes_ph'))}">${esc(S.prefs.notes[r.id] || '')}</textarea></div>
+          <textarea id="notes" class="input" data-id="${esc(r.id)}" placeholder="${esc(t('notes_ph'))}">${esc(S.prefs.notes[r.id] || '')}</textarea></div>
       </section>
     </div>
   </div>`;
@@ -1765,7 +1834,7 @@ function tick() {
   else for (const tm of S.timers) {
     if (tm.done) continue;
     const v = fmtClock(remaining(tm));
-    $$(`[data-ttime="${tm.tid}"]`).forEach(e => { if (e.textContent !== v) e.textContent = v; });
+    $$(`[data-ttime="${esc(tm.tid)}"]`).forEach(e => { if (e.textContent !== v) e.textContent = v; });
   }
   updateTitle();
   if (!S.timers.some(tm => (!tm.done && !tm.paused) || (tm.done && tm.rings < 6))) { clearInterval(tickH); tickH = null; }
@@ -1776,13 +1845,13 @@ function renderTimers() {
     const r = byId(tm.rid);
     return `<div class="timer ${tm.done ? 'done' : ''} ${tm.paused ? 'paused' : ''}">
       <span class="t-ic">${tm.done ? ICON.bell : ICON.timer}</span>
-      <button class="t-main" data-action="open" data-id="${tm.rid}">
-        <span class="t-time" ${tm.done ? '' : `data-ttime="${tm.tid}"`}>${tm.done ? esc(t('timer_done')) : fmtClock(remaining(tm))}</span>
+      <button class="t-main" data-action="open" data-id="${esc(tm.rid)}">
+        <span class="t-time" ${tm.done ? '' : `data-ttime="${esc(tm.tid)}"`}>${tm.done ? esc(t('timer_done')) : fmtClock(remaining(tm))}</span>
         <span class="t-label">${esc(t('step', {n: tm.step + 1}))}: ${esc(r ? tx(r.title) : '')}</span>
       </button>
-      ${tm.done ? `<button class="icon-btn sm" data-action="tdismiss" data-tid="${tm.tid}" aria-label="${esc(t('dismiss'))}">${ICON.check}</button>`
-        : `<button class="icon-btn sm" data-action="ttoggle" data-tid="${tm.tid}" aria-label="${esc(t(tm.paused ? 'resume' : 'pause'))}">${tm.paused ? ICON.play : ICON.pause}</button>
-           <button class="icon-btn sm" data-action="tdismiss" data-tid="${tm.tid}" aria-label="${esc(t('cancel_timer'))}">${ICON.x}</button>`}
+      ${tm.done ? `<button class="icon-btn sm" data-action="tdismiss" data-tid="${esc(tm.tid)}" aria-label="${esc(t('dismiss'))}">${ICON.check}</button>`
+        : `<button class="icon-btn sm" data-action="ttoggle" data-tid="${esc(tm.tid)}" aria-label="${esc(t(tm.paused ? 'resume' : 'pause'))}">${tm.paused ? ICON.play : ICON.pause}</button>
+           <button class="icon-btn sm" data-action="tdismiss" data-tid="${esc(tm.tid)}" aria-label="${esc(t('cancel_timer'))}">${ICON.x}</button>`}
     </div>`;
   }).join('');
   updateTitle();
@@ -1804,6 +1873,7 @@ function applyTheme() {
 function applyLang() { document.documentElement.lang = {en:'en', de:'de', zh:'zh-CN'}[S.settings.lang] || 'en'; }
 function renderAll() { renderTop(); renderMain(); renderFoot(); if (S.openId) renderDetailKeep(); renderTimers(); }
 function setSetting(k, v) {
+  if (k === 'provider' && (S.gen.busy || recipeImport.busy || editBusy())) { toast(rxText(15)); return; }
   S.settings[k] = v; Store.saveLocal();
   if (k === 'theme') applyTheme();
   if (k === 'lang') applyLang();
@@ -1862,13 +1932,19 @@ document.addEventListener('click', e => {
     case 'set': setSetting(a.dataset.k, a.dataset.v); break;
     case 'toggle-daily': S.settings.autoDaily = !S.settings.autoDaily; Store.saveLocal(); renderTop(); { const b = $('#settingsPop .switch'); if (b) b.focus(); } if (S.settings.autoDaily) maybeAutoDaily(); break;
     case 'toggle-oven': S.settings.oven = !S.settings.oven; Store.saveLocal(); renderTop(); { const b = $('#settingsPop [data-action="toggle-oven"]'); if (b) b.focus(); } break;
+    case 'or-model-save': if (saveOpenRouterModel()) { renderTop(); toast(orText(3)); } break;
     case 'api-save': {
       const v = ($('#apiKey') || {}).value || '';
       if (!v.trim()) { const i = $('#apiKey'); if (i) i.focus(); break; }
-      try { localStorage.setItem(KEYS_LS[provider()], v.trim()); } catch {}
-      S.aiAvailable = true; S.gen.error = null; renderTop(); renderMain(); toast(t('api_saved')); maybeAutoDaily(); break;
+      if (provider() === 'openrouter') {
+        if (!saveOpenRouterModel()) break;
+        try { if ($('#orRemember').checked) localStorage.setItem(KEYS_LS.openrouter,v.trim()); else localStorage.removeItem(KEYS_LS.openrouter); }
+        catch { toast(impText(15)); break; }
+        openrouterSessionKey = v.trim();
+      } else { try { localStorage.setItem(KEYS_LS[provider()], v.trim()); } catch { toast(impText(15)); break; } }
+      S.aiAvailable = true; S.gen.error = null; renderTop(); renderMain(); toast(provider() === 'openrouter' ? orText(11) : t('api_saved')); if (provider() !== 'openrouter') maybeAutoDaily(); break;
     }
-    case 'api-remove': try { localStorage.removeItem(KEYS_LS[provider()]); } catch {} S.aiAvailable = false; renderTop(); renderMain(); toast(t('api_removed')); break;
+    case 'api-remove': if (provider() === 'openrouter') openrouterSessionKey = ''; try { localStorage.removeItem(KEYS_LS[provider()]); } catch {} S.aiAvailable = false; renderTop(); renderMain(); toast(t('api_removed')); break;
     case 'export': exportBackup(); break;
     case 'open': openDetail(id, a); break;
     case 'close': closeDetail(); break;
